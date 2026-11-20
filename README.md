@@ -56,9 +56,9 @@ Every step is an event in an append-only ledger. Approved changes carry an idemp
 | Module | Path | Owner | What it does |
 | --- | --- | --- | --- |
 | A. Perception | `src/amber_lens/perception/` | Vrushali | Capture page, vision-model reader, format rules + OCR tie-break, label-injection check |
-| B. Records + MCP | `src/amber_lens/records/`, `src/amber_lens/mcp_server/` | _B owner_ | Project Alpha tables, record linking, alias normalisation, sightings table, MCP server, mock record store |
+| B. Records + MCP | `src/amber_lens/records/`, `src/amber_lens/mcp_server/` | Koushik | Project Alpha tables, record linking, alias normalisation, sightings table, MCP server, mock record store |
 | C. Verdict + Site PR spine | `src/amber_lens/verdict/`, `src/amber_lens/sitepr/` | Shubhanshu | Deterministic checks, confidence, impact line, Site PR lifecycle, ledger, idempotency, verify |
-| D. Data, eval + demo | `data/`, `eval/`, `src/amber_lens/ui/` | Koushik, Vikas (data) · Vrushali (demo) · Shubhanshu (eval support) | Equipment shortlist, datasheets, photos, planted problems, held-out set, baseline, metrics, review UI, video, deck |
+| D. Data, eval + demo | `data/`, `eval/`, `src/amber_lens/ui/` | Vikas (data) · Vrushali (demo) · Shubhanshu (eval support) | Equipment shortlist, datasheets, photos, planted problems, held-out set, baseline, metrics, review UI, video, deck |
 | Shared contracts | `src/amber_lens/schemas.py` | Everyone (changes need 2 approvals) | The frozen data shapes every module uses |
 
 Stack: Python 3.11+, Pydantic, FastAPI, Streamlit (review UI), official MCP Python SDK, SQLite (Postgres optional), Docker Compose.
@@ -132,9 +132,8 @@ Full breakdown and cut order in [ROADMAP.md](ROADMAP.md). Work is tracked as Git
 | --- | --- | --- |
 | Shubhanshu Dubey | C. Verdict + Site PR spine · repo admin · eval support | Newton School of Technology, ADYPU Pune |
 | Vrushali Nanavati | A. Perception · demo · mentor hours + Kaya email | _TBD_ |
-| Koushik Mishra | D. Data collection | _TBD_ |
+| Koushik Mishra | B. Records + MCP | _TBD_ |
 | Vikas | D. Data collection | _TBD_ |
-| _B owner_ | B. Records + MCP | _TBD_ |
 
 ## Contributing
 

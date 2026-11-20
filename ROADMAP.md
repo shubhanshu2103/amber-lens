@@ -14,8 +14,8 @@ Get the data and the contracts sorted so nobody is blocked next week.
 | 2 | Book mentor office hours | Vrushali |
 | 3 | Permission to photograph campus rooms | Vikas |
 | 4 | Equipment shortlist + public datasheets | Vikas |
-| 5 | Photo shoot round 1 + labels.csv | Vikas, Koushik |
-| 6 | Project Alpha records (CSV) | B owner |
+| 5 | Photo shoot round 1 + labels.csv | Vikas |
+| 6 | Project Alpha records (CSV) | Koushik |
 | 7 | Freeze schemas.py | Shubhanshu |
 | 8 | Reader spike: vision vs OCR | Vrushali |
 | 9 | Repo setup, branch protection | Shubhanshu |
@@ -31,8 +31,8 @@ One photo all the way through: capture -> read -> verdict -> Site PR -> approve 
 | 10 | Capture page | Vrushali |
 | 11 | Nameplate reader | Vrushali |
 | 12 | Flag instruction-like label text | Vrushali |
-| 13 | Records in SQLite + lookups | B owner |
-| 14 | Sightings table | B owner |
+| 13 | Records in SQLite + lookups | Koushik |
+| 14 | Sightings table | Koushik |
 | 15 | Pre-install check | Shubhanshu |
 | 16 | Confidence + review threshold | Shubhanshu |
 | 17 | Ledger + Site PR state machine | Shubhanshu |
@@ -53,9 +53,9 @@ All three checks, Amber can call us over MCP, and we have honest numbers on the 
 | 23 | Gate check | Shubhanshu |
 | 24 | Self-check before claims / re-orders | Shubhanshu |
 | 25 | Reopen on recurrence | Shubhanshu |
-| 26 | Impact line from schedule float | B owner |
-| 27 | MCP server (6 tools) | B owner |
-| 28 | API for the review UI | B owner |
+| 26 | Impact line from schedule float | Koushik |
+| 27 | MCP server (6 tools) | Koushik |
+| 28 | API for the review UI | Koushik |
 | 29 | Review UI | Vrushali |
 | 30 | Baseline model | Vikas |
 | 31 | Tuning-set eval + failure review | Vikas, Shubhanshu |
@@ -67,7 +67,7 @@ All three checks, Amber can call us over MCP, and we have honest numbers on the 
 | # | Issue | Owner |
 | --- | --- | --- |
 | 32 | Freeze rules + single held-out run | Shubhanshu, Vikas |
-| 33 | One-command setup + README | B owner |
+| 33 | One-command setup + README | Koushik |
 | 34 | Demo video | Vrushali |
 | 35 | Pitch deck | Vrushali, Vikas |
 | 36 | Devpost submission | Shubhanshu |
