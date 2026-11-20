@@ -115,12 +115,14 @@ Reported for our system **and** a plain baseline (one multimodal model, photo + 
 
 ## Timeline
 
-| Date | Gate |
-| --- | --- |
-| **Nov 22** | Go / no-go: 30 real photos · 21/30 read correctly · 8+ models with public datasheets · 30-row records written. Schemas frozen. Fail → same-day switch to Track 03 (Bid Leveling + Spec Compliance) |
-| Nov 25 | One photo → verdict → Site PR → approve → verify, end to end |
-| Dec 1 | All must-haves; MCP server callable; held-out eval run once |
-| **Dec 4** | Submit: repo, ≤5 min video, 8–10 slide deck. Dec 5–6 buffer only |
+| Phase | Dates | Ends with |
+| --- | --- | --- |
+| 1. Foundations | Nov 21 - 23 | Photos, datasheets, records committed; schemas frozen |
+| 2. Core loop | Nov 24 - 27 | One photo -> verdict -> Site PR -> verified, end to end |
+| 3. Depth + integration | Nov 28 - Dec 1 | All three checks, MCP callable, tuning eval vs baseline |
+| 4. Proof + ship | Dec 2 - 4 | Held-out run once, video, deck, **submit Dec 4** (Dec 5-6 buffer) |
+
+Full breakdown and cut order in [ROADMAP.md](ROADMAP.md). Work is tracked as GitHub issues under matching milestones.
 
 **Cut unless ahead:** signal tracker, site-walk voice, graph DB / embeddings, confidence calibration.
 
