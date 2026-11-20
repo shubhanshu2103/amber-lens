@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+*.pyc
+.env
+*.db
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+# Raw captures stay out of git; only curated, people-free photos go in data/photos/
+captures/

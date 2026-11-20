@@ -1,0 +1,3 @@
+# Target: `docker compose up` runs API, MCP server and review UI.
+# Services are filled in as modules land (owners: B for api/mcp, D for ui).
+services: {}
