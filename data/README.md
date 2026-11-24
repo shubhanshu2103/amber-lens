@@ -19,10 +19,14 @@ Keep 3-4 blurry or damaged plates on purpose; they are our `CANT_MATCH` cases.
 ## labels.csv columns
 `photo_id, source, license, manufacturer, model_number, voltage, hp_or_kw, amps, true_verdict, planted_problem, notes`
 
+labels.csv also carries the columns used by `scripts/data/`: `image_id` (same as `photo_id`), `file_name`, `source_url`, `model_group` (model number uppercased, spaces removed; the split key), `equipment_type`, `rating_1` / `rating_2` (two ratings exactly as printed), `frequency`, `power` (same as `hp_or_kw`), `readable`, quality columns (`quality, angle, lighting, glare, obscured, small_text`), `split`, `verified_by` (`claude-code-vision`) and `human_checked` (empty until a person checks the row). `voltage` / `amps` are split out of the ratings; `amps` is empty when the plate prints no current.
+
+`true_verdict` is `CANT_MATCH` for unreadable plates and blank otherwise, because verdicts depend on the records and planted problems (#20). `metadata/photo_review.csv` lists every photo looked at, including rejects and why.
+
 ## Rules
 - Public dataset labels are auto-generated and wrong in places. Never copy them in without checking the photo.
 - Split tuning / held-out **by model**, not by photo.
-- Rename files as `<brand-model>_<nn>.jpg`.
+- Public-dataset photos keep their source name with a prefix (`hf_<original>`, `darjja_<split>_<nn>`) so they trace back to the source row; own photos use `<brand-model>_<nn>.jpg`.
 
 ## Planted problems (record edits, not photo edits)
 Wrong room · changed rating in the approved submittal · approved equivalent suffix (must pass) · unapproved submittal · short / over delivery · "missing" item that has a sighting · unreadable plate · no PO line · label with an injection line.
