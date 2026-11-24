@@ -1,7 +1,7 @@
 # A. Perception
 
-Reads equipment photos into shared `schemas.py` types. Everything runs locally: a vision model via
-Ollama plus Tesseract and RapidOCR, so `cost_usd` is 0.0.
+Reads equipment photos into shared `schemas.py` types: a vision model on Groq reads each field, and local
+OCR (RapidOCR and Tesseract, on the CPU) must find the same characters on the photo before a field is READ.
 
 | Module | What it does |
 | --- | --- |
@@ -33,8 +33,9 @@ The full READ rule and its reason codes are in the `reader.py` docstring.
 python -m venv .venv
 .venv/Scripts/python -m pip install -e ".[dev,ocr,capture]"     # Windows; use .venv/bin/python elsewhere
 winget install --id UB-Mannheim.TesseractOCR -e          # or apt install tesseract-ocr
-ollama pull qwen2.5vl:7b
 ```
+
+Put `GROQ_API_KEY` in `.env` (copy `.env.example`; never commit `.env`).
 
 RapidOCR's ONNX models ship inside the `rapidocr` package, so no download happens at runtime.
 `AMBER_DATA_DIR` defaults to `../amber-lens-data/data`, a read-only worktree of `d/dataset-hf-40`:
@@ -45,20 +46,26 @@ git worktree add --detach ../amber-lens-data origin/d/dataset-hf-40
 
 Switch it to `./data` once the final `labels.csv` lands on `main`, then rerun the spike and the eval.
 
-## Vision providers
+## Vision provider: Groq
 
-`VISION_PROVIDER=ollama` (default) runs qwen2.5vl:7b locally. `VISION_PROVIDER=groq` sends the photo to
-Groq (`GROQ_MODEL`, default `qwen/qwen3.8-27b`, a preview model that can be deprecated at short notice) with
-`GROQ_API_KEY` from `.env`. Either way the strict READ rule is unchanged: local OCR confirms every value.
-A photo with a face is never sent; Groq calls stay inside 30 requests and 8K tokens per minute, wait on HTTP
-429 `retry-after`, and are cached on disk, so reruns cost nothing. `cost_usd` is Groq's list price for the
-tokens used (the free tier charges nothing). Vision and OCR run in parallel per photo.
+`qwen/qwen3.8-27b` on Groq (`GROQ_MODEL`) is the default. Accuracy comes from the strict rule, not the model:
+OCR must confirm every value on the photo, so on 94 labelled key values Groq has 3 key wrong READs and a local
+7B model 2; two of Groq's three are cases the local model also gets wrong and one is a label gap. Groq answers
+in about 1 s, so a check takes 5.3 s (local OCR sets the pace) against 15.8 s for the local model, and it needs
+no GPU, so it deploys on a CPU-only server (`deploy/perception.env`).
 
-If the provider fails (an error, rate limits beyond 3 retries, or a removed model), every field from that photo
-is DISPUTED with reason `vision_unavailable` and `warnings["vision"]` says why; nothing is guessed. With
-`VISION_FALLBACK=ollama` the local model is tried first. The deployed server has no GPU, so
-`deploy/perception.env` sets `VISION_PROVIDER=groq` and `VISION_FALLBACK=none`; the key comes from the server's
-environment. The laptop default stays `ollama`.
+- A photo is sent to Groq only after the on-device face check; a photo with a face is never sent.
+- Calls stay inside 30 requests and 8K tokens per minute, wait on HTTP 429 `retry-after`, and are cached on
+  disk, so reruns cost nothing. `cost_usd` is Groq's list price for the tokens used (about $0.0025 per check;
+  the free tier charges nothing).
+- If Groq fails (an error, rate limits beyond 3 retries, a removed model), every field from that photo is
+  DISPUTED with reason `vision_unavailable` and `warnings["vision"]` says why; nothing is guessed.
+- Risk: `qwen/qwen3.8-27b` is a Groq preview model and can be deprecated at short notice; the model is one setting.
+
+## Offline mode: Ollama
+
+`VISION_PROVIDER=ollama` runs `qwen2.5vl:7b` locally (`ollama pull qwen2.5vl:7b`, needs a GPU); photos never leave
+the machine. `VISION_FALLBACK=ollama` keeps Groq primary and tries Ollama when Groq fails.
 
 ## Capture page and privacy
 

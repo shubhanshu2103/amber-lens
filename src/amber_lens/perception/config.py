@@ -23,7 +23,7 @@ class Settings:
     cache_dir: Path
     ollama_host: str
     vision_model: str
-    vision_provider: str = "ollama"
+    vision_provider: str = "groq"
     groq_api_key: str = ""
     groq_model: str = "qwen/qwen3.8-27b"
     vision_fallback: str = "none"
@@ -47,7 +47,7 @@ def settings_from_mapping(env: Mapping[str, str], root: Path = REPO_ROOT) -> Set
         cache_dir=_resolve(env.get("AMBER_CACHE_DIR") or DEFAULT_CACHE_DIR, root),
         ollama_host=_normalise_host(env.get("OLLAMA_HOST") or DEFAULT_OLLAMA_HOST),
         vision_model=model,
-        vision_provider=(env.get("VISION_PROVIDER") or "ollama").strip().lower(),
+        vision_provider=(env.get("VISION_PROVIDER") or "groq").strip().lower(),
         groq_api_key=(env.get("GROQ_API_KEY") or "").strip(),
         groq_model=(env.get("GROQ_MODEL") or "qwen/qwen3.8-27b").strip(),
         vision_fallback=(env.get("VISION_FALLBACK") or "none").strip().lower(),

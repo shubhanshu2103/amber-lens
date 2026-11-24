@@ -1,8 +1,9 @@
 # Nameplate reader on the tuning set (#11)
 
-All 35 tuning photos, run 2026-11-24 on an RTX 4050 laptop (6 GB VRAM). Vision model `qwen2.5vl:7b`
-(the default), prompt `nameplate-labelled-v1`, temperature 0, fixed seed. Everything is local:
-**$0.00 per photo.**
+All 35 tuning photos, prompt `nameplate-labelled-v1`, temperature 0, fixed seed. The default vision model is
+`qwen/qwen3.8-27b` on Groq; the rule was built and first measured with a local `qwen2.5vl:7b` (RTX 4050 laptop,
+$0.00 per photo), and the tables below the next section are from that local run. Both models are compared
+under "Model-agnostic: the same rule on two models".
 
 **Truth is not yet human-verified.** `labels.csv` was read off the photos by an AI model and
 `human_checked` is empty, so "correct" means agreement with AI-read labels. Labels come from the
@@ -20,6 +21,22 @@ OCR's own reading under the field's label does not differ; and OCR does not see 
 voltage, current or frequency values on the plate (R4). Otherwise the value is None, the status is
 UNREADABLE or DISPUTED, and the reason is one of `model_missing`, `format_fail`, `not_located`,
 `readers_disagree`.
+
+## Model-agnostic: the same rule on two models
+
+The same strict rule and the same local OCR, measured 2026-11-25 (key values: model number, voltage, current).
+
+| photos | vision model | key values READ and correct | wrong READs (key) | located | s/check total (vision, OCR in parallel) | tokens / check | cost / check |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 35 | **qwen/qwen3.8-27b, Groq (default)** | 39 of 94 | 4 (3) | 65 of 94 | **5.3** (1.1, 5.3), max 8.3 | 2,155 | $0.0025 list, $0 free tier |
+| 35 | qwen2.5vl:7b, local (offline mode) | 41 of 94 | 5 (2) | 67 of 94 | 15.8 (15.8, 7.2), max 36.7 | 1,576 | $0 |
+| 10 (spike) | qwen/qwen3.8-27b, Groq | 11 of 26 | 1 (1) | 18 of 26 | 4.9 (1.2, 4.9) | 2,202 | $0.0025 list |
+| 10 (spike) | qwen2.5vl:7b, local | 12 of 26 | 3 (1) | 19 of 26 | 16.6 (16.6, 7.8) | 1,580 | $0 |
+
+The model choice barely moves wrong READs because OCR must confirm every value. Groq's 3 key wrong READs:
+hf_04 model_number (MODEL vs CAT. NO.) and hf_075 voltage (multi-row table) are also wrong with the local model;
+darjja_train_14 current is printed but unlabelled (label gap). Local's 2 are the same hf_04 and hf_075.
+Groq's one clear misread, darjja_train_12 power `79.0 HP`, is blocked by the power-unit rule (named test).
 
 ## Engines and paths (key values = model number via either identifier, voltage, rated current; 94 labelled)
 
@@ -40,7 +57,8 @@ The model-box version of path C was not built: on hf_02 and hf_04 the boxes qwen
 The label-anchored crops above replace it.
 
 **Default: RapidOCR + Tesseract** (decision T2-10). Crops stay available as `--ocr "both+crops"`, off by
-default. **For the deck: 19.5 s mean, 22.9 s max per photo, $0.00.**
+default. Measured with the local model before vision and OCR ran in parallel: 19.5 s mean, 22.9 s max
+per photo, $0.00. Current per-check times are in the two-model table above.
 
 ## R6, the rating-table rule: measured, then kept as a warning only
 

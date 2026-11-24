@@ -108,11 +108,11 @@ def test_reset_header_parsing(value: str, seconds: float) -> None:
 
 
 def test_provider_choice_and_missing_key(tmp_path: Path) -> None:
-    assert isinstance(default_vision(settings_from_mapping({}, root=tmp_path)), OllamaVision)
-    groq = default_vision(settings_from_mapping({"VISION_PROVIDER": "groq", "GROQ_API_KEY": "gsk_x"}, root=tmp_path))
+    groq = default_vision(settings_from_mapping({"GROQ_API_KEY": "gsk_x"}, root=tmp_path))
     assert isinstance(groq, GroqVision) and groq.model == "qwen/qwen3.8-27b"
     with pytest.raises(VisionError, match="GROQ_API_KEY"):
-        default_vision(settings_from_mapping({"VISION_PROVIDER": "groq"}, root=tmp_path))
+        default_vision(settings_from_mapping({}, root=tmp_path))
+    assert isinstance(default_vision(settings_from_mapping({"VISION_PROVIDER": "ollama"}, root=tmp_path)), OllamaVision)
     with pytest.raises(VisionError, match="unknown VISION_PROVIDER"):
         default_vision(settings_from_mapping({"VISION_PROVIDER": "azure"}, root=tmp_path))
 
