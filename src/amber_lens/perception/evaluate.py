@@ -26,6 +26,7 @@ from amber_lens.perception.fields import IDENTIFIER_FIELDS, KEY_FIELDS, LABELLED
 from amber_lens.perception.ocr import run_multipass, run_rapidocr, run_rapidocr_and_tesseract
 from amber_lens.perception.reader import NameplateRun, run_nameplate
 from amber_lens.perception.scoring import Outcome, values_agree
+from amber_lens.perception.spike import SPIKE_PHOTOS
 from amber_lens.schemas import ReadStatus
 
 OCR_RUNNERS = {
@@ -156,11 +157,16 @@ def render(scores: list[FieldScore], runs: dict[str, NameplateRun], labels: dict
     ]
     for field, c in reason_counts(runs).items():
         out.append(f"| {field} | " + " | ".join(str(c[col]) for col in columns) + " |")
+    def mean(key: str) -> float:
+        return statistics.mean(run.timings[key] for run in runs.values()) / 1000
+
     latencies = [run.result.latency_ms / 1000 for run in runs.values()]
     latency = (f"mean {statistics.mean(latencies):.2f}, median {statistics.median(latencies):.2f}, "
-               f"max {max(latencies):.2f}")
+               f"max {max(latencies):.2f} (vision {mean('vision_ms'):.2f}, OCR {mean('ocr_ms'):.2f} in parallel); "
+               f"tokens per photo {mean('tokens') * 1000:.0f}")
     out += _paths_and_rules(scores, wrong, runs, labels)
-    out += ["", f"latency per photo (s): {latency}; cost_usd per photo: 0.0", "", "wrong READs:"]
+    cost = statistics.mean(run.result.cost_usd for run in runs.values())
+    out += ["", f"latency per photo (s): {latency}; cost_usd per photo: {cost:.5f}", "", "wrong READs:"]
     out += [f"- {s.photo_id} {s.field}: read {s.read_value!r}, label {s.truth!r}, via {s.located_by}" for s in wrong]
     out += [] if wrong else ["- none"]
     return "\n".join(out)
@@ -169,6 +175,7 @@ def render(scores: list[FieldScore], runs: dict[str, NameplateRun], labels: dict
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Reader eval on all tuning photos (#11)")
     parser.add_argument("--ocr", choices=sorted(OCR_RUNNERS), default="both")
+    parser.add_argument("--photos", choices=("all", "spike"), default="all", help="spike = the 10 photos of #8")
     parser.add_argument("--json-out", type=Path, default=None)
     args = parser.parse_args(argv)
     settings = load_settings()
@@ -180,10 +187,11 @@ def main(argv: list[str] | None = None) -> int:
         photo_id: run_nameplate(
             tuning_photo_path(settings.data_dir, labels[photo_id]), settings=settings, ocr=OCR_RUNNERS[args.ocr]
         )
-        for photo_id in sorted(labels)
+        for photo_id in (sorted(labels) if args.photos == "all" else SPIKE_PHOTOS)
     }
     scores = [s for photo_id, run in runs.items() for s in score_photo(photo_id, run, labels[photo_id])]
-    print(f"model {settings.vision_model}; OCR {args.ocr}; data {settings.data_dir}")
+    model = settings.groq_model if settings.vision_provider == "groq" else settings.vision_model
+    print(f"provider {settings.vision_provider}; model {model}; OCR {args.ocr}; photos {args.photos}")
     print(render(scores, runs, labels))
     if args.json_out is not None:
         payload = {

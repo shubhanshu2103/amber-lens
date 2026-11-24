@@ -8,6 +8,9 @@ Ollama plus Tesseract and RapidOCR, so `cost_usd` is 0.0.
 | `reader.py` | `read_nameplate(photo) -> PerceptionResult`, `run_nameplate` (result + reason codes + rule + locating path), `read_observation` |
 | `capture.py`, `capture.html` | Phone capture page (#10): photo + room QR tag -> saved photo and Observation JSON |
 | `models/` | YuNet face model (MIT, see `SOURCE.md`), SHA-256 checked before loading |
+| `documents.py` | Crate labels and delivery tickets (#22): label anchors for every field, row-and-column rule for table cells; `read_observation` for every kind |
+| `providers.py`, `groq.py` | Vision provider choice (`VISION_PROVIDER`: ollama or groq); Groq client with face check, rate limits and cache |
+| `faces.py` | YuNet face check used by the capture page and before any cloud call |
 | `fields.py` | Field names in `ReadField.name`: `model_number`, `catalog_number`, `voltage`, `rated_current`, `power`, `frequency`, `manufacturer` |
 | `config.py` | Settings from the environment and `.env`: `AMBER_DATA_DIR`, `AMBER_CACHE_DIR`, `OLLAMA_HOST`, `VISION_MODEL_NAME` (default `qwen2.5vl:7b`) |
 | `dataset.py` | Tuning rows of `labels.csv` and tuning photo paths; held-out paths are refused before they are opened |
@@ -41,6 +44,15 @@ git worktree add --detach ../amber-lens-data origin/d/dataset-hf-40
 ```
 
 Switch it to `./data` once the final `labels.csv` lands on `main`, then rerun the spike and the eval.
+
+## Vision providers
+
+`VISION_PROVIDER=ollama` (default) runs qwen2.5vl:7b locally. `VISION_PROVIDER=groq` sends the photo to
+Groq (`GROQ_MODEL`, default `qwen/qwen3.8-27b`, a preview model that can be deprecated at short notice) with
+`GROQ_API_KEY` from `.env`. Either way the strict READ rule is unchanged: local OCR confirms every value.
+A photo with a face is never sent; Groq calls stay inside 30 requests and 8K tokens per minute, wait on HTTP
+429 `retry-after`, and are cached on disk, so reruns cost nothing. `cost_usd` is Groq's list price for the
+tokens used (the free tier charges nothing). Vision and OCR run in parallel per photo.
 
 ## Capture page and privacy
 

@@ -109,6 +109,10 @@ FORMAT_RULES: dict[str, Callable[[str], bool]] = {
     "power": power_ok,
     "frequency": frequency_ok,
     "manufacturer": manufacturer_ok,
+    "po_number": model_number_ok,
+    "delivery_ticket_id": model_number_ok,
+    "qty": lambda v: re.fullmatch(r"\d{1,5}", _clean(v)) is not None,
+    "po_line": lambda v: re.fullmatch(r"[1-9]\d{0,2}", _clean(v)) is not None,
 }
 
 
@@ -127,6 +131,10 @@ PRINTED_LABELS: dict[str, frozenset[str]] = {
     "power": frozenset({"HP", "KW", "KVA", "POWER", "OUTPUT", "RATEDOUTPUT"}),
     "frequency": frozenset({"HZ", "HERTZ", "FREQ", "FREQUENCY", "CYCLES"}),
     "manufacturer": frozenset(),
+    "po_number": frozenset({"PO", "PONO", "PONUMBER", "CUSTOMERPO", "PURCHASEORDER"}),
+    "delivery_ticket_id": frozenset({"DELIVERYTICKET", "TICKET", "TICKETNO", "DELIVERYNOTE"}),
+    "qty": frozenset({"QTY", "QUANTITY", "QTYSHIPPED"}),
+    "po_line": frozenset({"LINE", "POLINE"}),
 }
 
 

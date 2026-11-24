@@ -33,6 +33,7 @@ def _run(read: dict[str, str], rules: dict[str, str] | None = None, vision: dict
         rules={n: rules.get(n) for n in NAMEPLATE_FIELDS},
         located_by={n: (path if n in read else None) for n in NAMEPLATE_FIELDS},
         warnings=dict.fromkeys(NAMEPLATE_FIELDS),
+        timings={"vision_ms": 900, "ocr_ms": 400, "total_ms": 900, "tokens": 2400},
     )
 
 

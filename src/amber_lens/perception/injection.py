@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import re
 
-from amber_lens.perception.locate import strict_key
+from amber_lens.perception.locate import centre_inside, strict_key
 from amber_lens.perception.ocr import OcrLine
 from amber_lens.perception.rules import check_format, label_key
 from amber_lens.perception.textfields import FIELD_PATTERNS
@@ -39,23 +39,18 @@ def _second_model_labels(lines: list[OcrLine]) -> list[OcrLine]:
     return [line for found in by_label.values() if len({key for key, _ in found}) >= 2 for _, line in found]
 
 
-def _inside(box: BBox, other: BBox) -> bool:
-    cx, cy = box.x + box.w / 2, box.y + box.h / 2
-    return other.x <= cx <= other.x + other.w and other.y <= cy <= other.y + other.h
-
-
 def flagged_lines(lines: tuple[OcrLine, ...], primary_pass: str) -> list[OcrLine]:
     """Instruction-like lines plus planted second MODEL labels, one per printed line across OCR passes."""
     primary = [line for line in lines if line.pass_id == primary_pass]
     kept: list[OcrLine] = []
     for line in [line for line in lines if looks_like_instruction(line.text)] + _second_model_labels(primary):
-        if not any(_inside(line.bbox, other.bbox) for other in kept):
+        if not any(centre_inside(line.bbox, other.bbox) for other in kept):
             kept.append(line)
     return kept
 
 
 def on_flagged_line(box: BBox, flagged: list[OcrLine]) -> bool:
-    return any(_inside(box, line.bbox) for line in flagged)
+    return any(centre_inside(box, line.bbox) for line in flagged)
 
 
 def free_text_fields(flagged: list[OcrLine], photo_ref: str) -> list[ReadField]:

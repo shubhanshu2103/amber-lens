@@ -8,6 +8,7 @@ from pathlib import Path
 
 from PIL import Image, ImageOps
 
+from amber_lens.perception.locate import label_boxes
 from amber_lens.perception.ocr import (
     OcrLine,
     OcrResult,
@@ -18,10 +19,9 @@ from amber_lens.perception.ocr import (
     run_multipass,
     run_rapidocr_and_tesseract,
     tesseract_module,
-    union_bbox,
     words_from_tesseract_data,
 )
-from amber_lens.perception.rules import PRINTED_LABELS, label_key
+from amber_lens.perception.rules import PRINTED_LABELS
 from amber_lens.schemas import BBox
 
 CROP_PASS = "crop_ocr"
@@ -48,18 +48,12 @@ def _padded(x: float, y: float, w: float, h: float, image_size: tuple[int, int])
 def label_cells(lines: tuple[OcrLine, ...] | list[OcrLine], image_size: tuple[int, int]) -> list[BBox]:
     """Padded cells right of and below each printed label OCR found; one-letter labels are skipped."""
     cells: list[BBox] = []
-    for line in lines:
-        words = line.words
-        for i in range(len(words)):
-            for j in range(i, min(i + 3, len(words))):
-                if label_key(" ".join(w.text for w in words[i : j + 1])) not in LABEL_KEYS:
-                    continue
-                box = union_bbox([w.bbox for w in words[i : j + 1]])
-                right = _padded(box.x + box.w, box.y - 0.3 * box.h, 10 * box.h, 1.6 * box.h, image_size)
-                below = _padded(box.x - box.h, box.y + box.h, box.w + 6 * box.h, 2 * box.h, image_size)
-                for cell in (right, below):
-                    if cell is not None and all(_iou(cell, other) < 0.5 for other in cells):
-                        cells.append(cell)
+    for box in label_boxes(lines, LABEL_KEYS):
+        right = _padded(box.x + box.w, box.y - 0.3 * box.h, 10 * box.h, 1.6 * box.h, image_size)
+        below = _padded(box.x - box.h, box.y + box.h, box.w + 6 * box.h, 2 * box.h, image_size)
+        for cell in (right, below):
+            if cell is not None and all(_iou(cell, other) < 0.5 for other in cells):
+                cells.append(cell)
     return cells[:MAX_CROPS]
 
 

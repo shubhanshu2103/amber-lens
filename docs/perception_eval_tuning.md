@@ -28,10 +28,10 @@ UNREADABLE or DISPUTED, and the reason is one of `model_missing`, `format_fail`,
 | Tesseract, 9 passes (path A) | 30 (32%) | 17 | 3 (1) | 18.3 (22.4) |
 | Tesseract + label-anchored crops (A + crops) | 34 (36%) | 19 | 3 (1) | 19.2 (22.5) |
 | RapidOCR | 61 (65%) | 42 | 5 (3) | 15.9 (19.3) |
-| **RapidOCR + Tesseract (default)** | **66 (70%)** | **41** | **5 (2)** | **19.5 (22.9)** |
+| **RapidOCR + Tesseract (default)** | **67 (71%)** | **41** | **5 (2)** | **19.5 (22.9)** |
 | RapidOCR + Tesseract + crops | 69 (73%) | 43 | 5 (2) | 34.9 (55.3) |
 
-Located boxes by path in the RapidOCR + Tesseract run: rapidocr 109, full_ocr (Tesseract) 11. Correct READs
+Located boxes by path in the RapidOCR + Tesseract run: rapidocr 110, full_ocr (Tesseract) 11. Correct READs
 by path: rapidocr 75, full_ocr 5. With crops added: crop_ocr located 5 more boxes, all 4 crop READs were
 correct and the crop path produced **0 wrong READs**.
 
@@ -73,7 +73,7 @@ model_number matched the label through `model_number` 15 times and through `cata
 | model_number | 17 | 0 | 1 | 16 | 1 |
 | catalog_number | 6 | 2 | 1 | 26 | 0 |
 | voltage | 14 | 0 | 4 | 9 | 8 |
-| rated_current | 8 | 0 | 2 | 10 | 15 |
+| rated_current | 8 | 0 | 2 | 9 | 16 |
 | power | 9 | 1 | 12 | 13 | 0 |
 | frequency | 11 | 0 | 1 | 15 | 8 |
 | manufacturer | 22 | 1 | 2 | 9 | 1 |
@@ -83,10 +83,10 @@ model_number matched the label through `model_number` 15 times and through `cata
 | field | moved out of READ by R4 alone | of which the vision value was correct |
 | --- | --- | --- |
 | voltage (key) | 1 | 1 |
-| rated_current (key) | 4 | 2 |
+| rated_current (key) | 5 | 3 |
 | frequency | 8 | 5 |
 
-Key values: R4 moves 5 out of READ, 3 of them correct (within the 5-value limit). Counting frequency it
+Key values: R4 moves 6 out of READ, 4 of them correct (within the 5-value limit). Counting frequency it
 holds back 8 correct values, so the row-aware version is proposed as a follow-up after the Nov 25 handoff.
 
 ## Every wrong READ (RapidOCR + Tesseract)
@@ -101,6 +101,13 @@ holds back 8 correct values, so the row-aware version is proposed as a follow-up
 
 The six reader errors found earlier tonight (`13ACD` fragment, `ee` logo, `1.82Y`, `50` on two 60 Hz
 plates, `03D 87250` without a catalog label) are all removed by R1-R5 and each has a named test.
+
+## Change log
+
+- T5 (#22) locate fixes (glued labels need a separator; a glued trailing slash is not part of the value):
+  no status or value changed on any tuning field. Located key values 66 -> 67 (hf_092 current is now found,
+  then held back by R4); R4 on current 4 -> 5 values (3 correct). Two fields stop at not_located instead of
+  label_anchor_missing. Counts above are from this run.
 
 ## Reproduce
 

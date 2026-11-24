@@ -30,7 +30,7 @@
       "name": "catalog_number",
       "value": null,
       "vision_value": "ITF312500",
-      "ocr_value": "CODEITF312500",
+      "ocr_value": null,
       "format_rule_passed": true,
       "status": "disputed",
       "source": null,
@@ -139,7 +139,7 @@
     ],
     "tag_read_ok": false,
     "model_name": "qwen2.5vl:7b",
-    "latency_ms": 20340,
+    "latency_ms": 20370,
     "cost_usd": 0.0
    },
    "reasons": {
@@ -153,7 +153,7 @@
    },
    "rules": {
     "model_number": null,
-    "catalog_number": "label_anchor_missing",
+    "catalog_number": "not_found",
     "voltage": "ocr_label_value_differs",
     "rated_current": "ocr_label_value_differs",
     "power": null,
@@ -296,7 +296,7 @@
     ],
     "tag_read_ok": false,
     "model_name": "qwen2.5vl:7b",
-    "latency_ms": 20652,
+    "latency_ms": 20758,
     "cost_usd": 0.0
    },
    "reasons": {
@@ -443,7 +443,7 @@
     ],
     "tag_read_ok": false,
     "model_name": "qwen2.5vl:7b",
-    "latency_ms": 19130,
+    "latency_ms": 18412,
     "cost_usd": 0.0
    },
    "reasons": {
@@ -600,7 +600,7 @@
     ],
     "tag_read_ok": false,
     "model_name": "qwen2.5vl:7b",
-    "latency_ms": 19385,
+    "latency_ms": 19526,
     "cost_usd": 0.0
    },
    "reasons": {
@@ -737,7 +737,7 @@
     ],
     "tag_read_ok": false,
     "model_name": "qwen2.5vl:7b",
-    "latency_ms": 17532,
+    "latency_ms": 17843,
     "cost_usd": 0.0
    },
    "reasons": {
@@ -884,7 +884,7 @@
     ],
     "tag_read_ok": false,
     "model_name": "qwen2.5vl:7b",
-    "latency_ms": 19559,
+    "latency_ms": 19972,
     "cost_usd": 0.0
    },
    "reasons": {
@@ -1011,7 +1011,7 @@
     ],
     "tag_read_ok": false,
     "model_name": "qwen2.5vl:7b",
-    "latency_ms": 19174,
+    "latency_ms": 19347,
     "cost_usd": 0.0
    },
    "reasons": {
@@ -1148,7 +1148,7 @@
     ],
     "tag_read_ok": false,
     "model_name": "qwen2.5vl:7b",
-    "latency_ms": 19270,
+    "latency_ms": 19517,
     "cost_usd": 0.0
    },
    "reasons": {
@@ -1295,7 +1295,7 @@
     ],
     "tag_read_ok": false,
     "model_name": "qwen2.5vl:7b",
-    "latency_ms": 20318,
+    "latency_ms": 20931,
     "cost_usd": 0.0
    },
    "reasons": {
@@ -1442,7 +1442,7 @@
     ],
     "tag_read_ok": false,
     "model_name": "qwen2.5vl:7b",
-    "latency_ms": 16447,
+    "latency_ms": 17754,
     "cost_usd": 0.0
    },
    "reasons": {
@@ -1589,7 +1589,7 @@
     ],
     "tag_read_ok": false,
     "model_name": "qwen2.5vl:7b",
-    "latency_ms": 19574,
+    "latency_ms": 22222,
     "cost_usd": 0.0
    },
    "reasons": {
@@ -1736,7 +1736,7 @@
     ],
     "tag_read_ok": false,
     "model_name": "qwen2.5vl:7b",
-    "latency_ms": 18309,
+    "latency_ms": 19318,
     "cost_usd": 0.0
    },
    "reasons": {
@@ -1893,7 +1893,7 @@
     ],
     "tag_read_ok": false,
     "model_name": "qwen2.5vl:7b",
-    "latency_ms": 20639,
+    "latency_ms": 22681,
     "cost_usd": 0.0
    },
    "reasons": {
@@ -2070,7 +2070,7 @@
     ],
     "tag_read_ok": false,
     "model_name": "qwen2.5vl:7b",
-    "latency_ms": 19418,
+    "latency_ms": 20175,
     "cost_usd": 0.0
    },
    "reasons": {
@@ -2247,7 +2247,7 @@
     ],
     "tag_read_ok": false,
     "model_name": "qwen2.5vl:7b",
-    "latency_ms": 17844,
+    "latency_ms": 19043,
     "cost_usd": 0.0
    },
    "reasons": {
@@ -2295,7 +2295,7 @@
       "name": "model_number",
       "value": null,
       "vision_value": "A36-8063-4076",
-      "ocr_value": "SECA36-8063-4076",
+      "ocr_value": null,
       "format_rule_passed": true,
       "status": "disputed",
       "source": null,
@@ -2414,7 +2414,7 @@
     ],
     "tag_read_ok": false,
     "model_name": "qwen2.5vl:7b",
-    "latency_ms": 20639,
+    "latency_ms": 23542,
     "cost_usd": 0.0
    },
    "reasons": {
@@ -2427,7 +2427,7 @@
     "manufacturer": null
    },
    "rules": {
-    "model_number": "label_anchor_missing",
+    "model_number": "not_found",
     "catalog_number": "label_anchor_missing",
     "voltage": null,
     "rated_current": "ocr_label_value_differs",
@@ -2591,7 +2591,7 @@
     ],
     "tag_read_ok": false,
     "model_name": "qwen2.5vl:7b",
-    "latency_ms": 20994,
+    "latency_ms": 20185,
     "cost_usd": 0.0
    },
    "reasons": {
@@ -2758,7 +2758,7 @@
     ],
     "tag_read_ok": false,
     "model_name": "qwen2.5vl:7b",
-    "latency_ms": 19189,
+    "latency_ms": 21457,
     "cost_usd": 0.0
    },
    "reasons": {
@@ -2915,7 +2915,7 @@
     ],
     "tag_read_ok": false,
     "model_name": "qwen2.5vl:7b",
-    "latency_ms": 19258,
+    "latency_ms": 19715,
     "cost_usd": 0.0
    },
    "reasons": {
@@ -3032,7 +3032,7 @@
     ],
     "tag_read_ok": false,
     "model_name": "qwen2.5vl:7b",
-    "latency_ms": 16330,
+    "latency_ms": 16322,
     "cost_usd": 0.0
    },
    "reasons": {
@@ -3169,7 +3169,7 @@
     ],
     "tag_read_ok": false,
     "model_name": "qwen2.5vl:7b",
-    "latency_ms": 19641,
+    "latency_ms": 20214,
     "cost_usd": 0.0
    },
    "reasons": {
@@ -3316,7 +3316,7 @@
     ],
     "tag_read_ok": false,
     "model_name": "qwen2.5vl:7b",
-    "latency_ms": 19021,
+    "latency_ms": 19518,
     "cost_usd": 0.0
    },
    "reasons": {
@@ -3463,7 +3463,7 @@
     ],
     "tag_read_ok": false,
     "model_name": "qwen2.5vl:7b",
-    "latency_ms": 20861,
+    "latency_ms": 21633,
     "cost_usd": 0.0
    },
    "reasons": {
@@ -3610,7 +3610,7 @@
     ],
     "tag_read_ok": false,
     "model_name": "qwen2.5vl:7b",
-    "latency_ms": 21598,
+    "latency_ms": 22150,
     "cost_usd": 0.0
    },
    "reasons": {
@@ -3777,7 +3777,7 @@
     ],
     "tag_read_ok": false,
     "model_name": "qwen2.5vl:7b",
-    "latency_ms": 18974,
+    "latency_ms": 19138,
     "cost_usd": 0.0
    },
    "reasons": {
@@ -3875,10 +3875,20 @@
       "name": "rated_current",
       "value": null,
       "vision_value": "12.3 / 6.15",
-      "ocr_value": null,
+      "ocr_value": "12.3/6.15 | 4 | 2",
       "format_rule_passed": true,
       "status": "disputed",
-      "source": null,
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_092.jpg",
+       "detail": "field=rated_current; label=AMP; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 136,
+        "y": 93,
+        "w": 111,
+        "h": 27
+       }
+      },
       "injection_flag": false
      },
      {
@@ -3924,14 +3934,14 @@
     ],
     "tag_read_ok": false,
     "model_name": "qwen2.5vl:7b",
-    "latency_ms": 18890,
+    "latency_ms": 19401,
     "cost_usd": 0.0
    },
    "reasons": {
     "model_number": null,
     "catalog_number": "not_located",
     "voltage": "readers_disagree",
-    "rated_current": "not_located",
+    "rated_current": "readers_disagree",
     "power": "format_fail",
     "frequency": "not_located",
     "manufacturer": null
@@ -3940,7 +3950,7 @@
     "model_number": null,
     "catalog_number": "label_anchor_missing",
     "voltage": "ocr_label_value_differs",
-    "rated_current": "not_found",
+    "rated_current": "multi_rating",
     "power": "format_rule",
     "frequency": "not_found",
     "manufacturer": null
@@ -3949,7 +3959,7 @@
     "model_number": "rapidocr",
     "catalog_number": null,
     "voltage": "rapidocr",
-    "rated_current": null,
+    "rated_current": "rapidocr",
     "power": null,
     "frequency": null,
     "manufacturer": "rapidocr"
@@ -4061,7 +4071,7 @@
     ],
     "tag_read_ok": false,
     "model_name": "qwen2.5vl:7b",
-    "latency_ms": 22900,
+    "latency_ms": 23098,
     "cost_usd": 0.0
    },
    "reasons": {
@@ -4238,7 +4248,7 @@
     ],
     "tag_read_ok": false,
     "model_name": "qwen2.5vl:7b",
-    "latency_ms": 20173,
+    "latency_ms": 20593,
     "cost_usd": 0.0
    },
    "reasons": {
@@ -4375,7 +4385,7 @@
     ],
     "tag_read_ok": false,
     "model_name": "qwen2.5vl:7b",
-    "latency_ms": 20259,
+    "latency_ms": 20605,
     "cost_usd": 0.0
    },
    "reasons": {
@@ -4552,7 +4562,7 @@
     ],
     "tag_read_ok": false,
     "model_name": "qwen2.5vl:7b",
-    "latency_ms": 17589,
+    "latency_ms": 17869,
     "cost_usd": 0.0
    },
    "reasons": {
@@ -4679,7 +4689,7 @@
     ],
     "tag_read_ok": false,
     "model_name": "qwen2.5vl:7b",
-    "latency_ms": 22155,
+    "latency_ms": 22519,
     "cost_usd": 0.0
    },
    "reasons": {
@@ -4836,7 +4846,7 @@
     ],
     "tag_read_ok": false,
     "model_name": "qwen2.5vl:7b",
-    "latency_ms": 19249,
+    "latency_ms": 19559,
     "cost_usd": 0.0
    },
    "reasons": {
@@ -4953,7 +4963,7 @@
     ],
     "tag_read_ok": false,
     "model_name": "qwen2.5vl:7b",
-    "latency_ms": 18053,
+    "latency_ms": 18168,
     "cost_usd": 0.0
    },
    "reasons": {
@@ -5090,7 +5100,7 @@
     ],
     "tag_read_ok": false,
     "model_name": "qwen2.5vl:7b",
-    "latency_ms": 17638,
+    "latency_ms": 17707,
     "cost_usd": 0.0
    },
    "reasons": {
@@ -5257,7 +5267,7 @@
     ],
     "tag_read_ok": false,
     "model_name": "qwen2.5vl:7b",
-    "latency_ms": 20925,
+    "latency_ms": 21208,
     "cost_usd": 0.0
    },
    "reasons": {

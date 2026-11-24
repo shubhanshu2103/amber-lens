@@ -14,8 +14,6 @@ from __future__ import annotations
 
 import base64
 import binascii
-import functools
-import hashlib
 import io
 import re
 import uuid
@@ -29,19 +27,15 @@ from pydantic import BaseModel, Field, ValidationError
 from starlette.concurrency import run_in_threadpool
 
 from amber_lens.perception.config import REPO_ROOT
+from amber_lens.perception.faces import has_face
 from amber_lens.schemas import Observation
 
 CAPTURE_DIR = REPO_ROOT / "captures"
 PAGE = Path(__file__).with_name("capture.html")
 ROLES = ("site engineer", "storekeeper", "quality inspector", "project manager")
 ROOM_TAG = re.compile(r"[A-Z0-9][A-Z0-9.\-]{1,31}")
-DETECT_MAX_SIDE = 800
 MAX_BODY_BYTES = 15 * 1024 * 1024
 MAX_PIXELS = 40_000_000
-FACE_MODEL = Path(__file__).with_name("models") / "face_detection_yunet_2023mar.onnx"
-FACE_MODEL_SHA256 = "8f2383e4dd3cfbb4553ea8718107fc0423210dc964f9f4280604804ed2552fa4"
-# YuNet's default score threshold; on the 35 tuning nameplates the highest face score was 0.53.
-FACE_SCORE_THRESHOLD = 0.9
 TagSource = Literal["qr_in_photo", "qr_photo", "typed"]
 
 
@@ -77,28 +71,6 @@ def decode_image(b64: str) -> Image.Image:
         raise CaptureRejected("That file is not a photo.") from exc
     upright = ImageOps.exif_transpose(image).convert("RGB")
     return Image.frombytes("RGB", upright.size, upright.tobytes())
-
-
-@functools.lru_cache(maxsize=1)
-def _face_detector():
-    if hashlib.sha256(FACE_MODEL.read_bytes()).hexdigest() != FACE_MODEL_SHA256:
-        raise RuntimeError(f"refusing to load {FACE_MODEL.name}: SHA-256 does not match the pinned hash")
-    import cv2
-
-    return cv2.FaceDetectorYN.create(str(FACE_MODEL), "", (320, 320), FACE_SCORE_THRESHOLD)
-
-
-def has_face(image: Image.Image) -> bool:
-    """Best-effort: does YuNet find a face at or above FACE_SCORE_THRESHOLD?"""
-    import cv2
-    import numpy as np
-
-    small = image.copy()
-    small.thumbnail((DETECT_MAX_SIDE, DETECT_MAX_SIDE))
-    detector = _face_detector()
-    detector.setInputSize(small.size)
-    _, faces = detector.detect(cv2.cvtColor(np.asarray(small), cv2.COLOR_RGB2BGR))
-    return faces is not None and len(faces) > 0
 
 
 def decode_qr(image: Image.Image) -> str | None:

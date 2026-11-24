@@ -30,9 +30,12 @@ class VisionPrompt:
     fields: tuple[str, ...]
     # Labelled prompts answer {"value": ..., "printed_label": ...} per field instead of a plain string.
     labelled: bool = False
+    custom_schema: dict | None = None
 
     def schema(self) -> dict:
         """JSON schema passed to Ollama so the model can only answer with these keys."""
+        if self.custom_schema is not None:
+            return self.custom_schema
         if self.labelled:
             item = {
                 "type": "object",
@@ -99,6 +102,41 @@ NAMEPLATE_PROMPT = VisionPrompt(
 )
 
 
+CRATE_PROMPT = VisionPrompt(
+    version="crate-label-v1",
+    fields=("model_number", "qty", "po_number", "po_line"),
+    labelled=True,
+    text=(
+        "Transcribe fields from this photo of a crate or shipping label.\n"
+        + _DATA_NOT_INSTRUCTIONS
+        + "Return JSON with exactly these keys: model_number, qty, po_number, po_line. Each key maps to an "
+        "object with two keys: value and printed_label.\n"
+        "value: copied exactly as printed. printed_label: the label printed next to that value, copied exactly.\n"
+        "model_number: the value next to MODEL. qty: the value next to QTY. po_number: the purchase order "
+        "number next to PO. po_line: the PO line number next to LINE.\n"
+        "Use null for any value that is not printed or that you cannot read with certainty. Never guess a value."
+    ),
+)
+_NULLABLE = {"type": ["string", "null"]}
+_TICKET_LINE = {"type": "object", "properties": {k: _NULLABLE for k in ("po_line", "model_number", "qty")},
+                "required": ["po_line", "model_number", "qty"]}
+TICKET_PROMPT = VisionPrompt(
+    version="delivery-ticket-v1",
+    fields=("po_number", "delivery_ticket_id", "lines"),
+    custom_schema={"type": "object", "required": ["po_number", "delivery_ticket_id", "lines"],
+                   "properties": {"po_number": _NULLABLE, "delivery_ticket_id": _NULLABLE,
+                                  "lines": {"type": "array", "items": _TICKET_LINE}}},
+    text=(
+        "Transcribe this delivery ticket.\n"
+        + _DATA_NOT_INSTRUCTIONS
+        + "Return JSON: po_number (the customer PO number), delivery_ticket_id (the ticket number) and lines, "
+        "one object per table row with po_line (the value in the Line column), model_number and qty (the "
+        "quantity shipped), each copied exactly as printed.\n"
+        "Use null for any value that is not printed or that you cannot read with certainty. Never guess a value."
+    ),
+)
+
+
 @dataclass(frozen=True)
 class VisionCall:
     model: str
@@ -108,6 +146,8 @@ class VisionCall:
     latency_ms: int
     load_ms: int
     cached: bool
+    tokens: int = 0
+    cost_usd: float = 0.0
 
 
 @dataclass(frozen=True)
@@ -157,14 +197,14 @@ def collapse_whitespace(value: str) -> str:
     return " ".join(value.split())
 
 
-def _clean_string(value: object) -> str | None:
+def clean_string(value: object) -> str | None:
     if not isinstance(value, str):
         return None
     value = collapse_whitespace(value)
     return None if value.casefold() in _NONE_LIKE else value
 
 
-def _load_object(raw_text: str) -> dict:
+def load_object(raw_text: str) -> dict:
     try:
         data = json.loads(raw_text)
     except json.JSONDecodeError as exc:
@@ -180,18 +220,18 @@ def parse_reading(raw_text: str, fields: tuple[str, ...]) -> dict[str, str | Non
     Unknown keys are ignored, so text on a label can never add a field or change the shape.
     Raises VisionError when the answer is not a JSON object at all.
     """
-    data = _load_object(raw_text)
-    return {name: _clean_string(data.get(name)) for name in fields}
+    data = load_object(raw_text)
+    return {name: clean_string(data.get(name)) for name in fields}
 
 
 def parse_labelled_reading(raw_text: str, fields: tuple[str, ...]) -> dict[str, FieldReading]:
     """Labelled form of parse_reading: each field is {"value", "printed_label"}; any other shape is empty."""
-    data = _load_object(raw_text)
+    data = load_object(raw_text)
     readings = {}
     for name in fields:
         item = data.get(name)
         if isinstance(item, dict):
-            readings[name] = FieldReading(_clean_string(item.get("value")), _clean_string(item.get("printed_label")))
+            readings[name] = FieldReading(clean_string(item.get("value")), clean_string(item.get("printed_label")))
         else:
             readings[name] = FieldReading(None, None)
     return readings
@@ -225,7 +265,7 @@ class OllamaVision:
             if self.cache is not None:
                 self.cache.put(digest, self.model, prompt.version, entry)
         return VisionCall(self.model, prompt.version, digest, entry["raw_text"], int(entry.get("latency_ms", 0)),
-                          int(entry.get("load_ms", 0)), cached)
+                          int(entry.get("load_ms", 0)), cached, int(entry.get("tokens", 0)))
 
     def _generate(self, image_bytes: bytes, prompt: VisionPrompt) -> dict:
         payload = {
@@ -246,7 +286,9 @@ class OllamaVision:
         load_ms = int(body.get("load_duration", 0) / 1e6)
         total_ms = int(body.get("total_duration", 0) / 1e6) or wall_ms
         # Latency excludes the one-off model load so it reflects a warm per-photo check.
-        return {"raw_text": raw_text, "latency_ms": max(total_ms - load_ms, 0), "load_ms": load_ms, "wall_ms": wall_ms}
+        tokens = int(body.get("prompt_eval_count", 0)) + int(body.get("eval_count", 0))
+        return {"raw_text": raw_text, "latency_ms": max(total_ms - load_ms, 0), "load_ms": load_ms, "wall_ms": wall_ms,
+                "tokens": tokens}
 
     def unload(self) -> None:
         """Free GPU memory so the next model gets the whole card."""

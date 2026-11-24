@@ -6,7 +6,7 @@ from pathlib import Path
 import pytest
 from PIL import Image
 
-from amber_lens.perception import capture
+from amber_lens.perception import capture, faces
 from amber_lens.perception.capture import CaptureRejected, CaptureRequest, save_capture
 
 DEVICE = "3f2a8c1e-4b7d-4e2f-9a1b-0c3d5e7f9a2b"
@@ -92,17 +92,17 @@ def test_request_accepts_only_known_roles_and_random_device_ids() -> None:
 def test_face_model_with_a_different_hash_is_refused(tmp_path: Path, monkeypatch) -> None:
     tampered = tmp_path / "face.onnx"
     tampered.write_bytes(b"not the pinned model")
-    monkeypatch.setattr(capture, "FACE_MODEL", tampered)
-    capture._face_detector.cache_clear()
+    monkeypatch.setattr(faces, "FACE_MODEL", tampered)
+    faces._face_detector.cache_clear()
     with pytest.raises(RuntimeError, match="SHA-256"):
-        capture._face_detector()
-    capture._face_detector.cache_clear()
+        faces._face_detector()
+    faces._face_detector.cache_clear()
 
 
 def test_bundled_face_model_matches_its_pinned_hash() -> None:
     import hashlib
 
-    assert hashlib.sha256(capture.FACE_MODEL.read_bytes()).hexdigest() == capture.FACE_MODEL_SHA256
+    assert hashlib.sha256(faces.FACE_MODEL.read_bytes()).hexdigest() == faces.FACE_MODEL_SHA256
 
 
 def _png_b64(size: tuple[int, int], mode: str = "1") -> str:

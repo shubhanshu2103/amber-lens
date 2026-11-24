@@ -3,6 +3,7 @@ from pathlib import Path
 
 import pytest
 
+from amber_lens.perception.documents import read_observation
 from amber_lens.perception.fields import NAMEPLATE_FIELDS
 from amber_lens.perception.ocr import OcrLine, OcrResult, OcrWord, union_bbox
 from amber_lens.perception.reader import (
@@ -11,7 +12,6 @@ from amber_lens.perception.reader import (
     build_evidence,
     decide_field,
     read_nameplate,
-    read_observation,
     run_nameplate,
 )
 from amber_lens.perception.vision import NAMEPLATE_PROMPT, FieldReading, VisionCall
@@ -171,7 +171,9 @@ def test_run_nameplate_end_to_end(photo: Path) -> None:
     assert isinstance(run.result, PerceptionResult)
     assert run.result.observation_id == "plate_01"
     assert run.result.tag_read_ok is False
-    assert (run.result.model_name, run.result.latency_ms, run.result.cost_usd) == ("fake-vl", 1000, 0.0)
+    assert (run.result.model_name, run.result.cost_usd) == ("fake-vl", 0.0)
+    # Vision and OCR run in parallel, so the photo costs the slower of the two.
+    assert run.result.latency_ms == max(700, run.timings["ocr_ms"]) == run.timings["total_ms"]
     assert [f.name for f in run.result.fields] == list(NAMEPLATE_FIELDS)
     assert run.reasons == {
         "model_number": None, "catalog_number": "model_missing", "voltage": None, "rated_current": "model_missing",
@@ -211,7 +213,7 @@ def test_read_observation_tag_ok_only_for_a_decoded_qr(photo: Path, source: str 
 
 
 def test_read_observation_refuses_other_kinds(photo: Path) -> None:
-    observation = Observation(observation_id="obs-2", kind="delivery_ticket", device_id="dev-1", role="site engineer",
+    observation = Observation(observation_id="obs-2", kind="packing_slip", device_id="dev-1", role="site engineer",
                               photo_path=str(photo))
     with pytest.raises(PerceptionError, match="not supported"):
         read_observation(observation, vision=FakeVision(_answer()), ocr=fake_ocr)

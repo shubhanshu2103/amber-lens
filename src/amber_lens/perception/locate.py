@@ -71,8 +71,8 @@ def _strip_units(field: str, text: str) -> str:
 
 
 def _split_parts(field: str, text: str) -> list[str]:
-    # "480 V / 400 V" is two printed values; "230/460" with no spaces is one printed token.
-    if field in ("model_number", "catalog_number"):
+    # "480 V / 400 V" is two printed ratings; "230/460" with no spaces is one printed token.
+    if field not in RATING_FIELDS:
         return [text]
     return [p for p in re.split(r"\s/\s", text) if p.strip()]
 
@@ -96,7 +96,8 @@ def min_box_height(lines: tuple[OcrLine, ...] | list[OcrLine]) -> float:
 
 
 def _word_key(field: str, text: str, fold: bool) -> str:
-    return match_key(_strip_units(field, text), fold).strip(_EDGE_PUNCT)
+    # A slash glued to the end ("ALPHA-0412/") is not part of the value; is_fragment decides what it joins.
+    return match_key(_strip_units(field, text), fold).strip(_EDGE_PUNCT).rstrip("/")
 
 
 def _span_matches(span_key: str, target: str, raw_span: str, single_word: bool) -> bool:
@@ -110,7 +111,7 @@ def _span_matches(span_key: str, target: str, raw_span: str, single_word: bool) 
         return True
     if single_word and span_key.endswith(target):
         prefix = raw_span[: len(raw_span) - len(target)]
-        return re.fullmatch(r"[a-z.:#]+", prefix) is not None
+        return re.fullmatch(r"[a-z.:#]*[.:#]", prefix) is not None
     return False
 
 
@@ -118,14 +119,16 @@ def _has_unit_context(field: str, line: OcrLine) -> bool:
     return field in _UNIT_WORDS and _UNIT_WORDS[field].search(line.text.casefold()) is not None
 
 
-def _is_fragment(line: OcrLine, start: int, end: int, multi_part: bool) -> bool:
-    """Rule R1: the next word starts with, or the previous word ends with, a dash or slash."""
+def is_fragment(line: OcrLine, start: int, end: int, multi_part: bool) -> bool:
+    """Rule R1: the value continues into a neighbour through a dash or slash ("13ACD" "-036", "230/" "460")."""
     words = line.words
-    if end + 1 < len(words):
-        following = words[end + 1].text
-        # Between the parts of "480 V / 400 V" a lone "/" is the expected separator, not a continuation.
-        if following[:1] in _JOINERS and not (multi_part and following == "/"):
-            return True
+    following = words[end + 1].text if end + 1 < len(words) else ""
+    # Between the parts of "480 V / 400 V" a lone "/" is the expected separator, not a continuation.
+    if following and following[0] in _JOINERS and not (multi_part and following == "/"):
+        return True
+    # A slash glued to the end joins only a following number; "ALPHA-0412/" "Line" is a separator.
+    if words[end].text.strip(_EDGE_PUNCT).endswith("/") and following[:1].isdigit():
+        return True
     return start > 0 and words[start - 1].text[-1:] in _JOINERS
 
 
@@ -157,7 +160,7 @@ def _locate_part(
                         ocr_text=" ".join(w.text for w in words),
                         pass_id=line.pass_id,
                         exact=_span_matches(raw_span, exact_target, raw_span, single_word=end == start),
-                        fragment=_is_fragment(line, start, end, multi_part),
+                        fragment=is_fragment(line, start, end, multi_part),
                         line=line,
                         start=start,
                         end=end,
@@ -219,16 +222,19 @@ def has_label_anchor(field: str, hit: LocateHit, lines: tuple[OcrLine, ...] | li
     labels = PRINTED_LABELS[field]
     if _glued_label(hit.line.words[hit.start].text, labels):
         return True
+    return any(_left_on_row(box, hit.bbox) or _directly_above(box, hit.bbox) for box in label_boxes(lines, labels))
+
+
+def label_boxes(lines: tuple[OcrLine, ...] | list[OcrLine], labels: frozenset[str] | set[str]) -> list[BBox]:
+    """Boxes of every run of 1-3 OCR words on a line that spells one of the labels."""
+    boxes = []
     for line in lines:
         words = line.words
         for i in range(len(words)):
             for j in range(i, min(i + 3, len(words))):
-                if label_key(" ".join(w.text for w in words[i : j + 1])) not in labels:
-                    continue
-                box = union_bbox([w.bbox for w in words[i : j + 1]])
-                if _left_on_row(box, hit.bbox) or _directly_above(box, hit.bbox):
-                    return True
-    return False
+                if label_key(" ".join(w.text for w in words[i : j + 1])) in labels:
+                    boxes.append(union_bbox([w.bbox for w in words[i : j + 1]]))
+    return boxes
 
 
 def unit_adjacent(hit: LocateHit, unit_label: str) -> bool:
@@ -258,3 +264,9 @@ def has_rating_table(lines: tuple[OcrLine, ...] | list[OcrLine]) -> bool:
         if len(rows) >= 2:
             return True
     return False
+
+
+def centre_inside(box: BBox, other: BBox) -> bool:
+    """The centre of box lies inside other."""
+    cx, cy = box.x + box.w / 2, box.y + box.h / 2
+    return other.x <= cx <= other.x + other.w and other.y <= cy <= other.y + other.h
