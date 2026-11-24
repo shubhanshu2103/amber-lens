@@ -51,6 +51,21 @@ Every step is an event in an append-only ledger. Approved changes carry an idemp
 - **Confidence from signals, not self-report:** reader agreement, match exactness (exact / normalised / fuzzy), check completeness, tag read quality.
 - **No tracking of people.** Location from printed room tags, never GPS. We photograph only nameplates, labels and tickets; frames with a person are discarded. Device ID and role only.
 
+### How confidence is computed
+
+```
+confidence = completeness * (0.4 * agreement + 0.4 * match + 0.2 * tag)
+```
+
+| Signal | Meaning |
+| --- | --- |
+| completeness | share of checks that had data to run |
+| agreement | per field: 1.0 if read, format rule passed and OCR does not contradict; 0.6 if read otherwise; 0 if disputed or unreadable |
+| match | average over checks: exact 1.0, normalised 0.95, alias 0.85, fuzzy 0.6, no match type 0.7 |
+| tag | 1.0 if the room tag was read cleanly or isn't used, else 0.6 |
+
+An injection flag on any read field caps confidence at 0.5. Below 0.80 the verdict is marked `needs_human`. The model's own self-reported number is never used. Code: `src/amber_lens/verdict/confidence.py`.
+
 ## Architecture
 
 | Module | Path | Owner | What it does |
