@@ -54,6 +54,12 @@ A photo with a face is never sent; Groq calls stay inside 30 requests and 8K tok
 429 `retry-after`, and are cached on disk, so reruns cost nothing. `cost_usd` is Groq's list price for the
 tokens used (the free tier charges nothing). Vision and OCR run in parallel per photo.
 
+If the provider fails (an error, rate limits beyond 3 retries, or a removed model), every field from that photo
+is DISPUTED with reason `vision_unavailable` and `warnings["vision"]` says why; nothing is guessed. With
+`VISION_FALLBACK=ollama` the local model is tried first. The deployed server has no GPU, so
+`deploy/perception.env` sets `VISION_PROVIDER=groq` and `VISION_FALLBACK=none`; the key comes from the server's
+environment. The laptop default stays `ollama`.
+
 ## Capture page and privacy
 
 ```bash

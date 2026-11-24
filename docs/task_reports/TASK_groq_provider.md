@@ -11,7 +11,7 @@ Owner: A Perception (Vrushali). Not committed yet (same working tree as T5).
 | face check before any cloud call | **done** | `GroqVision.read` runs YuNet first and raises `FaceInPhoto` before sending; test proves no request is made |
 | vision and OCR in parallel per photo | **done, with a change** | a two-worker thread pool runs both (see "Deviation") |
 | 30 RPM / 8K TPM, 429 `retry-after`, `x-ratelimit-*` headers, on-disk cache | **done** | sliding one-minute window; up to 3 retries on 429; pause when remaining tokens are low; cached answers make no call |
-| measure on the 10 spike photos and all 35, compare with local | **local done; Groq not measured** | there is no `.env` and no `GROQ_API_KEY` on this machine |
+| measure on the 10 spike photos and all 35, compare with local | **done** | "Measurements" below |
 
 ## Groq facts used (Groq public docs, read 2026-11-24)
 
@@ -23,19 +23,34 @@ Owner: A Perception (Vrushali). Not committed yet (same working tree as T5).
   page does not label the table clearly as free tier).
 - The only other Groq vision model, `meta-models/muse-spark-open`, is enterprise ("contact sales").
 
-## Measurements (qwen2.5vl:7b local, uncached, RapidOCR + Tesseract, strict rule)
+## Measurements (35 tuning photos, strict rule, RapidOCR + Tesseract; final after the power-unit fix)
 
 | photos | provider | key values READ and correct | wrong READs (key) | located | s/photo total (vision, OCR in parallel) | tokens / photo | cost / photo |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | 10 (spike) | local qwen2.5vl:7b | 12 of 26 | 3 (1) | 19 of 26 | 16.6 (16.6, 7.8) | 1,580 | $0 |
-| 35 (all) | local qwen2.5vl:7b | 41 of 94 | 5 (2) | 67 of 94 | 15.8 (15.8, 7.2), max 36.7 | 1,576 | $0 |
-| 10 / 35 | Groq qwen/qwen3.8-27b | not measured | not measured | not measured | not measured | about 2,500 expected (2,048 per image + prompt + answer) | about $0.0026 at list price, $0 on the free tier |
+| 10 (spike) | Groq qwen/qwen3.8-27b | 11 of 26 | 1 (1) | 18 of 26 | 4.9 (1.2, 4.9) | 2,202 | $0.0025 list, $0 free tier |
+| 35 (all) | local qwen2.5vl:7b | 41 of 94 | 5 (2) | 67 of 94 | 15.8 (15.8, 7.2) uncached | 1,576 | $0 |
+| 35 (all) | Groq qwen/qwen3.8-27b | 39 of 94 | 4 (3) | 65 of 94 | 5.3 (1.1, 5.3), max 8.3 | 2,155 | $0.0025 list, $0 free tier |
 
-Running vision and OCR in parallel brings the local mean from 19.5 s to 15.8 s per photo. The fresh local run
-reproduces the committed scores exactly (one field differs only in its box, still DISPUTED).
+Groq's key wrong READs: hf_04 model_number (shared with local), darjja_train_14 rated_current (label blank on the
+unreadable plate), hf_075 voltage (multi-row table, carries the multi_row_table warning). Its one clear misread,
+darjja_train_12 power `79.0 HP` (79.0 is the compressor LRA; HP belongs to the fan motor's 1/5), is now blocked:
+every power value READ needs its unit confirmed next to the number on the photo, whoever wrote the unit, and a
+unit label that also touches another number is ambiguous (named test). Local counts are unchanged by the fix.
 
-Expected Groq throughput from the limits alone: about 2,500 tokens per photo against 8K tokens per minute is
-about 3 photos per minute (35 photos take at least ~12 minutes), and 200K tokens per day is about 80 photos.
+**Default (your G-2 rule):** Groq key wrong READs 3 > local 2, so the default stays `ollama`. The deployed server
+uses Groq anyway (no GPU): `deploy/perception.env` sets `VISION_PROVIDER=groq`, `VISION_FALLBACK=none`.
+
+The 6 real-model tests (4 injection variants, SRT crate label, synthetic ticket) also pass with Groq
+(`6 passed in 164.55s`), so the deployed provider is held to the same injection and document checks.
+
+## Fallback
+
+If the provider fails (HTTP error, rate limits beyond 3 retries, a removed model), every field is DISPUTED with
+the new reason `vision_unavailable` and `warnings["vision"]` names the error; nothing is guessed. With
+`VISION_FALLBACK=ollama` local Ollama is tried first. A face in the photo is not a failure: the photo is refused.
+Groq requests send a generic client name (`amber-lens/0.1`); Groq's edge blocks Python's default (Cloudflare 1010).
+Measurement note: the first key was deleted mid-run (HTTP 401 after 7 answers); the cached answers were reused.
 
 ## Deviation
 
@@ -73,6 +88,5 @@ per-day budget tracking (the daily cap is reported instead).
 
 ## Proposed commit
 
-T5 is not committed and shares `reader.py`, `vision.py`, `evaluate.py` and `README.md` with this change, so they
-cannot be split cleanly. Either one commit `a: tickets and crate labels, optional Groq vision provider (#22)`, or
-T5 first with these files as they are now. Your call on "commit".
+`a: Groq vision provider with vision_unavailable fallback, power-unit rule fix (#11)`; stage the changed files
+(never `.env`). The T5 and earlier Groq files were committed in `f44b349`.

@@ -1,26 +1,21 @@
-"""Nameplate reader: photo in, PerceptionResult out (#11). Shared core for every document kind.
+"""Nameplate reader (#11) and the shared core for every document kind.
 
-A field is READ only when every check passes, in order (failing check -> reason): the model gave a value
-(model_missing); a bare power number takes its printed unit label; format rule, ratings hold only their unit
-words (R3, format_fail); OCR finds it in a box >= 8 px and 60% of the median line (R2, not_located); not a
-fragment (R1), same characters as OCR, OCR's own reading under the label agrees, no 2+ different ratings on
-the plate (R4) (readers_disagree); an attached power unit sits next to the number and an identifier has its
-label left of it or above (R5) (not_located). A value on a flagged line (#12) is DISPUTED with
-injection_flag; each flagged line is also a DISPUTED free_text_n field, quoted evidence only. Failures have
-value None; OCR never READs alone and the model's own confidence is never used.
+READ only when every check passes (reason when one fails): the model gave a value (model_missing); format
+rule, ratings hold only unit words (R3, format_fail); OCR finds it, box >= 8 px and 60% of the median line
+(R2, not_located); not a fragment (R1), OCR read the same characters, OCR's reading under the label agrees, no
+2+ different ratings (R4) (readers_disagree); an attached power unit sits next to its number and an identifier
+has its label left or above (R5) (not_located); never on a flagged line (#12, injection_flag). Vision provider
+failure: every field DISPUTED, vision_unavailable. Failures have value None; OCR never READs alone.
 
-run_nameplate returns result, reasons (None = READ), rules (the check that stopped each field), located_by,
-warnings ("multi_row_table", R6, never changes a status) and timings (vision, OCR and total ms, tokens).
-Vision and OCR run in parallel per photo. read_nameplate returns only the result.
-
-How to run:
-    python -m amber_lens.perception.reader <photo> --out examples/perception_result_sample.json
+run_nameplate returns result, reasons (None = READ), rules, located_by, warnings (multi_row_table, vision) and
+timings; vision and OCR run in parallel. Run: python -m amber_lens.perception.reader <photo> --out <json>
 """
 
 from __future__ import annotations
 
 import argparse
 import json
+import re
 import time
 from collections.abc import Callable
 from concurrent.futures import ThreadPoolExecutor
@@ -67,6 +62,7 @@ class Reason(str, Enum):
     READERS_DISAGREE = "readers_disagree"
     NOT_LOCATED = "not_located"
     MODEL_MISSING = "model_missing"
+    VISION_UNAVAILABLE = "vision_unavailable"
 
 
 class PerceptionError(RuntimeError):
@@ -136,9 +132,7 @@ def build_evidence(ocr: OcrResult) -> OcrEvidence:
 
 
 def ocr_path(pass_id: str) -> str:
-    if pass_id == RAPID_PASS:
-        return RAPIDOCR
-    return CROP_OCR if pass_id == CROP_PASS else FULL_OCR
+    return {RAPID_PASS: RAPIDOCR, CROP_PASS: CROP_OCR}.get(pass_id, FULL_OCR)
 
 
 def field_stop(name: str, status: ReadStatus, reason: Reason, rule: str, located_by: str | None = None,
@@ -155,7 +149,9 @@ def _check_located(
         return Reason.READERS_DISAGREE, "fragment", hit.ocr_text, True
     if not hit.exact:
         return Reason.READERS_DISAGREE, "glyph_mismatch", hit.ocr_text, True
-    if attached and not unit_adjacent(hit, label or ""):
+    # Every power value needs its unit confirmed next to the number, whoever wrote the unit (T2-8).
+    unit = label if attached else next(iter(re.findall(r"(?i)(?<![a-z])(?:hp|kva|kw|va|w)(?![a-z])", value)), "")
+    if name == "power" and not unit_adjacent(hit, unit or ""):
         return Reason.NOT_LOCATED, "unit_not_adjacent", hit.ocr_text, False
     if name in anchored and not has_label_anchor(name, hit, evidence.lines):
         return Reason.NOT_LOCATED, "label_anchor_missing", hit.ocr_text, False
@@ -219,23 +215,30 @@ def _decide_nameplate(raw_text: str, evidence: OcrEvidence, photo_ref: str):
 def read_document(
     photo_path: Path, prompt: VisionPrompt, decide: Decider, observation_id: str | None = None,
     tag_read_ok: bool = False, *, vision: VisionReader | None = None, ocr: OcrRunner = run_rapidocr_and_tesseract,
-    settings: Settings | None = None,
+    settings: Settings | None = None, fallback: VisionReader | None = None,
 ) -> NameplateRun:
     """Shared core: photo checks, one vision call, OCR evidence, the kind's field decisions, flagged lines."""
     photo_path = Path(photo_path)
     ensure_not_heldout(photo_path)
     if not photo_path.is_file():
         raise PerceptionError(f"photo not found: {photo_path}")
-    if vision is None:
-        from amber_lens.perception.providers import default_vision
+    from amber_lens.perception.providers import default_vision, fallback_vision, read_with_fallback
 
-        vision = default_vision(settings or load_settings())
+    if vision is None:
+        settings = settings or load_settings()
+        vision, fallback = default_vision(settings), fallback_vision(settings)
     # Vision and OCR are independent, so they run at the same time; the photo costs the slower of the two.
     with ThreadPoolExecutor(max_workers=2) as pool:
-        call_job, ocr_job = pool.submit(vision.read, photo_path, prompt), pool.submit(_timed, ocr, photo_path)
-        call, (ocr_result, ocr_ms) = call_job.result(), ocr_job.result()
+        call_job = pool.submit(read_with_fallback, vision, fallback, photo_path, prompt)
+        ocr_job = pool.submit(_timed, ocr, photo_path)
+        (call, failure), (ocr_result, ocr_ms) = call_job.result(), ocr_job.result()
     evidence = build_evidence(ocr_result)
-    decisions, warnings = decide(call.raw_text, evidence, photo_path.name)
+    decisions, warnings = decide(call.raw_text if call else "{}", evidence, photo_path.name)
+    if call is None:
+        decisions = {name: field_stop(name, ReadStatus.DISPUTED, Reason.VISION_UNAVAILABLE, "vision_unavailable",
+                                      ocr_value=d.field.ocr_value) for name, d in decisions.items()}
+        warnings = {**warnings, "vision": f"vision_unavailable: {failure}"}
+    call = call or VisionCall(vision.model, prompt.version, "", "", 0, 0, False)
     result = PerceptionResult(
         observation_id=observation_id or photo_path.stem,
         fields=[d.field for d in decisions.values()] + free_text_fields(evidence.flagged, photo_path.name),

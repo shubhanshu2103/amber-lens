@@ -115,3 +115,67 @@ def test_provider_choice_and_missing_key(tmp_path: Path) -> None:
         default_vision(settings_from_mapping({"VISION_PROVIDER": "groq"}, root=tmp_path))
     with pytest.raises(VisionError, match="unknown VISION_PROVIDER"):
         default_vision(settings_from_mapping({"VISION_PROVIDER": "azure"}, root=tmp_path))
+
+
+class Failing:
+    model = "groq-model"
+
+    def read(self, image_path, prompt):
+        raise VisionError("Groq returned HTTP 503")
+
+
+class Answering:
+    model = "ollama-model"
+
+    def read(self, image_path, prompt):
+        from amber_lens.perception.vision import VisionCall
+
+        answer = json.dumps({"model_number": {"value": "FX-100A", "printed_label": "MODEL"}})
+        return VisionCall(self.model, prompt.version, "0" * 64, answer, 900, 0, False)
+
+
+def _ocr(path):
+    from amber_lens.perception.ocr import OcrLine, OcrResult, OcrWord, union_bbox
+    from amber_lens.schemas import BBox
+
+    words = tuple(OcrWord(t, 90.0, BBox(x=10 + 70 * i, y=10, w=60, h=20), (0, 0, 0)) for i, t in enumerate(["MODEL", "FX-100A"]))
+    return OcrResult("fake", (OcrLine("MODEL FX-100A", union_bbox([w.bbox for w in words]), words, "rapidocr"),), 1)
+
+
+def test_provider_failure_without_fallback_disputes_every_field(photo: Path) -> None:
+    from amber_lens.perception.reader import run_nameplate
+    from amber_lens.schemas import ReadStatus
+
+    run = run_nameplate(photo, vision=Failing(), ocr=_ocr)
+    fields = [f for f in run.result.fields if not f.name.startswith("free_text")]
+    assert all(f.status is ReadStatus.DISPUTED and f.value is None for f in fields)
+    assert set(run.reasons.values()) == {"vision_unavailable"}
+    assert run.warnings["vision"].startswith("vision_unavailable: groq-model: Groq returned HTTP 503")
+
+
+def test_provider_failure_falls_back_to_ollama_when_configured(photo: Path) -> None:
+    from amber_lens.perception.reader import run_nameplate
+
+    run = run_nameplate(photo, vision=Failing(), fallback=Answering(), ocr=_ocr)
+    model = next(f for f in run.result.fields if f.name == "model_number")
+    assert model.value == "FX-100A" and "vision" not in run.warnings
+
+
+def test_a_face_is_not_a_provider_failure(photo: Path) -> None:
+    from amber_lens.perception.providers import read_with_fallback
+
+    class Face:
+        model = "groq-model"
+
+        def read(self, image_path, prompt):
+            raise FaceInPhoto("A face was found; it was not sent.")
+
+    with pytest.raises(FaceInPhoto):
+        read_with_fallback(Face(), Answering(), photo, NAMEPLATE_PROMPT)
+
+
+def test_fallback_setting(tmp_path: Path) -> None:
+    from amber_lens.perception.providers import fallback_vision
+
+    assert fallback_vision(settings_from_mapping({}, root=tmp_path)) is None
+    assert isinstance(fallback_vision(settings_from_mapping({"VISION_FALLBACK": "ollama"}, root=tmp_path)), OllamaVision)

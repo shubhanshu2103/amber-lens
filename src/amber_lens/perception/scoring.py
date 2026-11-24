@@ -44,7 +44,8 @@ def comparison_key(field: str, value: str) -> str:
         text = _UNIT_WORDS[field].sub(" ", text)
     if field == "manufacturer":
         return re.sub(r"[^0-9a-z]", "", text)
-    return re.sub(r"\s+", "", text)
+    # Punctuation left behind by a removed unit word ("7.8/3.9 AMP.") is not part of the value.
+    return re.sub(r"\s+", "", text).strip(".,:;")
 
 
 def _truth_keys(field: str, truth: str) -> set[str]:

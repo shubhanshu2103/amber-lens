@@ -238,12 +238,17 @@ def label_boxes(lines: tuple[OcrLine, ...] | list[OcrLine], labels: frozenset[st
 
 
 def unit_adjacent(hit: LocateHit, unit_label: str) -> bool:
-    """T2-8: the located number has its unit label as the word directly before or after it, or glued to it."""
+    """T2-8: the number's unit label is the word right before or after it (or glued to it) and that label
+    does not also touch another number on the row, as in "LRA 79.0 HP 1/5" where HP belongs to 1/5."""
     unit = label_key(unit_label)
     words = hit.line.words
-    neighbours = [words[i].text for i in (hit.start - 1, hit.end + 1) if 0 <= i < len(words)]
-    if any(label_key(text).strip(_EDGE_PUNCT.upper()) == unit for text in neighbours):
-        return True
+
+    def is_number(i: int) -> bool:
+        return 0 <= i < len(words) and re.fullmatch(r"[\d.,/]+", words[i].text.strip(_EDGE_PUNCT)) is not None
+
+    for i, other_side in ((hit.start - 1, hit.start - 2), (hit.end + 1, hit.end + 2)):
+        if 0 <= i < len(words) and label_key(words[i].text).strip(_EDGE_PUNCT.upper()) == unit:
+            return not is_number(other_side)
     own = label_key(" ".join(w.text for w in words[hit.start : hit.end + 1]))
     return re.fullmatch(rf"(?:{unit}[\d.,/]+|[\d.,/]+{unit})", own) is not None
 

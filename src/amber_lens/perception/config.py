@@ -26,6 +26,7 @@ class Settings:
     vision_provider: str = "ollama"
     groq_api_key: str = ""
     groq_model: str = "qwen/qwen3.8-27b"
+    vision_fallback: str = "none"
 
 
 def _resolve(raw: str, root: Path) -> Path:
@@ -49,6 +50,7 @@ def settings_from_mapping(env: Mapping[str, str], root: Path = REPO_ROOT) -> Set
         vision_provider=(env.get("VISION_PROVIDER") or "ollama").strip().lower(),
         groq_api_key=(env.get("GROQ_API_KEY") or "").strip(),
         groq_model=(env.get("GROQ_MODEL") or "qwen/qwen3.8-27b").strip(),
+        vision_fallback=(env.get("VISION_FALLBACK") or "none").strip().lower(),
     )
 
 

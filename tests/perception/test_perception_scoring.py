@@ -43,3 +43,9 @@ def test_tally_reports_zero_counts() -> None:
     counts = tally([Outcome.CORRECT, Outcome.CORRECT])
     assert counts[Outcome.CORRECT] == 2
     assert counts[Outcome.WRONG] == 0
+
+
+def test_unit_word_punctuation_is_not_part_of_the_value() -> None:
+    assert values_agree("rated_current", "7.8/3.9 AMP.", "7.8/3.9 A")
+    assert values_agree("voltage", "230/460 VOLTS", "230/460 V")
+    assert not values_agree("rated_current", "7.8/3.9 AMP.", "7.8/3.8 A")

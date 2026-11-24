@@ -37,7 +37,9 @@ HttpCall = Callable[[str, dict, dict, float], tuple[int, dict[str, str], dict]]
 def urllib_call(url: str, payload: dict, headers: dict, timeout_s: float) -> tuple[int, dict[str, str], dict]:
     """POST JSON; returns (status, lower-cased headers, body) for any HTTP status."""
     request = urllib.request.Request(url, data=json.dumps(payload).encode("utf-8"),
-                                     headers={"Content-Type": "application/json", **headers})
+                                     # Groq's edge refuses urllib's default client name (Cloudflare 1010).
+                                     headers={"Content-Type": "application/json", "User-Agent": "amber-lens/0.1",
+                                              **headers})
     try:
         with urllib.request.urlopen(request, timeout=timeout_s) as response:
             return response.status, {k.lower(): v for k, v in response.headers.items()}, json.load(response)

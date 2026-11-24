@@ -80,9 +80,11 @@ RapidOCR alone also READ `hf_072` current `0.62 A` (label blank; the plate print
 1. `hf_04`: plate prints MODEL `HLS447SR0608` and CAT. NO. `HHI150-12-447T`; labels keep only the second. Add a catalog_number column?
 2. `hf_04` manufacturer: printed `Crown Triton`, label `Hyundai (Crown Triton)`.
 3. `hf_06` manufacturer: printed `Baldor Electric Co.`, label `Baldor-Reliance`.
-4. `darjja_train_14` frequency: printed `HZ 60`, label blank.
+4. `darjja_train_14` (the unreadable PMI transformer): the plate prints a current (`138-105`, read under AMPS)
+   and `HZ 60`; the label row is blank for both because the model number is unreadable. Add them, or confirm blank.
 5. `hf_072` rated_current: printed `0.62 A`, label blank.
-6. `hf_075` voltage: printed rows 400 Δ / 690 Y / 460 Δ, label keeps `400 Δ V`.
+6. `hf_075` voltage: a 4-row rating table (400 Δ and 690 Y at 50 Hz, 460 Δ twice at 60 Hz); the label keeps only
+   `400 Δ V`. Decide how a multi-row plate is labelled (all rows, or the first).
 7. `hf_038` / `hf_048` frequency: plate prints `50Hz` (190/380 V row) and `3/60CYCLE`; label keeps 60 Hz only.
 8. Still open from T1: `hf_02` and `hf_04` glyphs (0/O, I/1), `hf_066`, `hf_053`, `darjja_train_10`, `hf_259`, `hf_06` identifier.
 
