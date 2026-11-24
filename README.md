@@ -20,13 +20,13 @@ Point a phone at a nameplate, crate label or delivery ticket, scan the room tag,
 | --- | --- | --- |
 | `GO` | Item, location and approval all match, every check sourced | Right unit, right room, approved submittal |
 | `HOLD` | Confident mismatch of place or item | Right model, but scheduled for a different room |
-| `DEVIATES` | Item differs from the approved submittal datasheet | Same model family, lower rating on the nameplate |
+| `DEVIATES` | Item differs from the approved submittal | Same model family, lower rating on the nameplate |
 | `SHORT` / `OVER` | Delivery count differs from the PO | 10 of 12 against PO line 7 |
 | `CANT_MATCH` | Not enough evidence to decide | Unreadable plate, or no PO line fits |
 
 ### Three checks (must-have)
 
-1. **Substitution check:** nameplate fields vs the *approved submittal datasheet*, field by field, alias-aware (an approved suffix passes, any rating change deviates)
+1. **Substitution check:** nameplate fields vs the *approved submittal*, field by field, alias-aware (an approved suffix passes, any rating change deviates)
 2. **Gate check:** delivery ticket and labels vs the PO, before signing
 3. **Pre-install check:** nameplate + room tag vs the equipment schedule, before lifting
 
@@ -58,7 +58,7 @@ Every step is an event in an append-only ledger. Approved changes carry an idemp
 | A. Perception | `src/amber_lens/perception/` | Vrushali | Capture page, vision-model reader, format rules + OCR tie-break, label-injection check |
 | B. Records + MCP | `src/amber_lens/records/`, `src/amber_lens/mcp_server/` | Koushik | Project Alpha tables, record linking, alias normalisation, sightings table, MCP server, mock record store |
 | C. Verdict + Site PR spine | `src/amber_lens/verdict/`, `src/amber_lens/sitepr/` | Shubhanshu | Deterministic checks, confidence, impact line, Site PR lifecycle, ledger, idempotency, verify |
-| D. Data, eval + demo | `data/`, `eval/`, `src/amber_lens/ui/` | Vikas (data) · Vrushali (demo) · Shubhanshu (eval support) | Equipment shortlist, datasheets, photos, planted problems, held-out set, baseline, metrics, review UI, video, deck |
+| D. Data, eval + demo | `data/`, `eval/`, `src/amber_lens/ui/` | Vikas (data) · Vrushali (demo) · Shubhanshu (eval support) | Nameplate datasets, hand-verified labels, team photos, planted problems, held-out set, baseline, metrics, review UI, video, deck |
 | Shared contracts | `src/amber_lens/schemas.py` | Everyone (changes need 2 approvals) | The frozen data shapes every module uses |
 
 Stack: Python 3.11+, Pydantic, FastAPI, Streamlit (review UI), official MCP Python SDK, SQLite (Postgres optional), Docker Compose.
@@ -68,7 +68,7 @@ Stack: Python 3.11+, Pydantic, FastAPI, Streamlit (review UI), official MCP Pyth
 | Tool | Input | Returns |
 | --- | --- | --- |
 | `check_item` | photo, room tag | `Verdict` (pre-install) |
-| `check_substitution` | photo | `Verdict` (vs approved datasheet) |
+| `check_substitution` | photo | `Verdict` (vs approved submittal) |
 | `check_delivery` | ticket photo, PO number | `Verdict` (`SHORT` / `OVER` / `GO`) |
 | `list_site_prs` | status filter | `SitePR[]` |
 | `approve_site_pr` | Site PR ID, reviewer role, decision, note | updated `SitePR` |
@@ -91,11 +91,12 @@ Run commands for the API, MCP server and UI are added as each module lands (see 
 
 ## Data and honesty
 
-- **Records are synthetic.** Project Alpha (POs, submittals, schedule, rooms) is written by us, around equipment we can actually photograph.
-- **Nameplates are real.** Photographed on campus with permission, no people in frame.
-- **Datasheets are public** manufacturer documents; each one's source URL is recorded in `data/datasheets/SOURCES.md`.
+- **Nameplate photos are real.** Most come from public, openly licensed datasets (see `data/SOURCES.md`), plus a few photos we took ourselves. No people in any frame.
+- **Labels are hand-verified.** The public datasets ship auto-generated labels with errors, so every photo we use was checked by hand and corrected in `data/labels.csv`.
+- **Records are synthetic.** Project Alpha (POs, approved submittals, schedule, rooms, deliveries) is written by us around the verified equipment. Approved values come from the verified nameplate, and planted problems are made by editing the records.
+- **Datasheets where we have them.** For a handful of products we also attach the official datasheet PDF; the substitution check does not depend on it.
 - **No model training.** We read nameplates with a pretrained vision model plus OCR and format rules. Photos are used for **evaluation**, not training.
-- **Held-out set.** A third of the photos live in `data/photos/heldout/` and nobody tunes on them. Rules and thresholds are frozen before the single held-out run.
+- **Held-out set.** About a third of the models live in `data/photos/heldout/` and nobody tunes on them. Rules and thresholds are frozen before the single held-out run.
 
 ## Evaluation
 
@@ -106,7 +107,7 @@ Reported for our system **and** a plain baseline (one multimodal model, photo + 
 | Wrong GOs | The mistake that bolts equipment in the wrong place. Target 0 |
 | GO coverage | True GOs we actually said GO to, so "0 wrong GOs" can't be won by abstaining |
 | Abstention rate | How often we said `CANT_MATCH` |
-| Substitutions caught | Planted datasheet deviations flagged as `DEVIATES` |
+| Substitutions caught | Planted rating changes flagged as `DEVIATES` |
 | Equivalent-suffix false alarms | Approved equivalents wrongly flagged |
 | Delivery discrepancies caught | Planted short / over lines |
 | Self-check withdrawals | Wrong fixes the agent dropped itself |
@@ -117,7 +118,7 @@ Reported for our system **and** a plain baseline (one multimodal model, photo + 
 
 | Phase | Dates | Ends with |
 | --- | --- | --- |
-| 1. Foundations | Nov 21 - 23 | Photos, datasheets, records committed; schemas frozen |
+| 1. Foundations | Nov 21 - 23 | Verified photos + labels, records committed; schemas frozen |
 | 2. Core loop | Nov 24 - 27 | One photo -> verdict -> Site PR -> verified, end to end |
 | 3. Depth + integration | Nov 28 - Dec 1 | All three checks, MCP callable, tuning eval vs baseline |
 | 4. Proof + ship | Dec 2 - 4 | Held-out run once, video, deck, **submit Dec 4** (Dec 5-6 buffer) |

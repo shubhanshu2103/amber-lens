@@ -117,9 +117,9 @@ class Submittal(BaseModel):
     submittal_id: str
     model_number: str
     status: Literal["approved", "approved_as_noted", "revise_resubmit", "rejected", "pending"]
-    datasheet_path: str
-    datasheet_source_url: str
-    ratings: dict[str, str] = Field(description="Key fields from the datasheet, e.g. {'voltage': '415V'}")
+    datasheet_path: str | None = Field(default=None, description="Official datasheet PDF, when we found one")
+    datasheet_source_url: str | None = None
+    ratings: dict[str, str] = Field(description="Approved values for this model, e.g. {'voltage': '460V', 'hp': '50'}")
     allowed_suffixes: list[str] = Field(default_factory=list, description="Equivalent suffixes that pass as GO")
 
 

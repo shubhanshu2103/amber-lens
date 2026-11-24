@@ -12,15 +12,15 @@ Get the data and the contracts sorted so nobody is blocked next week.
 | --- | --- | --- |
 | 1 | Email Kaya about the build window + rules | Vrushali |
 | 2 | Book mentor office hours | Vrushali |
-| 3 | Permission to photograph campus rooms | Vikas |
-| 4 | Equipment shortlist + public datasheets | Vikas |
-| 5 | Photo shoot round 1 + labels.csv | Vikas |
+| 3 | Pull + filter public nameplate datasets | Vikas |
+| 4 | Hand-verify ~40 photos + labels.csv | Vikas |
+| 5 | Team photos + datasheets for 8-10 products | Vikas |
 | 6 | Project Alpha records (CSV) | Koushik |
 | 7 | Freeze schemas.py | Shubhanshu |
 | 8 | Reader spike: vision vs OCR | Vrushali |
 | 9 | Repo setup, branch protection | Shubhanshu |
 
-**Done when:** photos + datasheets + records are committed and `schemas-v1` is tagged.
+**Done when:** verified photos + labels + records are committed and `schemas-v1` is tagged.
 
 ## Phase 2: Core loop (Nov 24 - 27)
 
