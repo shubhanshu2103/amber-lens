@@ -11,11 +11,15 @@ from datetime import UTC, datetime
 from enum import Enum
 from typing import Literal
 
-from pydantic import BaseModel, Field, model_validator
+from pydantic import AwareDatetime, BaseModel, Field, model_validator
 
 
 def utcnow() -> datetime:
     return datetime.now(UTC)
+
+
+# Verdicts below this confidence must be handed to a human.
+CONFIDENCE_REVIEW_THRESHOLD = 0.80
 
 
 # --------------------------------------------------------------------------- #
@@ -61,7 +65,7 @@ class Observation(BaseModel):
     role: str = Field(description="e.g. 'site engineer', never a name")
     room_tag: str | None = Field(default=None, description="Decoded room QR tag; None if not scanned")
     photo_path: str
-    captured_at: datetime = Field(default_factory=utcnow)
+    captured_at: AwareDatetime = Field(default_factory=utcnow)
 
 
 class ReadStatus(str, Enum):
@@ -79,13 +83,15 @@ class ReadField(BaseModel):
     ocr_value: str | None = None
     format_rule_passed: bool | None = None
     status: ReadStatus
-    source: SourceRef
+    source: SourceRef | None = Field(default=None, description="Required when READ; None if nothing was located")
     injection_flag: bool = Field(default=False, description="Read text looked like an instruction to an AI")
 
     @model_validator(mode="after")
     def _value_only_when_read(self) -> ReadField:
         if self.status != ReadStatus.READ and self.value is not None:
             raise ValueError("value must be None unless the field is READ (flag, never guess)")
+        if self.status == ReadStatus.READ and self.source is None:
+            raise ValueError("a READ field must carry a source")
         return self
 
 
@@ -149,7 +155,7 @@ class Sighting(BaseModel):
     equipment_tag: str | None = None
     room_tag: str
     observation_id: str
-    seen_at: datetime
+    seen_at: AwareDatetime
 
 
 # --------------------------------------------------------------------------- #
@@ -164,6 +170,13 @@ class VerdictCode(str, Enum):
     SHORT = "SHORT"
     OVER = "OVER"
     CANT_MATCH = "CANT_MATCH"
+
+
+_ALLOWED_VERDICTS: dict[str, set[VerdictCode]] = {
+    "pre_install": {VerdictCode.GO, VerdictCode.HOLD, VerdictCode.CANT_MATCH},
+    "substitution": {VerdictCode.GO, VerdictCode.DEVIATES, VerdictCode.CANT_MATCH},
+    "gate": {VerdictCode.GO, VerdictCode.SHORT, VerdictCode.OVER, VerdictCode.CANT_MATCH},
+}
 
 
 class CheckResult(BaseModel):
@@ -189,6 +202,17 @@ class Verdict(BaseModel):
     next_action: str | None = None
     impact: str | None = Field(default=None, description="e.g. 'feeds L2 switchboard activity; 6 days float'")
     sources: list[SourceRef]
+    flags: list[str] = Field(default_factory=list, description="e.g. 'injection_flag', 'unreadable_field'")
+    latency_ms: int | None = None
+    cost_usd: float | None = None
+
+    @model_validator(mode="after")
+    def _verdict_fits_check_and_confidence(self) -> Verdict:
+        if self.verdict not in _ALLOWED_VERDICTS[self.check_type]:
+            raise ValueError(f"{self.verdict.value} is not a valid outcome of a {self.check_type} check")
+        if self.confidence < CONFIDENCE_REVIEW_THRESHOLD and not self.needs_human:
+            raise ValueError("confidence below the review threshold requires needs_human")
+        return self
 
     @model_validator(mode="after")
     def _go_needs_every_check_sourced(self) -> Verdict:
@@ -256,6 +280,7 @@ class SitePR(BaseModel):
     confidence: float = Field(ge=0.0, le=1.0)
     idempotency_key: str = Field(description="e.g. 'sitepr-0042:claim:v1'; a write with a seen key is skipped")
     evidence_hash: str | None = Field(default=None, description="sha256 of the evidence pack, frozen at approval")
+    idempotency_version: int = Field(default=1, ge=1, description="Bumped on each reopen so a re-approved fix can write again")
     recurrence_count: int = Field(default=0, ge=0, description="Times this issue reappeared after approval")
 
 
@@ -266,6 +291,6 @@ class LedgerEvent(BaseModel):
     site_pr_id: str
     type: Literal["drafted", "self_checked", "withdrawn", "submitted", "approved", "rejected", "written", "verified", "reopened"]
     actor: str = Field(description="component name or reviewer role, never a person's name")
-    at: datetime = Field(default_factory=utcnow)
+    at: AwareDatetime = Field(default_factory=utcnow)
     payload: dict = Field(default_factory=dict)
     idempotency_key: str | None = None
