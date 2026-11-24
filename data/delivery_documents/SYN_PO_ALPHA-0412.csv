@@ -1,0 +1,5 @@
+# SYNTHETIC - NOT A REAL RECORD
+po_number,line,model_number,description,qty,unit,approved_submittal,deliver_to_room
+ALPHA-0412,1,A9F74316,"MCB Acti9 iC60N 3P 16A C curve",12,EA,SUB-E-017 (approved),ELEC-2.04
+ALPHA-0412,2,SRT10KXLI,"UPS 10 kVA online tower",2,EA,SUB-E-021 (approved),UPS-1.02
+ALPHA-0412,3,CR 10-5 A-A-A-E-HQQE,"Vertical multistage pump 2.2 kW",1,EA,SUB-M-008 (approved),PUMP-B1.01
