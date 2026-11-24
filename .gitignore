@@ -8,3 +8,10 @@ __pycache__/
 *.egg-info/
 # Raw captures stay out of git; only curated, people-free photos go in data/photos/
 captures/
+
+# Data work: raw downloads, scratch, venv
+raw/
+work/
+.venv-data/
+# Manufacturer datasheets are copyrighted and the repo is public: keep PDFs local
+data/datasheets/*.pdf
