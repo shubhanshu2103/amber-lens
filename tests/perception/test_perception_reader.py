@@ -200,11 +200,14 @@ def test_missing_and_heldout_photos_raise(tmp_path: Path) -> None:
         run_nameplate(tmp_path / "heldout" / "x.jpg", vision=FakeVision(_answer()), ocr=fake_ocr)
 
 
-def test_read_observation_uses_its_id_and_tag(photo: Path) -> None:
+@pytest.mark.parametrize(("source", "tag_ok"), [("qr_in_photo", True), ("qr_photo", True), ("typed", False), (None, False)])
+def test_read_observation_tag_ok_only_for_a_decoded_qr(photo: Path, source: str | None, tag_ok: bool) -> None:
+    if source is not None:
+        photo.with_suffix(".json").write_text(json.dumps({"room_tag_source": source}), encoding="utf-8")
     observation = Observation(observation_id="obs-1", kind="nameplate", device_id="dev-1", role="site engineer",
                               room_tag="ELEC-2.04", photo_path=str(photo))
     result = read_observation(observation, vision=FakeVision(_answer()), ocr=fake_ocr)
-    assert result.observation_id == "obs-1" and result.tag_read_ok is True
+    assert result.observation_id == "obs-1" and result.tag_read_ok is tag_ok
 
 
 def test_read_observation_refuses_other_kinds(photo: Path) -> None:

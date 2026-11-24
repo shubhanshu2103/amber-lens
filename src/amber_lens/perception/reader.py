@@ -262,13 +262,14 @@ def read_nameplate(photo_path: Path, observation_id: str | None = None, **kwargs
 
 
 def read_observation(observation: Observation, **kwargs) -> PerceptionResult:
-    """Read a captured Observation. Only nameplates are read so far; other kinds raise PerceptionError."""
+    """Read a captured nameplate; tag_read_ok only when the capture decoded the room tag from a QR code."""
     if observation.kind != "nameplate":
         raise PerceptionError(f"reading {observation.kind} photos is not supported yet")
-    return run_nameplate(
-        Path(observation.photo_path), observation.observation_id, tag_read_ok=observation.room_tag is not None,
-        **kwargs,
-    ).result
+    photo = Path(observation.photo_path)
+    sidecar = photo.with_suffix(".json")
+    source = json.loads(sidecar.read_text(encoding="utf-8")).get("room_tag_source") if sidecar.is_file() else None
+    tag_ok = observation.room_tag is not None and source in ("qr_in_photo", "qr_photo")
+    return run_nameplate(photo, observation.observation_id, tag_read_ok=tag_ok, **kwargs).result
 
 
 def main(argv: list[str] | None = None) -> int:
