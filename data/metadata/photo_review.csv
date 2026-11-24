@@ -1,0 +1,99 @@
+orig,source,decision,manufacturer,model_number,rating_1,rating_2,frequency,power,equipment_type,quality,angle,lighting,glare,obscured,small_text,model_group_override,notes
+01.jpg,hf,REJECT,,,,,,,,,,,"rendered catalog graphic, field values blurred out; not a photo",,,,
+02.jpg,hf,KEEP,Sterling Electric,DI0034PCI,230/460 V,7.8/3.9 A,60 Hz,3 HP,motor,clear,frontal,good,yes,no,no,,manufacturer from sterlingelectric.com footer; reflection on lower half
+04.jpg,hf,KEEP,Hyundai (Crown Triton),HHI150-12-447T,460 V,169.5 A,60 Hz,150 HP,motor,clear,frontal,good,no,no,yes,,Cat. No. used as model_number; plate Model field is HLS447SR0608; dataset OCR read HH1150-12-447T
+05.jpg,hf,REJECT,,,,,,,,,,,"drawn infographic (""Read Motor Nameplate Details""), not a photo; same graphic as 026 and 037",,,,
+026.jpg,hf,REJECT,,,,,,,,,,,same drawn infographic as 05 with a motor render; not a photo,,,,
+037.jpg,hf,REJECT,,,,,,,,,,,"explainer infographic embedding the 05 graphic; dataset OCR 380/415 V 54.6/31.5 A is not on the image, so the 05 vs 037 rating conflict is an OCR error",,,,
+06.jpg,hf,KEEP,Baldor-Reliance,094914,208-230/460 V,21-18.8/9.4 A,60 Hz,7.5 HP,motor,clear,angled,good,no,no,no,,"Cat. No.; small EEP watermark bottom-left, clear of fields"
+09.jpg,hf,KEEP,WEG,00118ET3E143T-W22,230/460 V,2.94/1.47 A,60 Hz,1.0 HP (0.75 kW),motor,clear,frontal,good,no,no,yes,,dataset OCR model 0011B13SE143T-W22 and amps 8.9/4.4 are wrong
+011.jpg,hf,REJECT,,,,,,,,,,,vector drawing of a Grundfos plate with a red highlight box from an article; not a photo,,,,
+012.jpg,hf,REJECT,,,,,,,,,,,"""How to Read a Motor Nameplate"" annotated diagram (EM3615T); not a photo, so the EM3615T datasheet case has no usable photo",,,,
+013.jpg,hf,KEEP,Baldor-Reliance,M3538,230/460 V,2/1 A,60 Hz,1/2 HP,motor,clear,frontal,good,no,no,no,,Cat. No.
+014.jpg,hf,REJECT,,,,,,,,,,,"textbook figure ""Fig. 1.1C"" drawing of a plate; not a photo",,,,
+019.jpg,hf,KEEP,unbranded,FM 140156,115/230 V,13.6/6.8 A,60 Hz,1 HP,motor,clear,frontal,good,no,no,no,,no brand name on plate; FLA field
+020.jpg,hf,KEEP,CG Power and Industrial Solutions,0.75KNE4FLG,415±10% V,1.82 A,50±5% Hz,0.75 kW (1.00 HP),motor,clear,frontal,good,no,no,no,,"Indian plate, IS 12615 / ISI mark; amp field printed 1.82Y (Y = connection)"
+021.jpg,hf,REJECT,,,,,,,,,,,person's finger on the plate and video title overlay,,,,
+022.jpg,hf,KEEP,unbranded,MY 7124,230 V,2.82 A,50 Hz,0.37 kW (0.5 HP),motor,clear,frontal,good,no,no,yes,,single-phase motor; no brand on plate; plate small in frame
+025.jpg,hf,KEEP,WEG,00536ET3E184JM-W22,230/460 V,11.8/5.90 A,60 Hz,5.0 HP (3.7 kW),motor,clear,frontal,good,yes,no,yes,,"heavy glare with a blurred, unidentifiable reflection of the photographer's arm; human check that this is acceptable"
+032.jpg,hf,REJECT,,,,,,,,,,,"video thumbnail ""Nameplate and Ratings Explained"" with a rendered plate overlay",,,,
+035.jpg,hf,KEEP,Lafert,DVE 80 S4,115/230 V,7.8/3.6 A,60 Hz,0.55 kW (0.75 HP),motor,clear,frontal,good,no,no,yes,,dataset OCR model DVE 80 B4 and volts 230/400 are wrong
+036.jpg,hf,REJECT,,,,,,,,,,,annotated line drawing with numbered callouts; not a photo,,,,
+038.jpg,hf,KEEP,Motors & Drives International,EPT0754,208-230/460 V,180-166/83 A,60 Hz,75 HP,motor,clear,frontal,good,no,no,no,,"red circle annotation around RPM and small InstTools watermark, fields clear; printed 3/60CYCLE; duplicate of 048"
+041.jpg,hf,KEEP,ABB,M2BAFC112M6,415D +/-10% V,5.20 A,50+/-5% Hz,2.2 kW (3 hp),motor,clear,frontal,good,no,no,yes,,"Indian plate, Ref IS 325; dataset OCR model M2BABC112M6 is wrong (plate reads M2BAFC112M6)"
+044.jpg,hf,REJECT,,,,,,,,,,,"typed table document, not a nameplate photo",,,,
+031.jpg,hf,REJECT,,,,,,,,,,,"digital artwork of a Motovario TH80B4 plate (flat render, not a camera photo); values readable: 230/400 V 3,10/1,77 A 0,75 kW 50 Hz; near-identical to 052",,,,
+047.jpg,hf,KEEP,Baldor-Reliance,A36-8063-4076,230/460 V,171/85.6 A,6-60 Hz,75 HP,motor,clear,frontal,good,yes,no,yes,,CAT. NO. field is blank; model_number is the SPEC. NO.; inverter-duty plate (HZ 6-60)
+048.jpg,hf,KEEP,Motors & Drives International,EPT0754,208-230/460 V,180-166/83 A,60 Hz,75 HP,motor,clear,frontal,good,no,no,no,,"near-identical to 038 (same photo, red box around 190/380 50Hz instead of RPM circle); same model_group"
+049.jpg,hf,REJECT,,,,,,,,,,,"digital label artwork with red highlight box; values readable: Grundfos MG 90SA2-24FF165-C2 220-240D/380-415Y V 5.90/3.40 A 1,50 kW 50 Hz",,,,
+052.jpg,hf,REJECT,,,,,,,,,,,"flat digital artwork, same plate as 031",,,,
+053.jpg,hf,KEEP,Hoyer,HMC2-160L-4,400/690 V,28/16.5 A,50 Hz,15 kW,motor,clear,frontal,good,yes,no,no,,60 Hz row also printed 480/830 V 28/16.5 A 18 kW; serial partly worn
+057.jpg,hf,KEEP,Gibbons,MY8024,230 V,5.21 A,50 Hz,0.75 kW (1 HP),motor,clear,frontal,good,no,no,no,,single-phase motor
+061.jpg,hf,KEEP,Siemens,1LE0001-1AB4 2-1FA4,220VΔ/380VY V,8.7/5.0 A,50 Hz,2.2 kW,motor,clear,frontal,good,no,no,yes,,order number printed with a space; 60 Hz row 440VY 4.90 A 2.55 kW; dataset OCR dropped the 2-1FA4 suffix
+062.jpg,hf,KEEP,Grower Select,HS9014,115/208-230 V,10.8/5.4 A,60 Hz,1 1/2 HP,motor,clear,angled,good,no,no,no,,Cat. No.; plate also shows MODEL T63KZDPA-1861; amps are F.L.A.; plate cropped at left edge
+063.jpg,hf,REJECT,,,,,,,,,,,collage of three plates with callouts and a BIN95 logo,,,,
+066.jpg,hf,KEEP,Gibbons,MY90L-4,230 V,"1,5 kW",50 Hz,"1,5 kW (2 HP)",motor,blurry,angled,good,no,no,yes,,"amps field unclear between 5.40 and 5.43 (dataset OCR 5.43), so rating_2 is the power; human check amps"
+068.jpg,hf,REJECT,,,,,,,,,,,flat digital artwork of a Baldor XT3156T plate; values readable: 230/460 V 38.8/19.4 A 15 HP 60 Hz,,,,
+069.jpg,hf,KEEP,Copeland (DWM Copeland),D8SJ1-6000-BWM/D,380/420 Δ/Δ V,"106,0 A",50 Hz,,compressor,clear,frontal,good,no,no,no,,"refrigeration compressor; amps is I-OPER.MAX, LRA 475-544 A; 60 Hz row 440/480 V; dataset OCR had amps null; small EEP watermark"
+070.jpg,hf,KEEP,Lincoln Electric,TM-2734-A1,230/460 V,240/120 A,60 Hz,100 HP,motor,clear,frontal,good,yes,no,no,,worn stainless plate; model is the LINCOLN CODE field; underscore-like mark after TM read as hyphen; frequency field labelled CYCLES
+072.jpg,hf,KEEP,unbranded,GSA632-4,220/380 V,0.18 KW,50 Hz,0.18 KW (0.25 HP),motor,clear,frontal,good,no,no,yes,,"amps read 0.62 A (low confidence, 6 vs 8), so rating_2 is the power; dataset OCR amps 0.8 does not match the plate"
+073.jpg,hf,KEEP,ABB,M2BAX160MLC2,415 D V,31.10 A,50 Hz,18.5 kW (25 hp),motor,clear,angled,good,yes,yes,no,,"Indian plate IS 12615; social-media title and a blue pointer line overlay parts of the plate, rating row readable; dataset OCR (21.0 A, 11.5 kW) is wrong; SAME MODEL as 077, compare ratings"
+075.jpg,hf,KEEP,Siemens,1LE15062CA234AB0,400 Δ V,95 A,50 Hz,55 kW,motor,clear,frontal,good,no,no,no,,"photo with background masked to black; other rows 690 Y 55 A, 460 Δ 60 Hz 83 A"
+076.jpg,hf,REJECT,,,,,,,,,,,flat digital artwork with red highlight box; values readable: Chin-Cho RGT037 380/660 V 70/40 A 37 kW 50 Hz,,,,
+077.jpg,hf,KEEP,ABB,M2BAX160MLC2,400 D V,34.20 A,50 Hz,18.5 kW (25 hp),motor,clear,frontal,good,no,no,no,,"Indian plate IS 12615, IE3, prod code H6343 161430-ADD; SAME MODEL as 073 which reads IE4, 415 D V, 31.10 A, prod code V4012 161430-ADN"
+darjja_train_00.png,darjja,REJECT,,,,,,,,,,,AC condenser rating label cropped so no model number in frame,,,,
+darjja_train_01.png,darjja,KEEP,Noratel,6-030-732021,"480 V / 15,5 A (input)","400 V / 18,0 A (output)",50/60 Hz,12.5 KVA,transformer,clear,frontal,good,no,no,no,,3-phase isolation transformer; stained plate; small dealer watermark bottom-right
+darjja_train_02.png,darjja,REJECT,,,,,,,,,,,"dispensing-valve controller, no model number, not site equipment",,,,
+darjja_train_03.png,darjja,KEEP,Lennox,HS29-042-5P,208/230 V,20.3 A (compressor RLA),60 Hz,,AC condensing unit,clear,frontal,good,no,no,no,,HVAC outdoor unit; nominal volts partly cut at right edge (208/23_)
+darjja_train_04.png,darjja,KEEP,Rex Manufacturing,DC8H1P1,460 DELTA V (primary),460Y/266 V (secondary),60 Hz,8.0 KVA,transformer,clear,angled,good,no,no,no,,"3-phase isolation transformer; KVA value cut at right edge; darjja caption says 460Y/226, plate reads 460Y/266"
+darjja_train_05.png,darjja,KEEP,not shown,38CKC048300,208-230 V,24.4 A (compressor RLA),60 Hz,,AC condensing unit,clear,frontal,good,no,no,no,,brand not printed in frame; PROD 38CKC048---301--
+darjja_train_08.png,darjja,REJECT,,,,,,,,,,,"Flowserve seal reservoir, pressure ratings only, no electrical ratings",,,,
+darjja_train_09.png,darjja,REJECT,,,,,,,,,,,worksheet with a drawn transformer plate,,,,
+darjja_train_10.png,darjja,KEEP,Lennox,ML14XC1S030-230A04,208/230 V,12.8 A (compressor RLA),60 Hz,,AC condensing unit,clear,frontal,good,no,no,no,,
+darjja_train_11.png,darjja,KEEP,not shown,13ACD-036-230-05,208/230 V,14.4 A (compressor RLA),60 Hz,,AC condensing unit,clear,frontal,good,no,no,no,,red circle annotation around refrigerant line; darjja caption model 13ACF-036-230-05 is wrong
+darjja_train_12.png,darjja,KEEP,Heat Controller LLC,RSG1436S1P,208/230 V,13.5 A (compressor RLA),60 Hz,,AC condensing unit,clear,frontal,good,no,no,no,,
+darjja_train_13.png,darjja,REJECT,,,,,,,,,,,"AC rating label cropped, no model number in frame",,,,
+darjja_train_14.png,darjja,CANT_MATCH,Power Magnetics (PMI),,,,,,transformer,blurry,frontal,good,yes,yes,no,,"stamped values worn: KVA field unreadable (R34/834?), no model field; only Spec 9873 and S/N 21600-7 legible"
+darjja_train_16.png,darjja,KEEP,Dongan,35-LM015,240x480 V (primary),24x48 V (secondary),50/60 Hz,.150 KVA,transformer,blurry,frontal,good,no,no,yes,,single-phase control transformer
+darjja_train_17.png,darjja,REJECT,,,,,,,,,,,"industrial laser, not site equipment",,,,
+darjja_train_18.png,darjja,KEEP,Noratel,3LT50-440/230-Dyn11-23,440 V / 67 A (input),230 V / 126 A (output),60 Hz,50 kVA,transformer,clear,frontal,good,no,no,no,,Mship.no watermark outside the plate
+darjja_train_21.png,darjja,REJECT,,,,,,,,,,,"marking-system printer label, not site equipment",,,,
+darjja_train_22.png,darjja,CANT_MATCH,General Electric,,,,,,transformer,blurry,frontal,poor,no,yes,no,,"antique brass plate, low-res and worn; type and number fields not reliably readable"
+darjja_test_00.png,darjja,REJECT,,,,,,,,,,,"AC rating label cropped, no model number; red circle annotation",,,,
+darjja_train_06.png,darjja,REJECT,,,,,,,,,,,vehicle plate per caption (not opened),,,,
+darjja_train_07.png,darjja,REJECT,,,,,,,,,,,laser marker per caption (not opened),,,,
+darjja_train_15.png,darjja,REJECT,,,,,,,,,,,laser per caption (not opened),,,,
+darjja_train_19.png,darjja,REJECT,,,,,,,,,,,laser level per caption (not opened),,,,
+darjja_train_20.png,darjja,REJECT,,,,,,,,,,,dot-peen marker per caption (not opened),,,,
+darjja_train_23.png,darjja,REJECT,,,,,,,,,,,truck plate per caption (not opened),,,,
+darjja_test_01.png,darjja,REJECT,,,,,,,,,,,aircraft jack per caption (not opened),,,,
+darjja_test_02.png,darjja,REJECT,,,,,,,,,,,laser per caption (not opened),,,,
+darjja_test_03.png,darjja,REJECT,,,,,,,,,,,aircraft engine per caption (not opened),,,,
+darjja_test_04.png,darjja,REJECT,,,,,,,,,,,laser per caption (not opened),,,,
+darjja_test_05.png,darjja,REJECT,,,,,,,,,,,trailer per caption (not opened),,,,
+090.jpg,hf,KEEP,Baldor-Reliance,EM3615T,208-230/460 V,13.9-13.4/6.7 A,60 Hz,5 HP,motor,clear,angled,good,no,no,no,,"photo of a screen showing the plate, red box around RPM; datasheet model EQ18"
+081.jpg,hf,KEEP,Crompton Greaves (CG),NGNADA2271,415±10% V,1.86 A,50 Hz,0.75 kW,motor,clear,frontal,good,no,no,no,,"Indian plate (Crompton Greaves); model is the MC NO field; amp value printed 1.86 with star symbol, dataset OCR 1.861"
+163.jpg,hf,REJECT,,,,,,,,,,,collage of five Indian motor plates,,,,
+098.jpg,hf,KEEP,ABB,M2BAX180MLA4,415 D V,35.00 A,50 Hz,18.5 kW (25 hp),motor,clear,frontal,good,no,no,yes,,"Indian plate IS 12615, IE2"
+380.jpg,hf,KEEP,Havells,MHCITGS402X2,415 ± 10% V,4.7 A,50 ± 5% Hz,2.2 kW (3.0 HP),motor,blurry,angled,good,no,no,yes,,"Indian plate IS 12615 / ISI, IE2; caption overlay above the plate; CAT REF read MHCITGS402X2 (dataset OCR MHCIIT05462X2), low confidence on letters, human check"
+308.jpg,hf,KEEP,CG Power and Industrial Solutions,GF7003R,190-240 V,3.0 HP,50 Hz,3.0 HP,motor,clear,frontal,good,no,no,yes,,"Indian carton label (CG Commercial Motors), not the motor nameplate; no amps printed, so rating_2 is HP; Machine Point logo outside the label"
+190.jpg,hf,REJECT,,,,,,,,,,,clean digital render of a Siemens 1LA02864SE41 plate (video frame); values 415 V 52 A 30/40 kW/HP; ties to 05/026/037 graphics,,,,
+247.jpg,hf,KEEP,Galt,EPT0754,208-230/460 V,180-166/83 A,60 Hz,75 HP,motor,clear,frontal,good,no,no,no,,studio photo of a real plate; SAME MODEL NUMBER as 038/048 (Motors & Drives International) with the same ratings but a different brand; same model_group
+305.jpg,hf,REJECT,,,,,,,,,,,vector drawing of a Grundfos plate with callout labels,,,,
+175.jpg,hf,KEEP,WEG,03018OT3E286T-W40,230/460 V,69.8/34.9 A,60 Hz,30.0 HP (22.0 kW),motor,clear,frontal,good,no,no,yes,,model printed vertically at left edge; dataset OCR (Leeson 144803.00) is wrong; 50 Hz row 380 V 35.7 A 25 HP
+174.jpg,hf,KEEP,GE Industrial Motors (Wolong),5KS324ZWL305,230/460 V,64.2/32.1 A,60 Hz,25 HP,motor,clear,frontal,good,no,no,yes,,CAT W7549; dataset OCR model 5KS3242WL305 misreads Z as 2
+110.jpg,hf,KEEP,WEG,00112EP3ER145TC-W22,208-230/460 V,3.76-3.26/1.63 A,60 Hz,1.0 HP (0.75 kW),motor,clear,frontal,good,no,no,no,,50 Hz row 380 V 1.90 A
+259.jpg,hf,KEEP,ABB,M2AA 160 L 4,400 Δ V,28.5 A,50 Hz,15 kW,motor,blurry,frontal,good,no,no,yes,,"multi-voltage table; 690 Y 16.5 A, 415 Δ 28 A; prod code 3GAA 162 102-ADA"
+295.jpg,hf,CANT_MATCH,Hoyer Motors,,,,,,motor,blurry,frontal,poor,no,yes,yes,,"stamped values faded to illegible: type, voltage, current and kW fields cannot be read; dataset OCR claims H225M-4 IE3 400 V 69.8 A"
+330.jpg,hf,KEEP,Leeson,120485.00,208-230/460 V,3/1.5 A,60 Hz,3/4 HP (0.56 kW),motor,clear,frontal,good,no,no,yes,,Cat. No.; MODEL C143T11FK2F; dataset OCR amps 13.1/6.5 and 3 HP are wrong
+179.jpg,hf,REJECT,,,,,,,,,,,"Toshiba plate readable except one character of the model number (BY752F?F203, C or L); not usable as ground truth without a guess",,,,
+355.jpg,hf,KEEP,Brook Crompton,W-DA80MM6,230/460 V,2.7/1.4 A,60 Hz,0.75 HP (0.55 kW),motor,clear,frontal,good,no,no,no,,TYPE field; PART No. BA6M.75-4; plate cropped at right edge
+306.jpg,hf,KEEP,ABB,M2AA 160 M 4,400 D V,21.5 A,50 Hz,11 kW,motor,clear,frontal,good,no,no,no,,"worn Ex e plate, values faint but legible"
+230.jpg,hf,REJECT,,,,,,,,,,,document page with drawn WEG plate figures,,,,
+119.jpg,hf,REJECT,,,,,,,,,,,flat digital artwork of a Marathon Globetrotter plate; dataset OCR model 254TFC6001 is wrong (plate shows 254TTFCD6001),,,,
+286.jpg,hf,KEEP,Siemens,1LA02864SE41,460 V,34.9 A,60 Hz,30.00 HP,motor,blurry,frontal,good,no,no,yes,,low-res flat image of a US plate (TYPE RGZESD); same plate image appears inside infographic 064; SAME ORD.NO. as the Indian 415 V / 52 A / 30 kW 50 Hz plate shown only in graphics 05/026/190
+064.jpg,hf,REJECT,,,,,,,,,,,"infographic (""What's mean Service Factor"") embedding the 286 plate image",,,,
+142.jpg,hf,REJECT,,,,,,,,,,,flat digital artwork of a Yaskawa plate with red highlight row,,,,
+092.jpg,hf,KEEP,GE Motors,5KS184BCT205B,230/460 V,12.3/6.15 A,60 Hz,5 HP,motor,clear,frontal,good,no,no,no,,
+162.jpg,hf,CANT_MATCH,not shown,,,,,,motor,blurry,angled,poor,yes,no,yes,,"hydraulic-unit motor plate rotated 90 degrees with faint stamped values; ITEM (model), volts and amps not legible (MS13725-4?, 240?, 18.5?); only RPM 1420 and PH 3 are clear"
+097.jpg,hf,REJECT,,,,,,,,,,,gloved hand holding the plate in frame,,,,
