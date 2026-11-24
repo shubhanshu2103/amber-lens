@@ -1,0 +1,1520 @@
+{
+ "prompt_version": "nameplate-v3",
+ "ocr_engine": "tesseract 5.4.0.20240606 psm11",
+ "photos": [
+  "hf_02",
+  "hf_04",
+  "hf_06",
+  "hf_053",
+  "hf_066",
+  "hf_069",
+  "hf_259",
+  "darjja_train_01",
+  "darjja_train_10",
+  "hf_295"
+ ],
+ "model_runs": [
+  {
+   "model": "qwen2.5vl:3b",
+   "cold_load_ms": 6716,
+   "gpu_share": 1.0,
+   "cached_calls": 0
+  },
+  {
+   "model": "qwen2.5vl:7b",
+   "cold_load_ms": 8781,
+   "gpu_share": 0.566,
+   "cached_calls": 0
+  },
+  {
+   "model": "qwen3-vl:4b",
+   "cold_load_ms": 4566,
+   "gpu_share": 1.0,
+   "cached_calls": 0
+  }
+ ],
+ "labels": {
+  "hf_02": {
+   "model_number": "DI0034PCI",
+   "voltage": "230/460 V",
+   "rated_current": "7.8/3.9 A",
+   "power": "3 HP",
+   "frequency": "60 Hz",
+   "manufacturer": "Sterling Electric"
+  },
+  "hf_04": {
+   "model_number": "HHI150-12-447T",
+   "voltage": "460 V",
+   "rated_current": "169.5 A",
+   "power": "150 HP",
+   "frequency": "60 Hz",
+   "manufacturer": "Hyundai (Crown Triton)"
+  },
+  "hf_06": {
+   "model_number": "094914",
+   "voltage": "208-230/460 V",
+   "rated_current": "21-18.8/9.4 A",
+   "power": "7.5 HP",
+   "frequency": "60 Hz",
+   "manufacturer": "Baldor-Reliance"
+  },
+  "hf_053": {
+   "model_number": "HMC2-160L-4",
+   "voltage": "400/690 V",
+   "rated_current": "28/16.5 A",
+   "power": "15 kW",
+   "frequency": "50 Hz",
+   "manufacturer": "Hoyer"
+  },
+  "hf_066": {
+   "model_number": "MY90L-4",
+   "voltage": "230 V",
+   "rated_current": null,
+   "power": "1,5 kW (2 HP)",
+   "frequency": "50 Hz",
+   "manufacturer": "Gibbons"
+  },
+  "hf_069": {
+   "model_number": "D8SJ1-6000-BWM/D",
+   "voltage": "380/420 Δ/Δ V",
+   "rated_current": "106,0 A",
+   "power": null,
+   "frequency": "50 Hz",
+   "manufacturer": "Copeland (DWM Copeland)"
+  },
+  "hf_259": {
+   "model_number": "M2AA 160 L 4",
+   "voltage": "400 Δ V",
+   "rated_current": "28.5 A",
+   "power": "15 kW",
+   "frequency": "50 Hz",
+   "manufacturer": "ABB"
+  },
+  "darjja_train_01": {
+   "model_number": "6-030-732021",
+   "voltage": "480 V (input) / 400 V (output)",
+   "rated_current": "15,5 A / 18,0 A",
+   "power": "12.5 KVA",
+   "frequency": "50/60 Hz",
+   "manufacturer": "Noratel"
+  },
+  "darjja_train_10": {
+   "model_number": "ML14XC1S030-230A04",
+   "voltage": "208/230 V",
+   "rated_current": "12.8 A (compressor RLA)",
+   "power": null,
+   "frequency": "60 Hz",
+   "manufacturer": "Lennox"
+  },
+  "hf_295": {
+   "model_number": null,
+   "voltage": null,
+   "rated_current": null,
+   "power": null,
+   "frequency": null,
+   "manufacturer": "Hoyer Motors"
+  }
+ },
+ "readings": [
+  {
+   "arm": "vision:qwen2.5vl:3b",
+   "photo_id": "hf_02",
+   "values": {
+    "model_number": "DI0034PCI",
+    "voltage": "230/460 VOLTS",
+    "rated_current": "7.8/3.9 AMP",
+    "power": "3 HP",
+    "frequency": "60 Hz",
+    "manufacturer": "ABB"
+   },
+   "latency_ms": 2026,
+   "error": null
+  },
+  {
+   "arm": "vision+rule:qwen2.5vl:3b",
+   "photo_id": "hf_02",
+   "values": {
+    "model_number": "DI0034PCI",
+    "voltage": "230/460 VOLTS",
+    "rated_current": "7.8/3.9 AMP",
+    "power": "3 HP",
+    "frequency": "60 Hz",
+    "manufacturer": "ABB"
+   },
+   "latency_ms": 2026,
+   "error": null
+  },
+  {
+   "arm": "vision+rule+located:qwen2.5vl:3b",
+   "photo_id": "hf_02",
+   "values": {
+    "model_number": "DI0034PCI",
+    "voltage": null,
+    "rated_current": "7.8/3.9 AMP",
+    "power": null,
+    "frequency": null,
+    "manufacturer": null
+   },
+   "latency_ms": 2695,
+   "error": null
+  },
+  {
+   "arm": "vision:qwen2.5vl:3b",
+   "photo_id": "hf_04",
+   "values": {
+    "model_number": "HLS447SR0608",
+    "voltage": "460V",
+    "rated_current": "169.5A",
+    "power": "150HP",
+    "frequency": "60Hz",
+    "manufacturer": "Crown Triton"
+   },
+   "latency_ms": 2225,
+   "error": null
+  },
+  {
+   "arm": "vision+rule:qwen2.5vl:3b",
+   "photo_id": "hf_04",
+   "values": {
+    "model_number": "HLS447SR0608",
+    "voltage": "460V",
+    "rated_current": "169.5A",
+    "power": "150HP",
+    "frequency": "60Hz",
+    "manufacturer": "Crown Triton"
+   },
+   "latency_ms": 2225,
+   "error": null
+  },
+  {
+   "arm": "vision+rule+located:qwen2.5vl:3b",
+   "photo_id": "hf_04",
+   "values": {
+    "model_number": "HLS447SR0608",
+    "voltage": null,
+    "rated_current": null,
+    "power": "150HP",
+    "frequency": null,
+    "manufacturer": "Crown Triton"
+   },
+   "latency_ms": 2692,
+   "error": null
+  },
+  {
+   "arm": "vision:qwen2.5vl:3b",
+   "photo_id": "hf_06",
+   "values": {
+    "model_number": "094914",
+    "voltage": "208-230/460",
+    "rated_current": "21",
+    "power": "7.5",
+    "frequency": "60",
+    "manufacturer": "BALDOR ELECTRIC CO."
+   },
+   "latency_ms": 2133,
+   "error": null
+  },
+  {
+   "arm": "vision+rule:qwen2.5vl:3b",
+   "photo_id": "hf_06",
+   "values": {
+    "model_number": "094914",
+    "voltage": "208-230/460",
+    "rated_current": "21",
+    "power": null,
+    "frequency": "60",
+    "manufacturer": "BALDOR ELECTRIC CO."
+   },
+   "latency_ms": 2133,
+   "error": null
+  },
+  {
+   "arm": "vision+rule+located:qwen2.5vl:3b",
+   "photo_id": "hf_06",
+   "values": {
+    "model_number": "094914",
+    "voltage": null,
+    "rated_current": null,
+    "power": null,
+    "frequency": null,
+    "manufacturer": "BALDOR ELECTRIC CO."
+   },
+   "latency_ms": 2528,
+   "error": null
+  },
+  {
+   "arm": "vision:qwen2.5vl:3b",
+   "photo_id": "hf_053",
+   "values": {
+    "model_number": "HMC2-160L-4",
+    "voltage": "400/690V",
+    "rated_current": "15A",
+    "power": "15 kW",
+    "frequency": "50 Hz",
+    "manufacturer": "HOYER"
+   },
+   "latency_ms": 2074,
+   "error": null
+  },
+  {
+   "arm": "vision+rule:qwen2.5vl:3b",
+   "photo_id": "hf_053",
+   "values": {
+    "model_number": "HMC2-160L-4",
+    "voltage": "400/690V",
+    "rated_current": "15A",
+    "power": "15 kW",
+    "frequency": "50 Hz",
+    "manufacturer": "HOYER"
+   },
+   "latency_ms": 2074,
+   "error": null
+  },
+  {
+   "arm": "vision+rule+located:qwen2.5vl:3b",
+   "photo_id": "hf_053",
+   "values": {
+    "model_number": null,
+    "voltage": "400/690V",
+    "rated_current": "15A",
+    "power": "15 kW",
+    "frequency": null,
+    "manufacturer": null
+   },
+   "latency_ms": 2465,
+   "error": null
+  },
+  {
+   "arm": "vision:qwen2.5vl:3b",
+   "photo_id": "hf_066",
+   "values": {
+    "model_number": "QM00005",
+    "voltage": "230 V",
+    "rated_current": "5.40 A",
+    "power": "1.5 kW",
+    "frequency": "50 Hz",
+    "manufacturer": "Gibbons"
+   },
+   "latency_ms": 2007,
+   "error": null
+  },
+  {
+   "arm": "vision+rule:qwen2.5vl:3b",
+   "photo_id": "hf_066",
+   "values": {
+    "model_number": "QM00005",
+    "voltage": "230 V",
+    "rated_current": "5.40 A",
+    "power": "1.5 kW",
+    "frequency": "50 Hz",
+    "manufacturer": "Gibbons"
+   },
+   "latency_ms": 2007,
+   "error": null
+  },
+  {
+   "arm": "vision+rule+located:qwen2.5vl:3b",
+   "photo_id": "hf_066",
+   "values": {
+    "model_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": null,
+    "frequency": null,
+    "manufacturer": null
+   },
+   "latency_ms": 2425,
+   "error": null
+  },
+  {
+   "arm": "vision:qwen2.5vl:3b",
+   "photo_id": "hf_069",
+   "values": {
+    "model_number": "D8SJ1-6000-BWM/D",
+    "voltage": "380/420 V",
+    "rated_current": "475-544 A",
+    "power": "180.0 kW",
+    "frequency": "50 Hz",
+    "manufacturer": "DWM Copeland"
+   },
+   "latency_ms": 2277,
+   "error": null
+  },
+  {
+   "arm": "vision+rule:qwen2.5vl:3b",
+   "photo_id": "hf_069",
+   "values": {
+    "model_number": "D8SJ1-6000-BWM/D",
+    "voltage": null,
+    "rated_current": "475-544 A",
+    "power": "180.0 kW",
+    "frequency": "50 Hz",
+    "manufacturer": "DWM Copeland"
+   },
+   "latency_ms": 2277,
+   "error": null
+  },
+  {
+   "arm": "vision+rule+located:qwen2.5vl:3b",
+   "photo_id": "hf_069",
+   "values": {
+    "model_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": null,
+    "frequency": null,
+    "manufacturer": null
+   },
+   "latency_ms": 2774,
+   "error": null
+  },
+  {
+   "arm": "vision:qwen2.5vl:3b",
+   "photo_id": "hf_259",
+   "values": {
+    "model_number": "M2AA160L4",
+    "voltage": "400 V / 440 V",
+    "rated_current": "16.5 A / 20.5 A / 17.3 A / 30 A / 28 A / 30 A",
+    "power": "1.0 kW / 1.0 kW / 1.0 kW / 1.0 kW / 1.0 kW / 1.0 kW",
+    "frequency": "50 Hz",
+    "manufacturer": "ABB Motors"
+   },
+   "latency_ms": 2934,
+   "error": null
+  },
+  {
+   "arm": "vision+rule:qwen2.5vl:3b",
+   "photo_id": "hf_259",
+   "values": {
+    "model_number": "M2AA160L4",
+    "voltage": "400 V / 440 V",
+    "rated_current": "16.5 A / 20.5 A / 17.3 A / 30 A / 28 A / 30 A",
+    "power": null,
+    "frequency": "50 Hz",
+    "manufacturer": "ABB Motors"
+   },
+   "latency_ms": 2934,
+   "error": null
+  },
+  {
+   "arm": "vision+rule+located:qwen2.5vl:3b",
+   "photo_id": "hf_259",
+   "values": {
+    "model_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": null,
+    "frequency": "50 Hz",
+    "manufacturer": null
+   },
+   "latency_ms": 3289,
+   "error": null
+  },
+  {
+   "arm": "vision:qwen2.5vl:3b",
+   "photo_id": "darjja_train_01",
+   "values": {
+    "model_number": "6-030-732021",
+    "voltage": "480V / 400V",
+    "rated_current": "15,5A / 18,0A",
+    "power": "12.5 KVA",
+    "frequency": "50/60Hz",
+    "manufacturer": "Noratel Finland Oy"
+   },
+   "latency_ms": 2345,
+   "error": null
+  },
+  {
+   "arm": "vision+rule:qwen2.5vl:3b",
+   "photo_id": "darjja_train_01",
+   "values": {
+    "model_number": "6-030-732021",
+    "voltage": "480V / 400V",
+    "rated_current": "15,5A / 18,0A",
+    "power": "12.5 KVA",
+    "frequency": "50/60Hz",
+    "manufacturer": "Noratel Finland Oy"
+   },
+   "latency_ms": 2345,
+   "error": null
+  },
+  {
+   "arm": "vision+rule+located:qwen2.5vl:3b",
+   "photo_id": "darjja_train_01",
+   "values": {
+    "model_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": null,
+    "frequency": "50/60Hz",
+    "manufacturer": "Noratel Finland Oy"
+   },
+   "latency_ms": 2774,
+   "error": null
+  },
+  {
+   "arm": "vision:qwen2.5vl:3b",
+   "photo_id": "darjja_train_10",
+   "values": {
+    "model_number": "ML14XC1S030-230A04",
+    "voltage": "208/230",
+    "rated_current": "12.5 FLA",
+    "power": "67.3 HP",
+    "frequency": "60 Hz",
+    "manufacturer": "LENNOX"
+   },
+   "latency_ms": 2252,
+   "error": null
+  },
+  {
+   "arm": "vision+rule:qwen2.5vl:3b",
+   "photo_id": "darjja_train_10",
+   "values": {
+    "model_number": "ML14XC1S030-230A04",
+    "voltage": "208/230",
+    "rated_current": "12.5 FLA",
+    "power": "67.3 HP",
+    "frequency": "60 Hz",
+    "manufacturer": "LENNOX"
+   },
+   "latency_ms": 2252,
+   "error": null
+  },
+  {
+   "arm": "vision+rule+located:qwen2.5vl:3b",
+   "photo_id": "darjja_train_10",
+   "values": {
+    "model_number": null,
+    "voltage": "208/230",
+    "rated_current": null,
+    "power": "67.3 HP",
+    "frequency": "60 Hz",
+    "manufacturer": "LENNOX"
+   },
+   "latency_ms": 2769,
+   "error": null
+  },
+  {
+   "arm": "vision:qwen2.5vl:3b",
+   "photo_id": "hf_295",
+   "values": {
+    "model_number": "R22-1/2E-2501-A",
+    "voltage": "400/230V",
+    "rated_current": "1.0A",
+    "power": "0.05kW",
+    "frequency": "50Hz",
+    "manufacturer": "HÖYER MOTORS"
+   },
+   "latency_ms": 2179,
+   "error": null
+  },
+  {
+   "arm": "vision+rule:qwen2.5vl:3b",
+   "photo_id": "hf_295",
+   "values": {
+    "model_number": "R22-1/2E-2501-A",
+    "voltage": "400/230V",
+    "rated_current": "1.0A",
+    "power": "0.05kW",
+    "frequency": "50Hz",
+    "manufacturer": "HÖYER MOTORS"
+   },
+   "latency_ms": 2179,
+   "error": null
+  },
+  {
+   "arm": "vision+rule+located:qwen2.5vl:3b",
+   "photo_id": "hf_295",
+   "values": {
+    "model_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": null,
+    "frequency": null,
+    "manufacturer": null
+   },
+   "latency_ms": 2504,
+   "error": null
+  },
+  {
+   "arm": "vision:qwen2.5vl:7b",
+   "photo_id": "hf_02",
+   "values": {
+    "model_number": "DI0034PCI",
+    "voltage": "230/460 VOLTS",
+    "rated_current": "7.8/3.9 AMPS",
+    "power": "3 HP",
+    "frequency": "60 Hz",
+    "manufacturer": "EE"
+   },
+   "latency_ms": 6488,
+   "error": null
+  },
+  {
+   "arm": "vision+rule:qwen2.5vl:7b",
+   "photo_id": "hf_02",
+   "values": {
+    "model_number": "DI0034PCI",
+    "voltage": "230/460 VOLTS",
+    "rated_current": "7.8/3.9 AMPS",
+    "power": "3 HP",
+    "frequency": "60 Hz",
+    "manufacturer": "EE"
+   },
+   "latency_ms": 6488,
+   "error": null
+  },
+  {
+   "arm": "vision+rule+located:qwen2.5vl:7b",
+   "photo_id": "hf_02",
+   "values": {
+    "model_number": "DI0034PCI",
+    "voltage": null,
+    "rated_current": "7.8/3.9 AMPS",
+    "power": null,
+    "frequency": null,
+    "manufacturer": "EE"
+   },
+   "latency_ms": 7157,
+   "error": null
+  },
+  {
+   "arm": "vision:qwen2.5vl:7b",
+   "photo_id": "hf_04",
+   "values": {
+    "model_number": "HLS447SR0608",
+    "voltage": "460V",
+    "rated_current": "169.5A",
+    "power": "150HP",
+    "frequency": "60Hz",
+    "manufacturer": "Crown Triton"
+   },
+   "latency_ms": 6156,
+   "error": null
+  },
+  {
+   "arm": "vision+rule:qwen2.5vl:7b",
+   "photo_id": "hf_04",
+   "values": {
+    "model_number": "HLS447SR0608",
+    "voltage": "460V",
+    "rated_current": "169.5A",
+    "power": "150HP",
+    "frequency": "60Hz",
+    "manufacturer": "Crown Triton"
+   },
+   "latency_ms": 6156,
+   "error": null
+  },
+  {
+   "arm": "vision+rule+located:qwen2.5vl:7b",
+   "photo_id": "hf_04",
+   "values": {
+    "model_number": "HLS447SR0608",
+    "voltage": null,
+    "rated_current": null,
+    "power": "150HP",
+    "frequency": null,
+    "manufacturer": "Crown Triton"
+   },
+   "latency_ms": 6623,
+   "error": null
+  },
+  {
+   "arm": "vision:qwen2.5vl:7b",
+   "photo_id": "hf_06",
+   "values": {
+    "model_number": "37J776T859G1",
+    "voltage": "208-230/460",
+    "rated_current": "21-18.8/9.4",
+    "power": "7.5 HP",
+    "frequency": "60 Hz",
+    "manufacturer": "Baldor Electric Co."
+   },
+   "latency_ms": 7075,
+   "error": null
+  },
+  {
+   "arm": "vision+rule:qwen2.5vl:7b",
+   "photo_id": "hf_06",
+   "values": {
+    "model_number": "37J776T859G1",
+    "voltage": "208-230/460",
+    "rated_current": "21-18.8/9.4",
+    "power": "7.5 HP",
+    "frequency": "60 Hz",
+    "manufacturer": "Baldor Electric Co."
+   },
+   "latency_ms": 7075,
+   "error": null
+  },
+  {
+   "arm": "vision+rule+located:qwen2.5vl:7b",
+   "photo_id": "hf_06",
+   "values": {
+    "model_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": null,
+    "frequency": null,
+    "manufacturer": "Baldor Electric Co."
+   },
+   "latency_ms": 7470,
+   "error": null
+  },
+  {
+   "arm": "vision:qwen2.5vl:7b",
+   "photo_id": "hf_053",
+   "values": {
+    "model_number": "HMC2-160L-4",
+    "voltage": "400/690",
+    "rated_current": "28/16.5",
+    "power": "15/18 kW",
+    "frequency": "50/60 Hz",
+    "manufacturer": "HOYER"
+   },
+   "latency_ms": 6640,
+   "error": null
+  },
+  {
+   "arm": "vision+rule:qwen2.5vl:7b",
+   "photo_id": "hf_053",
+   "values": {
+    "model_number": "HMC2-160L-4",
+    "voltage": "400/690",
+    "rated_current": "28/16.5",
+    "power": "15/18 kW",
+    "frequency": "50/60 Hz",
+    "manufacturer": "HOYER"
+   },
+   "latency_ms": 6640,
+   "error": null
+  },
+  {
+   "arm": "vision+rule+located:qwen2.5vl:7b",
+   "photo_id": "hf_053",
+   "values": {
+    "model_number": null,
+    "voltage": "400/690",
+    "rated_current": "28/16.5",
+    "power": null,
+    "frequency": null,
+    "manufacturer": null
+   },
+   "latency_ms": 7031,
+   "error": null
+  },
+  {
+   "arm": "vision:qwen2.5vl:7b",
+   "photo_id": "hf_066",
+   "values": {
+    "model_number": "MY90L-4",
+    "voltage": "230 V",
+    "rated_current": "5.40 A",
+    "power": "1.5 kW",
+    "frequency": "50 Hz",
+    "manufacturer": "Gibbons"
+   },
+   "latency_ms": 5922,
+   "error": null
+  },
+  {
+   "arm": "vision+rule:qwen2.5vl:7b",
+   "photo_id": "hf_066",
+   "values": {
+    "model_number": "MY90L-4",
+    "voltage": "230 V",
+    "rated_current": "5.40 A",
+    "power": "1.5 kW",
+    "frequency": "50 Hz",
+    "manufacturer": "Gibbons"
+   },
+   "latency_ms": 5922,
+   "error": null
+  },
+  {
+   "arm": "vision+rule+located:qwen2.5vl:7b",
+   "photo_id": "hf_066",
+   "values": {
+    "model_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": null,
+    "frequency": null,
+    "manufacturer": null
+   },
+   "latency_ms": 6340,
+   "error": null
+  },
+  {
+   "arm": "vision:qwen2.5vl:7b",
+   "photo_id": "hf_069",
+   "values": {
+    "model_number": "D8SJ1-6000-BWM/D",
+    "voltage": "380/420 Δ/Δ",
+    "rated_current": "106,0 A",
+    "power": null,
+    "frequency": "50",
+    "manufacturer": "DWM COPELAND"
+   },
+   "latency_ms": 6518,
+   "error": null
+  },
+  {
+   "arm": "vision+rule:qwen2.5vl:7b",
+   "photo_id": "hf_069",
+   "values": {
+    "model_number": "D8SJ1-6000-BWM/D",
+    "voltage": null,
+    "rated_current": "106,0 A",
+    "power": null,
+    "frequency": "50",
+    "manufacturer": "DWM COPELAND"
+   },
+   "latency_ms": 6518,
+   "error": null
+  },
+  {
+   "arm": "vision+rule+located:qwen2.5vl:7b",
+   "photo_id": "hf_069",
+   "values": {
+    "model_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": null,
+    "frequency": null,
+    "manufacturer": null
+   },
+   "latency_ms": 7015,
+   "error": null
+  },
+  {
+   "arm": "vision:qwen2.5vl:7b",
+   "photo_id": "hf_259",
+   "values": {
+    "model_number": "M2AA 160 L 4",
+    "voltage": "530 Y / 420 Δ / 660 Y / 380 Δ / 415 Δ / 440 Δ",
+    "rated_current": "16.5 / 28.5 / 17.3 / 30 / 28 / 30",
+    "power": null,
+    "frequency": "50",
+    "manufacturer": "ABB Motors"
+   },
+   "latency_ms": 8910,
+   "error": null
+  },
+  {
+   "arm": "vision+rule:qwen2.5vl:7b",
+   "photo_id": "hf_259",
+   "values": {
+    "model_number": "M2AA 160 L 4",
+    "voltage": null,
+    "rated_current": "16.5 / 28.5 / 17.3 / 30 / 28 / 30",
+    "power": null,
+    "frequency": "50",
+    "manufacturer": "ABB Motors"
+   },
+   "latency_ms": 8910,
+   "error": null
+  },
+  {
+   "arm": "vision+rule+located:qwen2.5vl:7b",
+   "photo_id": "hf_259",
+   "values": {
+    "model_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": null,
+    "frequency": "50",
+    "manufacturer": null
+   },
+   "latency_ms": 9265,
+   "error": null
+  },
+  {
+   "arm": "vision:qwen2.5vl:7b",
+   "photo_id": "darjja_train_01",
+   "values": {
+    "model_number": "6-030-732021",
+    "voltage": "480V / 400V",
+    "rated_current": "15.5A / 18.0A",
+    "power": "12.5 KVA",
+    "frequency": "50/60Hz",
+    "manufacturer": "Noratel Finland Oy"
+   },
+   "latency_ms": 7508,
+   "error": null
+  },
+  {
+   "arm": "vision+rule:qwen2.5vl:7b",
+   "photo_id": "darjja_train_01",
+   "values": {
+    "model_number": "6-030-732021",
+    "voltage": "480V / 400V",
+    "rated_current": "15.5A / 18.0A",
+    "power": "12.5 KVA",
+    "frequency": "50/60Hz",
+    "manufacturer": "Noratel Finland Oy"
+   },
+   "latency_ms": 7508,
+   "error": null
+  },
+  {
+   "arm": "vision+rule+located:qwen2.5vl:7b",
+   "photo_id": "darjja_train_01",
+   "values": {
+    "model_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": null,
+    "frequency": "50/60Hz",
+    "manufacturer": "Noratel Finland Oy"
+   },
+   "latency_ms": 7937,
+   "error": null
+  },
+  {
+   "arm": "vision:qwen2.5vl:7b",
+   "photo_id": "darjja_train_10",
+   "values": {
+    "model_number": "ML14XC1S030-230A04",
+    "voltage": "208/230 VOLTS",
+    "rated_current": "17.0 AMPS",
+    "power": "1/6 HP",
+    "frequency": "60 Hz",
+    "manufacturer": "LENNOX"
+   },
+   "latency_ms": 6914,
+   "error": null
+  },
+  {
+   "arm": "vision+rule:qwen2.5vl:7b",
+   "photo_id": "darjja_train_10",
+   "values": {
+    "model_number": "ML14XC1S030-230A04",
+    "voltage": "208/230 VOLTS",
+    "rated_current": "17.0 AMPS",
+    "power": "1/6 HP",
+    "frequency": "60 Hz",
+    "manufacturer": "LENNOX"
+   },
+   "latency_ms": 6914,
+   "error": null
+  },
+  {
+   "arm": "vision+rule+located:qwen2.5vl:7b",
+   "photo_id": "darjja_train_10",
+   "values": {
+    "model_number": null,
+    "voltage": "208/230 VOLTS",
+    "rated_current": null,
+    "power": null,
+    "frequency": "60 Hz",
+    "manufacturer": "LENNOX"
+   },
+   "latency_ms": 7431,
+   "error": null
+  },
+  {
+   "arm": "vision:qwen2.5vl:7b",
+   "photo_id": "hf_295",
+   "values": {
+    "model_number": "822-V TEK-2501",
+    "voltage": "400/230",
+    "rated_current": "0050",
+    "power": "40°C",
+    "frequency": "50",
+    "manufacturer": "HØYER MOTORS"
+   },
+   "latency_ms": 6334,
+   "error": null
+  },
+  {
+   "arm": "vision+rule:qwen2.5vl:7b",
+   "photo_id": "hf_295",
+   "values": {
+    "model_number": "822-V TEK-2501",
+    "voltage": "400/230",
+    "rated_current": "0050",
+    "power": null,
+    "frequency": "50",
+    "manufacturer": "HØYER MOTORS"
+   },
+   "latency_ms": 6334,
+   "error": null
+  },
+  {
+   "arm": "vision+rule+located:qwen2.5vl:7b",
+   "photo_id": "hf_295",
+   "values": {
+    "model_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": null,
+    "frequency": null,
+    "manufacturer": null
+   },
+   "latency_ms": 6659,
+   "error": null
+  },
+  {
+   "arm": "vision:qwen3-vl:4b",
+   "photo_id": "hf_02",
+   "values": {
+    "model_number": "DIO034PCI",
+    "voltage": "230/460 VOLTS",
+    "rated_current": "7.8/3.9 AMP.",
+    "power": "3 HP",
+    "frequency": "60 Hz",
+    "manufacturer": "ee"
+   },
+   "latency_ms": 13000,
+   "error": null
+  },
+  {
+   "arm": "vision+rule:qwen3-vl:4b",
+   "photo_id": "hf_02",
+   "values": {
+    "model_number": "DIO034PCI",
+    "voltage": "230/460 VOLTS",
+    "rated_current": "7.8/3.9 AMP.",
+    "power": "3 HP",
+    "frequency": "60 Hz",
+    "manufacturer": "ee"
+   },
+   "latency_ms": 13000,
+   "error": null
+  },
+  {
+   "arm": "vision+rule+located:qwen3-vl:4b",
+   "photo_id": "hf_02",
+   "values": {
+    "model_number": "DIO034PCI",
+    "voltage": null,
+    "rated_current": "7.8/3.9 AMP.",
+    "power": null,
+    "frequency": null,
+    "manufacturer": "ee"
+   },
+   "latency_ms": 13669,
+   "error": null
+  },
+  {
+   "arm": "vision:qwen3-vl:4b",
+   "photo_id": "hf_04",
+   "values": {
+    "model_number": "HH1150-12-447T",
+    "voltage": "460V",
+    "rated_current": "169.5A",
+    "power": "150HP",
+    "frequency": "60Hz",
+    "manufacturer": "Crown Triton"
+   },
+   "latency_ms": 39594,
+   "error": null
+  },
+  {
+   "arm": "vision+rule:qwen3-vl:4b",
+   "photo_id": "hf_04",
+   "values": {
+    "model_number": "HH1150-12-447T",
+    "voltage": "460V",
+    "rated_current": "169.5A",
+    "power": "150HP",
+    "frequency": "60Hz",
+    "manufacturer": "Crown Triton"
+   },
+   "latency_ms": 39594,
+   "error": null
+  },
+  {
+   "arm": "vision+rule+located:qwen3-vl:4b",
+   "photo_id": "hf_04",
+   "values": {
+    "model_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": "150HP",
+    "frequency": null,
+    "manufacturer": "Crown Triton"
+   },
+   "latency_ms": 40061,
+   "error": null
+  },
+  {
+   "arm": "vision:qwen3-vl:4b",
+   "photo_id": "hf_06",
+   "values": {
+    "model_number": "094914",
+    "voltage": "208–230/460",
+    "rated_current": "21–18.8/9.4",
+    "power": "7.5 HP",
+    "frequency": "60 Hz",
+    "manufacturer": "BALDOR • RELIANCE"
+   },
+   "latency_ms": 22469,
+   "error": null
+  },
+  {
+   "arm": "vision+rule:qwen3-vl:4b",
+   "photo_id": "hf_06",
+   "values": {
+    "model_number": "094914",
+    "voltage": "208–230/460",
+    "rated_current": "21–18.8/9.4",
+    "power": "7.5 HP",
+    "frequency": "60 Hz",
+    "manufacturer": "BALDOR • RELIANCE"
+   },
+   "latency_ms": 22469,
+   "error": null
+  },
+  {
+   "arm": "vision+rule+located:qwen3-vl:4b",
+   "photo_id": "hf_06",
+   "values": {
+    "model_number": "094914",
+    "voltage": null,
+    "rated_current": null,
+    "power": null,
+    "frequency": null,
+    "manufacturer": null
+   },
+   "latency_ms": 22864,
+   "error": null
+  },
+  {
+   "arm": "vision:qwen3-vl:4b",
+   "photo_id": "hf_053",
+   "values": {
+    "model_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": null,
+    "frequency": null,
+    "manufacturer": null
+   },
+   "latency_ms": 50416,
+   "error": "vision answer is not JSON: ''"
+  },
+  {
+   "arm": "vision+rule:qwen3-vl:4b",
+   "photo_id": "hf_053",
+   "values": {
+    "model_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": null,
+    "frequency": null,
+    "manufacturer": null
+   },
+   "latency_ms": 50416,
+   "error": "vision answer is not JSON: ''"
+  },
+  {
+   "arm": "vision+rule+located:qwen3-vl:4b",
+   "photo_id": "hf_053",
+   "values": {
+    "model_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": null,
+    "frequency": null,
+    "manufacturer": null
+   },
+   "latency_ms": 50807,
+   "error": "vision answer is not JSON: ''"
+  },
+  {
+   "arm": "vision:qwen3-vl:4b",
+   "photo_id": "hf_066",
+   "values": {
+    "model_number": "MY80L-4",
+    "voltage": "230 / 460 V",
+    "rated_current": "5.40 A",
+    "power": "1.5 kW",
+    "frequency": "50 Hz",
+    "manufacturer": "Gibbons"
+   },
+   "latency_ms": 13970,
+   "error": null
+  },
+  {
+   "arm": "vision+rule:qwen3-vl:4b",
+   "photo_id": "hf_066",
+   "values": {
+    "model_number": "MY80L-4",
+    "voltage": "230 / 460 V",
+    "rated_current": "5.40 A",
+    "power": "1.5 kW",
+    "frequency": "50 Hz",
+    "manufacturer": "Gibbons"
+   },
+   "latency_ms": 13970,
+   "error": null
+  },
+  {
+   "arm": "vision+rule+located:qwen3-vl:4b",
+   "photo_id": "hf_066",
+   "values": {
+    "model_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": null,
+    "frequency": null,
+    "manufacturer": null
+   },
+   "latency_ms": 14388,
+   "error": null
+  },
+  {
+   "arm": "vision:qwen3-vl:4b",
+   "photo_id": "hf_069",
+   "values": {
+    "model_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": null,
+    "frequency": null,
+    "manufacturer": null
+   },
+   "latency_ms": 50382,
+   "error": "vision answer is not JSON: ''"
+  },
+  {
+   "arm": "vision+rule:qwen3-vl:4b",
+   "photo_id": "hf_069",
+   "values": {
+    "model_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": null,
+    "frequency": null,
+    "manufacturer": null
+   },
+   "latency_ms": 50382,
+   "error": "vision answer is not JSON: ''"
+  },
+  {
+   "arm": "vision+rule+located:qwen3-vl:4b",
+   "photo_id": "hf_069",
+   "values": {
+    "model_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": null,
+    "frequency": null,
+    "manufacturer": null
+   },
+   "latency_ms": 50879,
+   "error": "vision answer is not JSON: ''"
+  },
+  {
+   "arm": "vision:qwen3-vl:4b",
+   "photo_id": "hf_259",
+   "values": {
+    "model_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": null,
+    "frequency": null,
+    "manufacturer": null
+   },
+   "latency_ms": 50760,
+   "error": "vision answer is not JSON: ''"
+  },
+  {
+   "arm": "vision+rule:qwen3-vl:4b",
+   "photo_id": "hf_259",
+   "values": {
+    "model_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": null,
+    "frequency": null,
+    "manufacturer": null
+   },
+   "latency_ms": 50760,
+   "error": "vision answer is not JSON: ''"
+  },
+  {
+   "arm": "vision+rule+located:qwen3-vl:4b",
+   "photo_id": "hf_259",
+   "values": {
+    "model_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": null,
+    "frequency": null,
+    "manufacturer": null
+   },
+   "latency_ms": 51115,
+   "error": "vision answer is not JSON: ''"
+  },
+  {
+   "arm": "vision:qwen3-vl:4b",
+   "photo_id": "darjja_train_01",
+   "values": {
+    "model_number": "6-030-732021",
+    "voltage": "480V / 400V",
+    "rated_current": "15.5A / 18.0A",
+    "power": "12.5 KVA",
+    "frequency": "50/60Hz",
+    "manufacturer": "NORATEL"
+   },
+   "latency_ms": 26564,
+   "error": null
+  },
+  {
+   "arm": "vision+rule:qwen3-vl:4b",
+   "photo_id": "darjja_train_01",
+   "values": {
+    "model_number": "6-030-732021",
+    "voltage": "480V / 400V",
+    "rated_current": "15.5A / 18.0A",
+    "power": "12.5 KVA",
+    "frequency": "50/60Hz",
+    "manufacturer": "NORATEL"
+   },
+   "latency_ms": 26564,
+   "error": null
+  },
+  {
+   "arm": "vision+rule+located:qwen3-vl:4b",
+   "photo_id": "darjja_train_01",
+   "values": {
+    "model_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": null,
+    "frequency": "50/60Hz",
+    "manufacturer": "NORATEL"
+   },
+   "latency_ms": 26993,
+   "error": null
+  },
+  {
+   "arm": "vision:qwen3-vl:4b",
+   "photo_id": "darjja_train_10",
+   "values": {
+    "model_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": null,
+    "frequency": null,
+    "manufacturer": null
+   },
+   "latency_ms": 50624,
+   "error": "vision answer is not JSON: ''"
+  },
+  {
+   "arm": "vision+rule:qwen3-vl:4b",
+   "photo_id": "darjja_train_10",
+   "values": {
+    "model_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": null,
+    "frequency": null,
+    "manufacturer": null
+   },
+   "latency_ms": 50624,
+   "error": "vision answer is not JSON: ''"
+  },
+  {
+   "arm": "vision+rule+located:qwen3-vl:4b",
+   "photo_id": "darjja_train_10",
+   "values": {
+    "model_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": null,
+    "frequency": null,
+    "manufacturer": null
+   },
+   "latency_ms": 51141,
+   "error": "vision answer is not JSON: ''"
+  },
+  {
+   "arm": "vision:qwen3-vl:4b",
+   "photo_id": "hf_295",
+   "values": {
+    "model_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": null,
+    "frequency": null,
+    "manufacturer": null
+   },
+   "latency_ms": 50968,
+   "error": "vision answer is not JSON: ''"
+  },
+  {
+   "arm": "vision+rule:qwen3-vl:4b",
+   "photo_id": "hf_295",
+   "values": {
+    "model_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": null,
+    "frequency": null,
+    "manufacturer": null
+   },
+   "latency_ms": 50968,
+   "error": "vision answer is not JSON: ''"
+  },
+  {
+   "arm": "vision+rule+located:qwen3-vl:4b",
+   "photo_id": "hf_295",
+   "values": {
+    "model_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": null,
+    "frequency": null,
+    "manufacturer": null
+   },
+   "latency_ms": 51293,
+   "error": "vision answer is not JSON: ''"
+  },
+  {
+   "arm": "ocr",
+   "photo_id": "hf_02",
+   "values": {
+    "model_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": null,
+    "frequency": null,
+    "manufacturer": null
+   },
+   "latency_ms": 669,
+   "error": null
+  },
+  {
+   "arm": "ocr",
+   "photo_id": "hf_04",
+   "values": {
+    "model_number": null,
+    "voltage": "460",
+    "rated_current": "4",
+    "power": "150 HP",
+    "frequency": "50",
+    "manufacturer": null
+   },
+   "latency_ms": 467,
+   "error": null
+  },
+  {
+   "arm": "ocr",
+   "photo_id": "hf_06",
+   "values": {
+    "model_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": null,
+    "frequency": null,
+    "manufacturer": null
+   },
+   "latency_ms": 395,
+   "error": null
+  },
+  {
+   "arm": "ocr",
+   "photo_id": "hf_053",
+   "values": {
+    "model_number": null,
+    "voltage": "400/690",
+    "rated_current": null,
+    "power": null,
+    "frequency": null,
+    "manufacturer": null
+   },
+   "latency_ms": 391,
+   "error": null
+  },
+  {
+   "arm": "ocr",
+   "photo_id": "hf_066",
+   "values": {
+    "model_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": null,
+    "frequency": null,
+    "manufacturer": null
+   },
+   "latency_ms": 418,
+   "error": null
+  },
+  {
+   "arm": "ocr",
+   "photo_id": "hf_069",
+   "values": {
+    "model_number": null,
+    "voltage": null,
+    "rated_current": "7",
+    "power": null,
+    "frequency": null,
+    "manufacturer": null
+   },
+   "latency_ms": 497,
+   "error": null
+  },
+  {
+   "arm": "ocr",
+   "photo_id": "hf_259",
+   "values": {
+    "model_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": null,
+    "frequency": null,
+    "manufacturer": null
+   },
+   "latency_ms": 355,
+   "error": null
+  },
+  {
+   "arm": "ocr",
+   "photo_id": "darjja_train_01",
+   "values": {
+    "model_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": null,
+    "frequency": "60",
+    "manufacturer": null
+   },
+   "latency_ms": 429,
+   "error": null
+  },
+  {
+   "arm": "ocr",
+   "photo_id": "darjja_train_10",
+   "values": {
+    "model_number": null,
+    "voltage": "208/230",
+    "rated_current": "410",
+    "power": null,
+    "frequency": "60",
+    "manufacturer": null
+   },
+   "latency_ms": 517,
+   "error": null
+  },
+  {
+   "arm": "ocr",
+   "photo_id": "hf_295",
+   "values": {
+    "model_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": null,
+    "frequency": null,
+    "manufacturer": null
+   },
+   "latency_ms": 325,
+   "error": null
+  }
+ ]
+}

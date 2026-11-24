@@ -8,13 +8,14 @@ dependencies = [
   "fastapi>=0.110",
   "uvicorn>=0.29",
   "python-dotenv>=1.0",
+  "pillow>=10",
 ]
 
 [project.optional-dependencies]
 dev = ["pytest>=8", "ruff>=0.5"]
 mcp = ["mcp>=1.0"]
 ui = ["streamlit>=1.35"]
-ocr = ["pytesseract>=0.3", "pillow>=10"]
+ocr = ["pytesseract>=0.3", "rapidocr>=3.4", "onnxruntime>=1.20"]
 
 [build-system]
 requires = ["setuptools>=68"]
