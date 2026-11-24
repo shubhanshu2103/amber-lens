@@ -215,20 +215,19 @@ class OllamaVision:
         self.timeout_s = timeout_s
 
     def read(self, image_path: Path, prompt: VisionPrompt) -> VisionCall:
+        """One read of the photo; served from the cache when the same image, model and prompt were seen."""
         image_bytes = image_path.read_bytes()
         digest = image_sha256(image_bytes)
-        if self.cache is not None:
-            hit = self.cache.get(digest, self.model, prompt.version)
-            if hit is not None and isinstance(hit.get("raw_text"), str):
-                return VisionCall(
-                    model=self.model,
-                    prompt_version=prompt.version,
-                    image_sha256=digest,
-                    raw_text=hit["raw_text"],
-                    latency_ms=int(hit.get("latency_ms", 0)),
-                    load_ms=int(hit.get("load_ms", 0)),
-                    cached=True,
-                )
+        entry = self.cache.get(digest, self.model, prompt.version) if self.cache is not None else None
+        cached = entry is not None and isinstance(entry.get("raw_text"), str)
+        if not cached:
+            entry = self._generate(image_bytes, prompt)
+            if self.cache is not None:
+                self.cache.put(digest, self.model, prompt.version, entry)
+        return VisionCall(self.model, prompt.version, digest, entry["raw_text"], int(entry.get("latency_ms", 0)),
+                          int(entry.get("load_ms", 0)), cached)
+
+    def _generate(self, image_bytes: bytes, prompt: VisionPrompt) -> dict:
         payload = {
             "model": self.model,
             "prompt": prompt.text,
@@ -247,23 +246,7 @@ class OllamaVision:
         load_ms = int(body.get("load_duration", 0) / 1e6)
         total_ms = int(body.get("total_duration", 0) / 1e6) or wall_ms
         # Latency excludes the one-off model load so it reflects a warm per-photo check.
-        latency_ms = max(total_ms - load_ms, 0)
-        if self.cache is not None:
-            self.cache.put(
-                digest,
-                self.model,
-                prompt.version,
-                {"raw_text": raw_text, "latency_ms": latency_ms, "load_ms": load_ms, "wall_ms": wall_ms},
-            )
-        return VisionCall(
-            model=self.model,
-            prompt_version=prompt.version,
-            image_sha256=digest,
-            raw_text=raw_text,
-            latency_ms=latency_ms,
-            load_ms=load_ms,
-            cached=False,
-        )
+        return {"raw_text": raw_text, "latency_ms": max(total_ms - load_ms, 0), "load_ms": load_ms, "wall_ms": wall_ms}
 
     def unload(self) -> None:
         """Free GPU memory so the next model gets the whole card."""

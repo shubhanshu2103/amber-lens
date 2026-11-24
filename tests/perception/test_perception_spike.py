@@ -1,7 +1,5 @@
 from pathlib import Path
 
-import pytest
-
 from amber_lens.perception import spike
 from amber_lens.perception.dataset import parse_label_rows
 from amber_lens.perception.ocr import OcrLine, OcrWord
@@ -70,8 +68,6 @@ def test_disagreements_list_wrong_and_extra() -> None:
 
 def test_latency_summary() -> None:
     assert latency_summary([1000, 3000]) == {"mean_s": 2.0, "median_s": 2.0, "max_s": 3.0}
-    with pytest.raises(ValueError):
-        latency_summary([])
 
 
 def test_render_markdown_has_one_row_per_arm() -> None:

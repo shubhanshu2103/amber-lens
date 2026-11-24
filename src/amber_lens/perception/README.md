@@ -11,8 +11,10 @@ Ollama plus Tesseract and RapidOCR, so `cost_usd` is 0.0.
 | `dataset.py` | Tuning rows of `labels.csv` and tuning photo paths; held-out paths are refused before they are opened |
 | `cache.py` | Model responses cached on disk by image sha256, model name and prompt version |
 | `vision.py` | Ollama client (temperature 0, fixed seed, JSON schema output), the reader and spike prompts, strict parsing that ignores unknown keys |
-| `ocr.py` | Tesseract (9 passes) and RapidOCR adapters, label-anchored crops; words and lines with boxes in photo pixels |
+| `ocr.py` | Tesseract (9 passes) and RapidOCR adapters; words and lines with boxes in photo pixels |
+| `crops.py` | Optional path, off by default: re-read the cells next to printed labels, padded and upscaled |
 | `locate.py` | Finds a read value among OCR boxes; fragment, box-height, label-anchor and unit-adjacency checks |
+| `injection.py` | Flags instruction-like label text and planted second MODEL labels (#12); flagged text is quoted evidence only |
 | `textfields.py` | OCR-only field values by fixed label patterns (the second opinion, and rule R4's candidates) |
 | `rules.py` | Format rules, printed-label list, power unit attachment |
 | `scoring.py`, `evaluate.py` | Comparison with `labels.csv` and the tuning eval, for measurement only |
@@ -45,7 +47,7 @@ python -m amber_lens.perception.reader ../amber-lens-data/data/photos/tuning/hf_
 python -m amber_lens.perception.evaluate --ocr both --json-out docs/perception_eval_tuning.json
 python -m amber_lens.perception.spike --json-out docs/reader_spike_results.json
 python -m amber_lens.perception.check_sheet --results docs/reader_spike_results.json
-pytest -q tests/perception
+pytest -q tests/perception                      # local_model tests run only when Ollama is up
 ```
 
 Unit tests replace the vision model and OCR with stand-ins and use fixtures in `tests/fixtures/perception/`,

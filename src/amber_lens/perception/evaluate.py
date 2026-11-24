@@ -20,12 +20,21 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from amber_lens.perception.config import load_settings
+from amber_lens.perception.crops import run_both_with_crops, run_tesseract_with_crops
 from amber_lens.perception.dataset import LabelRow, load_tuning_labels, tuning_photo_path
 from amber_lens.perception.fields import IDENTIFIER_FIELDS, KEY_FIELDS, LABELLED_FIELDS
-from amber_lens.perception.ocr import OCR_RUNNERS
+from amber_lens.perception.ocr import run_multipass, run_rapidocr, run_rapidocr_and_tesseract
 from amber_lens.perception.reader import NameplateRun, run_nameplate
 from amber_lens.perception.scoring import Outcome, values_agree
 from amber_lens.schemas import ReadStatus
+
+OCR_RUNNERS = {
+    "tesseract": run_multipass,
+    "rapidocr": run_rapidocr,
+    "both": run_rapidocr_and_tesseract,
+    "tesseract+crops": run_tesseract_with_crops,
+    "both+crops": run_both_with_crops,
+}
 
 
 @dataclass(frozen=True)
@@ -104,6 +113,24 @@ def located_counts(runs: dict[str, NameplateRun]) -> Counter:
     return Counter(path for run in runs.values() for path in run.located_by.values() if path is not None)
 
 
+def _paths_and_rules(
+    scores: list[FieldScore], wrong: list[FieldScore], runs: dict[str, NameplateRun], labels: dict[str, LabelRow]
+) -> list[str]:
+    located, labelled = key_located(runs, labels)
+    correct_by_path = Counter(s.located_by for s in scores if s.outcome is Outcome.CORRECT)
+    out = ["", f"key values located: {located} of {labelled} labelled ({100 * located / labelled:.0f}%)",
+           f"located boxes per path, all fields: {dict(located_counts(runs))}",
+           f"correct READs per path: {dict(correct_by_path)}",
+           f"wrong READs per path: {dict(Counter(s.located_by for s in wrong))}"]
+    for field, (moved, was_correct) in rule_cost(runs, labels, "multi_rating").items():
+        out.append(f"R4 multi_rating, {field}: moved {moved} out of READ, {was_correct} of them correct")
+    warned = sorted(pid for pid, run in runs.items() if any(run.warnings.values()))
+    out.append(f"multi_row_table warnings: {len(warned)} photos ({', '.join(warned)})")
+    flagged = sorted(pid for pid, run in runs.items() if any(f.injection_flag for f in run.result.fields))
+    out.append(f"injection flags: {len(flagged)} photos ({', '.join(flagged)})")
+    return out
+
+
 def render(scores: list[FieldScore], runs: dict[str, NameplateRun], labels: dict[str, LabelRow]) -> str:
     out = [f"photos read: {len(runs)}", "",
            "| field | correct | wrong | extra | missed | abstained ok |", "| --- | --- | --- | --- | --- | --- |"]
@@ -132,16 +159,7 @@ def render(scores: list[FieldScore], runs: dict[str, NameplateRun], labels: dict
     latencies = [run.result.latency_ms / 1000 for run in runs.values()]
     latency = (f"mean {statistics.mean(latencies):.2f}, median {statistics.median(latencies):.2f}, "
                f"max {max(latencies):.2f}")
-    located, labelled = key_located(runs, labels)
-    correct_by_path = Counter(s.located_by for s in scores if s.outcome is Outcome.CORRECT)
-    wrong_by_path = Counter(s.located_by for s in wrong)
-    out += ["", f"key values located: {located} of {labelled} labelled ({100 * located / labelled:.0f}%)",
-            f"located boxes per path, all fields: {dict(located_counts(runs))}",
-            f"correct READs per path: {dict(correct_by_path)}; wrong READs per path: {dict(wrong_by_path)}"]
-    for field, (moved, was_correct) in rule_cost(runs, labels, "multi_rating").items():
-        out.append(f"R4 multi_rating, {field}: moved {moved} out of READ, {was_correct} of them correct")
-    warned = sorted(pid for pid, run in runs.items() if any(run.warnings.values()))
-    out.append(f"multi_row_table warnings: {len(warned)} photos ({', '.join(warned)})")
+    out += _paths_and_rules(scores, wrong, runs, labels)
     out += ["", f"latency per photo (s): {latency}; cost_usd per photo: 0.0", "", "wrong READs:"]
     out += [f"- {s.photo_id} {s.field}: read {s.read_value!r}, label {s.truth!r}, via {s.located_by}" for s in wrong]
     out += [] if wrong else ["- none"]

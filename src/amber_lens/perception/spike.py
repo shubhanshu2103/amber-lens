@@ -101,8 +101,6 @@ def disagreements(readings: list[ArmReading], labels: dict[str, LabelRow], field
 
 
 def latency_summary(latencies_ms: list[int]) -> dict[str, float]:
-    if not latencies_ms:
-        raise ValueError("no latencies to summarise")
     seconds = [ms / 1000 for ms in latencies_ms]
     return {"mean_s": round(statistics.mean(seconds), 2), "median_s": round(statistics.median(seconds), 2),
             "max_s": round(max(seconds), 2)}

@@ -1,41 +1,28 @@
 """Nameplate reader: photo in, PerceptionResult out (#11).
 
-Rule (strict). The vision model reads every field; a field is READ only when every check passes:
-  1. the vision model gave a value                                         else model_missing
-  2. a bare power number takes its printed unit label (HP, kW, kVA)
-  3. the value passes the field's format rule; a rating holds only its
-     own unit words (R3)                                                    else format_fail
-  4. OCR finds the value printed on the photo, in a box at least 8 px and
-     60% of the median OCR line high (R2)                                   else not_located
-  5. the match is not a fragment of a longer dash- or slash-joined token (R1) else readers_disagree
-  6. OCR read the same characters there                                    else readers_disagree
-  7. a power value with an attached unit sits directly next to that unit    else not_located
-  8. an identifier has its own printed label (MODEL / TYPE, or CAT / ORD)
-     found by OCR left of it on its row or directly above it (R5)          else not_located
-  9. OCR's own reading of the field under its printed label does not give
-     a different rule-passing value                                        else readers_disagree
- 10. voltage, current and frequency: OCR does not find two or more different
-     rule-passing values on the plate (multi-rating plate, R4)              else readers_disagree
-Fields that fail are UNREADABLE (model_missing, format_fail) or DISPUTED (not_located,
-readers_disagree) with value None. OCR never makes a field READ on its own, and the model's own
-confidence is never used.
+A field is READ only when every check passes, in this order (failing check -> reason):
+  1. the vision model gave a value                                       model_missing
+  2. (a bare power number takes its printed unit label: HP, kW, kVA)
+  3. the value passes its format rule; a rating holds only its unit words (R3)   format_fail
+  4. OCR finds it on the photo, box >= 8 px and 60% of the median line (R2)       not_located
+  5. not a fragment of a longer dash- or slash-joined token (R1)          readers_disagree
+  6. OCR read the same characters                                         readers_disagree
+  7. an attached power unit sits directly next to the number              not_located
+  8. an identifier has its printed label left of it or above it (R5)      not_located
+  9. OCR's reading under the field's label gives no other value           readers_disagree
+ 10. voltage / current / frequency: no 2+ different values on the plate (R4)   readers_disagree
+A value OCR finds on a flagged line (instruction-like text, or a second MODEL label with another value)
+is never READ: DISPUTED, readers_disagree, injection_flag=True (#12). Each flagged line is also added as a
+DISPUTED free_text_n field with value None; its text is quoted evidence only and never enters a prompt.
+Failures are UNREADABLE (model_missing, format_fail) or DISPUTED (others) with value None. OCR never makes
+a field READ on its own; the model's own confidence is never used.
 
-Reason codes are not in schemas.ReadField yet, so run_nameplate returns them with the result of the
-same run; read_nameplate returns only the PerceptionResult:
-
-    run = run_nameplate(photo_path)
-    run.result       # PerceptionResult
-    run.reasons      # {"model_number": None, "voltage": "not_located", ...}; None means READ
-    run.rules        # the exact check that stopped each field, e.g. "multi_rating"; None means READ
-    run.located_by   # {"model_number": "full_ocr", "voltage": None, ...}
-    run.warnings     # {"voltage": "multi_row_table", ...}; never changes a status
-
-Warning "multi_row_table" (R6 detector): voltage, current and frequency on a plate where OCR sees a row
-of unit headers (V, Hz, A, kW, HP) with several rows of values under them. The field keeps the status the
-rules gave it; the warning tells the verdict side that the plate carries more than one rating row.
+run_nameplate returns, from the same run: result (PerceptionResult), reasons (None = READ), rules (the
+exact check that stopped each field), located_by (rapidocr / full_ocr / crop_ocr) and warnings.
+Warning "multi_row_table" (R6): voltage, current and frequency on a plate with a row of unit headers and
+several rows of values under them; it never changes a status. read_nameplate returns only the result.
 
 How to run:
-    python -m amber_lens.perception.reader ../amber-lens-data/data/photos/tuning/hf_02.jpg
     python -m amber_lens.perception.reader <photo> --out examples/perception_result_sample.json
 """
 
@@ -51,9 +38,12 @@ from typing import Protocol
 
 from amber_lens.perception.cache import ResponseCache
 from amber_lens.perception.config import Settings, load_settings
+from amber_lens.perception.crops import CROP_PASS
 from amber_lens.perception.dataset import ensure_not_heldout
 from amber_lens.perception.fields import IDENTIFIER_FIELDS, NAMEPLATE_FIELDS
+from amber_lens.perception.injection import flagged_lines, free_text_fields, on_flagged_line
 from amber_lens.perception.locate import (
+    LocateHit,
     has_label_anchor,
     has_rating_table,
     locate,
@@ -61,7 +51,7 @@ from amber_lens.perception.locate import (
     strict_key,
     unit_adjacent,
 )
-from amber_lens.perception.ocr import CROP_PASS, RAPID_PASS, OcrLine, OcrResult, run_rapidocr_and_tesseract
+from amber_lens.perception.ocr import RAPID_PASS, OcrLine, OcrResult, run_rapidocr_and_tesseract
 from amber_lens.perception.rules import allowed_label, attach_power_unit, check_format
 from amber_lens.perception.textfields import all_values, extract_fields
 from amber_lens.perception.vision import (
@@ -110,6 +100,7 @@ class OcrEvidence:
     candidates: dict[str, tuple[str, ...]]
     min_box_height: float
     rating_table: bool
+    flagged: list[OcrLine]
 
 
 @dataclass(frozen=True)
@@ -141,13 +132,14 @@ def _distinct_rule_passing(field: str, values: list[str]) -> tuple[str, ...]:
 def build_evidence(ocr: OcrResult) -> OcrEvidence:
     # Crop re-reads only help locate a value; hints, R4 candidates and box heights use full-image lines.
     full = tuple(line for line in ocr.lines if line.pass_id != CROP_PASS)
-    hints = extract_fields(ocr.pass_lines(ocr.primary_pass))
+    hints = extract_fields([line for line in ocr.lines if line.pass_id == ocr.primary_pass])
     return OcrEvidence(
         lines=ocr.lines,
         hints={name: (hit.value if (hit := hints.get(name)) else None) for name in NAMEPLATE_FIELDS},
         candidates={name: _distinct_rule_passing(name, all_values(name, full)) for name in MULTI_RATING_FIELDS},
         min_box_height=min_box_height(full),
         rating_table=has_rating_table(full),
+        flagged=flagged_lines(ocr.lines, ocr.primary_pass),
     )
 
 
@@ -157,55 +149,57 @@ def _path(pass_id: str) -> str:
     return CROP_OCR if pass_id == CROP_PASS else FULL_OCR
 
 
-def _stopped(
-    name: str, status: ReadStatus, reason: Reason, rule: str, *, vision_value: str | None = None,
-    ocr_value: str | None = None, format_passed: bool | None = None, source: SourceRef | None = None,
-    located_by: str | None = None,
-) -> FieldDecision:
-    field = ReadField(name=name, value=None, vision_value=vision_value, ocr_value=ocr_value,
-                      format_rule_passed=format_passed, status=status, source=source)
-    return FieldDecision(field, reason, rule, located_by)
+def _stop(name: str, status: ReadStatus, reason: Reason, rule: str, located_by: str | None = None,
+          **fields) -> FieldDecision:
+    return FieldDecision(ReadField(name=name, value=None, status=status, **fields), reason, rule, located_by)
+
+
+def _check_located(
+    name: str, value: str, attached: bool, label: str | None, hit: LocateHit, hint: str | None, evidence: OcrEvidence
+) -> tuple[Reason, str, str | None, bool] | None:
+    """Checks after the value is found: (reason, rule, ocr_value, keep the source) for the first that fails."""
+    if hit.fragment:
+        return Reason.READERS_DISAGREE, "fragment", hit.ocr_text, True
+    if not hit.exact:
+        return Reason.READERS_DISAGREE, "glyph_mismatch", hit.ocr_text, True
+    if attached and not unit_adjacent(hit, label or ""):
+        return Reason.NOT_LOCATED, "unit_not_adjacent", hit.ocr_text, False
+    if name in IDENTIFIER_FIELDS and not has_label_anchor(name, hit, evidence.lines):
+        return Reason.NOT_LOCATED, "label_anchor_missing", hit.ocr_text, False
+    if hint is not None and check_format(name, hint) and strict_key(name, hint) != strict_key(name, value):
+        return Reason.READERS_DISAGREE, "ocr_label_value_differs", hint, True
+    candidates = evidence.candidates.get(name, ())
+    if len(candidates) >= 2:
+        return Reason.READERS_DISAGREE, "multi_rating", " | ".join(candidates), True
+    return None
 
 
 def decide_field(name: str, reading: FieldReading, evidence: OcrEvidence, photo_ref: str) -> FieldDecision:
     """Apply the strict rule to one field. Pure: same inputs, same decision."""
     hint = evidence.hints.get(name)
     if reading.value is None:
-        return _stopped(name, ReadStatus.UNREADABLE, Reason.MODEL_MISSING, "no_value", ocr_value=hint)
-    label = allowed_label(name, reading.printed_label)
+        return _stop(name, ReadStatus.UNREADABLE, Reason.MODEL_MISSING, "no_value", ocr_value=hint)
     attached = attach_power_unit(reading.value, reading.printed_label) if name == "power" else None
     value = attached or reading.value
-    common = {"vision_value": reading.value}
     if not check_format(name, value):
-        return _stopped(name, ReadStatus.UNREADABLE, Reason.FORMAT_FAIL, "format_rule", ocr_value=hint,
-                        format_passed=False, **common)
-    common["format_passed"] = True
+        return _stop(name, ReadStatus.UNREADABLE, Reason.FORMAT_FAIL, "format_rule", ocr_value=hint,
+                     vision_value=reading.value, format_rule_passed=False)
     hit = locate(name, value, evidence.lines, min_height=evidence.min_box_height)
     if hit is None:
-        return _stopped(name, ReadStatus.DISPUTED, Reason.NOT_LOCATED, "not_found", ocr_value=hint, **common)
+        return _stop(name, ReadStatus.DISPUTED, Reason.NOT_LOCATED, "not_found", ocr_value=hint,
+                     vision_value=reading.value, format_rule_passed=True)
+    label = allowed_label(name, reading.printed_label)
     path = _path(hit.pass_id)
     source = SourceRef(kind="photo_crop", ref_id=photo_ref, bbox=hit.bbox,
                        detail=f"field={name}; label={label or 'none'}; located_by={path}; pass={hit.pass_id}")
-    located = {"source": source, "located_by": path}
-    if hit.fragment:
-        return _stopped(name, ReadStatus.DISPUTED, Reason.READERS_DISAGREE, "fragment", ocr_value=hit.ocr_text,
-                        **common, **located)
-    if not hit.exact:
-        return _stopped(name, ReadStatus.DISPUTED, Reason.READERS_DISAGREE, "glyph_mismatch",
-                        ocr_value=hit.ocr_text, **common, **located)
-    if attached is not None and not unit_adjacent(hit, label or ""):
-        return _stopped(name, ReadStatus.DISPUTED, Reason.NOT_LOCATED, "unit_not_adjacent", ocr_value=hit.ocr_text,
-                        **common)
-    if name in IDENTIFIER_FIELDS and not has_label_anchor(name, hit, evidence.lines):
-        return _stopped(name, ReadStatus.DISPUTED, Reason.NOT_LOCATED, "label_anchor_missing",
-                        ocr_value=hit.ocr_text, **common)
-    if hint is not None and check_format(name, hint) and strict_key(name, hint) != strict_key(name, value):
-        return _stopped(name, ReadStatus.DISPUTED, Reason.READERS_DISAGREE, "ocr_label_value_differs",
-                        ocr_value=hint, **common, **located)
-    candidates = evidence.candidates.get(name, ())
-    if len(candidates) >= 2:
-        return _stopped(name, ReadStatus.DISPUTED, Reason.READERS_DISAGREE, "multi_rating",
-                        ocr_value=" | ".join(candidates), **common, **located)
+    if on_flagged_line(hit.bbox, evidence.flagged):
+        return _stop(name, ReadStatus.DISPUTED, Reason.READERS_DISAGREE, "injection_line", path, ocr_value=hit.ocr_text,
+                     vision_value=reading.value, format_rule_passed=True, source=source, injection_flag=True)
+    failed = _check_located(name, value, attached is not None, label, hit, hint, evidence)
+    if failed is not None:
+        reason, rule, ocr_value, keep = failed
+        return _stop(name, ReadStatus.DISPUTED, reason, rule, path if keep else None, ocr_value=ocr_value,
+                     vision_value=reading.value, format_rule_passed=True, source=source if keep else None)
     field = ReadField(name=name, value=value, vision_value=reading.value, ocr_value=hit.ocr_text,
                       format_rule_passed=True, status=ReadStatus.READ, source=source)
     return FieldDecision(field, None, None, path)
@@ -246,7 +240,7 @@ def run_nameplate(
     decisions = {name: decide_field(name, readings[name], evidence, photo_path.name) for name in NAMEPLATE_FIELDS}
     result = PerceptionResult(
         observation_id=observation_id or photo_path.stem,
-        fields=[d.field for d in decisions.values()],
+        fields=[d.field for d in decisions.values()] + free_text_fields(evidence.flagged, photo_path.name),
         tag_read_ok=tag_read_ok,
         model_name=vision.model,
         latency_ms=call.latency_ms + ocr_result.latency_ms,
