@@ -1,10 +1,12 @@
-# Replace B_OWNER and teammates' handles once they accept the invite.
+# Last matching pattern wins.
 *                                 @shubhanshu2103
 /src/amber_lens/schemas.py        @shubhanshu2103
 /src/amber_lens/verdict/          @shubhanshu2103
 /src/amber_lens/sitepr/           @shubhanshu2103
-# /src/amber_lens/perception/     @VRUSHALI_HANDLE
-# /src/amber_lens/records/        @B_OWNER_HANDLE
-# /src/amber_lens/mcp_server/     @B_OWNER_HANDLE
-# /data/                          @KOUSHIK_HANDLE @VIKAS_HANDLE
-# /eval/                          @KOUSHIK_HANDLE @VIKAS_HANDLE @shubhanshu2103
+/src/amber_lens/perception/       @vrxshxli
+/src/amber_lens/ui/               @vrxshxli
+/src/amber_lens/records/          @24f2006583-wq
+/src/amber_lens/mcp_server/       @24f2006583-wq
+/src/amber_lens/api/              @24f2006583-wq
+/data/                            @viki-eng @24f2006583-wq
+/eval/                            @viki-eng @24f2006583-wq @shubhanshu2103
