@@ -76,3 +76,34 @@ def test_sitepr_cannot_skip_approval():
 
 def test_verified_sitepr_can_reopen_on_recurrence():
     assert can_transition(SitePRStatus.VERIFIED, SitePRStatus.REOPENED)
+
+
+def test_unreadable_field_needs_no_source_but_read_field_does():
+    ReadField(name="sccr", value=None, status=ReadStatus.UNREADABLE)
+    with pytest.raises(ValidationError):
+        ReadField(name="sccr", value="65kA", status=ReadStatus.READ)
+
+
+def test_verdict_must_fit_its_check_type():
+    with pytest.raises(ValidationError):
+        Verdict(
+            verdict_id="v-2", observation_id="o", check_type="substitution", verdict=VerdictCode.SHORT,
+            checks=[], confidence=0.9, needs_human=False, explanation="x", sources=[],
+        )
+
+
+def test_low_confidence_requires_human():
+    with pytest.raises(ValidationError):
+        Verdict(
+            verdict_id="v-3", observation_id="o", check_type="gate", verdict=VerdictCode.CANT_MATCH,
+            checks=[], confidence=0.5, needs_human=False, explanation="x", sources=[],
+        )
+
+
+def test_naive_datetimes_rejected():
+    from datetime import datetime
+
+    from amber_lens.schemas import Sighting
+
+    with pytest.raises(ValidationError):
+        Sighting(model_number="M", room_tag="R", observation_id="o", seen_at=datetime(2026, 11, 24))
