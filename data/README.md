@@ -6,7 +6,7 @@
 | `photos/heldout/` | At least a third of all photos. **Nobody opens these while building.** Run once, after rules freeze | D |
 | `datasheets/` | Public manufacturer datasheets (PDF) for each photographed model | D |
 | `records/` | Project Alpha tables as CSV: `po_lines.csv`, `submittals.csv`, `schedule.csv`, `rooms.csv`, `deliveries.csv` | B |
-| `labels.csv` | Ground truth per photo: `photo_id, model_number, true_verdict, planted_problem, notes` | D |
+| `labels.csv` | Per-photo source, ratings, readability, split, and verdict metadata; see the CSV header and [`SOURCES.md`](SOURCES.md) | D |
 
 ## Photo rules
 - Nameplates, crate labels, delivery tickets only. **No people in frame**; discard and retake if anyone appears.
