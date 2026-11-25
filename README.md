@@ -51,6 +51,21 @@ Every step is an event in an append-only ledger. Approved changes carry an idemp
 - **Confidence from signals, not self-report:** reader agreement, match exactness (exact / normalised / fuzzy), check completeness, tag read quality.
 - **No tracking of people.** Location from printed room tags, never GPS. We photograph only nameplates, labels and tickets; frames with a person are discarded. Device ID and role only.
 
+### How confidence is computed
+
+```
+confidence = completeness * (0.4 * agreement + 0.4 * match + 0.2 * tag)
+```
+
+| Signal | Meaning |
+| --- | --- |
+| completeness | share of checks that had data to run |
+| agreement | share of the fields behind the checks that were read (perception has already checked the format rule and OCR); disputed or unreadable count as 0. Callers pass only the fields their checks use |
+| match | average over checks: exact 1.0, normalised 0.95, alias 0.85, fuzzy 0.6, no match type 0.5 |
+| tag | 1.0 if the room tag was read cleanly or isn't used, else 0.6 |
+
+An injection flag on any read field caps confidence at 0.5. Below 0.80 the verdict is marked `needs_human`. The model's own self-reported number is never used. Code: `src/amber_lens/verdict/confidence.py`.
+
 ## Architecture
 
 | Module | Path | Owner | What it does |
@@ -92,11 +107,24 @@ Run commands for the API, MCP server and UI are added as each module lands (see 
 ## Data and honesty
 
 - **Nameplate photos are real.** Most come from public, openly licensed datasets (see `data/SOURCES.md`), plus a few photos we took ourselves. No people in any frame.
-- **Labels are hand-verified.** The public datasets ship auto-generated labels with errors, so every photo we use was checked by hand and corrected in `data/labels.csv`.
+- **Labels are being hand-checked.** The public datasets ship auto-generated labels with errors, and our first labels were read off the photos by a model. A photo counts as verified only once `human_checked` is filled in `data/labels.csv`. Until then, results on it measure agreement with that label, not accuracy.
 - **Records are synthetic.** Project Alpha (POs, approved submittals, schedule, rooms, deliveries) is written by us around the verified equipment. Approved values come from the verified nameplate, and planted problems are made by editing the records.
 - **Datasheets where we have them.** For a handful of products we also attach the official datasheet PDF; the substitution check does not depend on it.
 - **No model training.** We read nameplates with a pretrained vision model plus OCR and format rules. Photos are used for **evaluation**, not training.
 - **Held-out set.** About a third of the models live in `data/photos/heldout/` and nobody tunes on them. Rules and thresholds are frozen before the single held-out run.
+
+## Known limits
+
+Things a reader should know before trusting a number or a verdict:
+
+- **Agreement, not accuracy, until labels are human-checked.** Both the labels and the reader are model-based, so their mistakes can line up. We report counts, not rates: the tuning set is 35 photos and the held-out set is smaller, so "0 wrong GOs" on about 15 photos only says the true error rate is probably under about 20%.
+- **Coverage is low by design.** The reader marks a field READ only when OCR finds the same characters on the photo. On the tuning set that is 39-41 of 94 key values, so many photos end in `CANT_MATCH`. We report GO coverage next to wrong GOs so abstaining can't pass for accuracy.
+- **A GO means "this model belongs in this room", not "this exact unit".** Nameplates carry no equipment tag, and several units of one model look the same to us. The schedule match is by model and room.
+- **Equivalence means an allowed suffix only.** The substitution check does not know that a different brand or model is electrically equivalent. Anything not on the allowed list is `CANT_MATCH`.
+- **Partial deliveries** are compared with the outstanding quantity (PO quantity minus what was already received), so the gate check needs the receipts recorded.
+- **Project Alpha is synthetic and built around the same labels**, so the evaluation tests our rules against planted problems, not real-world record mess.
+- **Privacy:** photos are sent to a hosted vision API after an on-device face check. The face check only catches visible faces, and capture also asks the user to confirm no people are in the frame.
+- **The hosted vision model is a preview model** that can be withdrawn at short notice, and the free tier allows only a few checks a minute. The model is one setting, and a local model is the offline fallback.
 
 ## Evaluation
 
