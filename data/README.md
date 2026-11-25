@@ -17,7 +17,9 @@
 Keep 3-4 blurry or damaged plates on purpose; they are our `CANT_MATCH` cases.
 
 ## labels.csv columns
-`photo_id, source, license, manufacturer, model_number, voltage, hp_or_kw, amps, true_verdict, planted_problem, notes`
+`photo_id, split, source, license, equipment_type, manufacturer, model_number, voltage, hp_or_kw, amps, readable, true_verdict, planted_problem, notes`
+
+See the header of `labels.csv` for the exact order; `true_verdict` and `planted_problem` are filled in #20 once records exist.
 
 ## Rules
 - Public dataset labels are auto-generated and wrong in places. Never copy them in without checking the photo.
