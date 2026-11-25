@@ -4,6 +4,7 @@ from amber_lens.schemas import BBox, RecordChange, SitePR, SitePRStatus, SourceR
 from amber_lens.sitepr import Ledger, MockRecordStore, SitePRService
 from amber_lens.sitepr.recurrence import report_finding
 
+
 def crop(ref):
     return [SourceRef(kind="photo_crop", ref_id=ref, bbox=BBox(x=1, y=1, w=5, h=5))]
 
