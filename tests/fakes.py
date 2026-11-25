@@ -134,3 +134,44 @@ class FuzzyRecords:
     def submittal_for_model(self, model_number):
         m = self.inner.submittal_for_model(model_number)
         return self._f(m) if m and "submittal" in self.only else m
+
+
+class GateRecords:
+    def __init__(self, lines=()):
+        self.lines = {(p.po_number, p.line): p for p in lines}
+
+    def po_line(self, po_number, line):
+        return self.lines.get((po_number, line))
+
+
+def gate_records():
+    return GateRecords([
+        POLine(po_number="PO-7", line=1, equipment_tag="P-101", model_number="ACME-50HP", description="pump", qty=12),
+        POLine(po_number="PO-7", line=2, equipment_tag="V-201", model_number="VALVE-2", description="valve", qty=4),
+    ])
+
+
+def _doc_field(name, value, status=ReadStatus.READ, inj=False):
+    read = status == ReadStatus.READ
+    return ReadField(
+        name=name, value=value if read else None, vision_value=value, ocr_value=value, format_rule_passed=True,
+        status=status, source=SourceRef(kind="photo_crop", ref_id="obs-1", detail=name, bbox=BBox(x=3, y=3, w=30, h=8))
+        if read else None, injection_flag=inj,
+    )
+
+
+def ticket(lines=(("ACME-50HP", "12", "1"),), po="PO-7", extra=()):
+    """A delivery ticket: one (model, qty, po_line) per printed row. A value of None is a DISPUTED cell."""
+    fields = [_doc_field("po_number", po, ReadStatus.READ if po else ReadStatus.DISPUTED)]
+    for n, (model, qty, line) in enumerate(lines, 1):
+        for name, v in (("model_number", model), ("qty", qty), ("po_line", line)):
+            fields.append(_doc_field(f"line[{n}].{name}", v, ReadStatus.READ if v else ReadStatus.DISPUTED))
+    return PerceptionResult(observation_id="obs-1", fields=[*fields, *extra], tag_read_ok=False, model_name="fake",
+                            latency_ms=1, cost_usd=0.0)
+
+
+def crate_label(model="ACME-50HP", qty="12", po="PO-7", line="1"):
+    fields = [_doc_field(n, v, ReadStatus.READ if v else ReadStatus.DISPUTED)
+              for n, v in (("model_number", model), ("qty", qty), ("po_number", po), ("po_line", line))]
+    return PerceptionResult(observation_id="obs-1", fields=fields, tag_read_ok=False, model_name="fake", latency_ms=1,
+                            cost_usd=0.0)
