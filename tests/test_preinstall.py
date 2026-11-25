@@ -149,3 +149,8 @@ def test_po_line_without_an_equipment_tag_matches_by_model():
                          qty=1, submittal_id="SUB-9")]
     v = run(records=records)
     assert v.verdict == VerdictCode.GO
+
+
+def test_a_flagged_free_text_line_caps_confidence_even_though_no_checked_field_is_flagged():
+    v = run(p=perception(extra=[free_text()]))
+    assert v.confidence <= 0.5 and v.needs_human
