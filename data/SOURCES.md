@@ -9,6 +9,10 @@ The CSV contains 42 rows: 37 source-plate photos (35 `yes`, 2 `partial`) and
 Hugging Face photos marked MIT and their 3 MIT blur augmentations. No team
 phone-photo rows were identified in the supplied CSV.
 
+Every row has a `license` value. `unknown` means redistribution rights were
+not established; those rows are URL/metadata references only, and their source
+photos are not included in this repository.
+
 | Source in `labels.csv` | Rows | Split | Use and image rights |
 | --- | ---: | --- | --- |
 | Hugging Face: `sergiudanstan/motor-nameplate` | 8 | tuning | MIT as recorded in the supplied CSV; photos included under `photos/tuning/`. |
