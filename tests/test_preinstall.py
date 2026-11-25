@@ -1,6 +1,7 @@
-from fakes import FakeRecords, good_records, model_field, obs, perception
+import pytest
+from fakes import FakeRecords, FuzzyRecords, free_text, good_records, model_field, obs, perception
 
-from amber_lens.schemas import ReadStatus, ScheduleItem, VerdictCode
+from amber_lens.schemas import POLine, ReadStatus, ScheduleItem, VerdictCode
 from amber_lens.verdict.preinstall import check_pre_install
 
 
@@ -105,3 +106,46 @@ def test_model_on_two_rows_without_a_room_cannot_be_resolved():
 
 def test_empty_records_object_is_cant_match():
     assert run(records=FakeRecords()).verdict == VerdictCode.CANT_MATCH
+
+
+@pytest.mark.parametrize("only", [("schedule",), ("po",), ("submittal",), ("schedule", "po", "submittal")])
+def test_a_fuzzy_match_is_never_a_go(only):
+    v = run(records=FuzzyRecords(good_records(), only))
+    assert v.verdict == VerdictCode.CANT_MATCH
+    assert v.needs_human
+
+
+def test_flagged_free_text_line_forces_a_human_even_with_a_clean_model_number():
+    v = run(p=perception(extra=[free_text()]))
+    assert "injection_flag" in v.flags and v.needs_human
+
+
+def test_unflagged_free_text_does_not_trigger_review():
+    v = run(p=perception(extra=[free_text(inj=False)]))
+    assert v.verdict == VerdictCode.GO and not v.needs_human
+
+
+def test_a_read_catalog_number_alone_can_match():
+    p = perception(model_field(name="catalog_number"))
+    p.fields.append(model_field(status=ReadStatus.UNREADABLE))
+    assert run(p=p).verdict == VerdictCode.GO
+
+
+def test_catalog_number_is_tried_before_model_number():
+    p = perception(model_field("ACME-50HP", name="catalog_number"))
+    p.fields.append(model_field("OTHER-99"))  # the model number is not on the schedule, the catalog number is
+    assert run(p=p).verdict == VerdictCode.GO
+
+
+def test_model_number_is_used_when_the_catalog_number_is_not_on_the_schedule():
+    p = perception(model_field("OTHER-99", name="catalog_number"))
+    p.fields.append(model_field())
+    assert run(p=p).verdict == VerdictCode.GO
+
+
+def test_po_line_without_an_equipment_tag_matches_by_model():
+    records = good_records()
+    records.po = [POLine(po_number="PO-7", line=1, equipment_tag=None, model_number="ACME-50HP", description="pump",
+                         qty=1, submittal_id="SUB-9")]
+    v = run(records=records)
+    assert v.verdict == VerdictCode.GO
