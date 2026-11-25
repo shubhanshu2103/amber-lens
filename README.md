@@ -60,8 +60,8 @@ confidence = completeness * (0.4 * agreement + 0.4 * match + 0.2 * tag)
 | Signal | Meaning |
 | --- | --- |
 | completeness | share of checks that had data to run |
-| agreement | per field: 1.0 if read, format rule passed and OCR does not contradict; 0.6 if read otherwise; 0 if disputed or unreadable |
-| match | average over checks: exact 1.0, normalised 0.95, alias 0.85, fuzzy 0.6, no match type 0.7 |
+| agreement | share of the fields behind the checks that were read (perception has already checked the format rule and OCR); disputed or unreadable count as 0. Callers pass only the fields their checks use |
+| match | average over checks: exact 1.0, normalised 0.95, alias 0.85, fuzzy 0.6, no match type 0.5 |
 | tag | 1.0 if the room tag was read cleanly or isn't used, else 0.6 |
 
 An injection flag on any read field caps confidence at 0.5. Below 0.80 the verdict is marked `needs_human`. The model's own self-reported number is never used. Code: `src/amber_lens/verdict/confidence.py`.
