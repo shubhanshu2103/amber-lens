@@ -27,7 +27,7 @@ def test_confidence_ignores_any_model_number_and_is_lower_for_weaker_matches():
 
 
 def test_fuzzy_with_weak_reading_goes_to_human():
-    c = compute_confidence([chk("fuzzy")], [rf(rule=False)])
+    c = compute_confidence([chk("fuzzy")], [rf(), rf(ReadStatus.DISPUTED)])
     assert c < 0.8 and needs_human(c)
 
 
@@ -38,7 +38,16 @@ def test_missing_data_lowers_completeness():
 
 def test_disputed_field_drags_agreement_down():
     assert field_agreement([rf(), rf(ReadStatus.DISPUTED)]) == 0.5
-    assert field_agreement([rf(vision="A", ocr="B")]) == 0.6
+
+
+def test_read_field_whose_ocr_span_differs_in_units_still_counts_as_agreed():
+    # perception's READ already means OCR found the same characters; the spans differ in units and spacing by design
+    assert field_agreement([rf(vision="230/460 V", ocr="230/460")]) == 1.0
+    assert field_agreement([rf(vision="60 Hz", ocr="60", rule=False)]) == 1.0
+
+
+def test_a_check_with_no_match_type_never_outranks_a_fuzzy_match():
+    assert compute_confidence([chk("none")], [rf()]) <= compute_confidence([chk("fuzzy")], [rf()])
 
 
 def test_bad_tag_read_lowers_confidence():

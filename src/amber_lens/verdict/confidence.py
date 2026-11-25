@@ -3,8 +3,9 @@
     confidence = completeness * (0.4 * agreement + 0.4 * match + 0.2 * tag)
 
 completeness  share of checks that had data to run (passed is not None)
-agreement     how well the readers agreed on the fields behind the verdict (see `field_agreement`)
-match         average weight of how each check matched: exact 1.0, normalised 0.95, alias 0.85, fuzzy 0.6, none 0.7
+agreement     share of the fields behind the verdict that were READ (see `field_agreement`). Pass only the fields the
+              checks actually use, since every field passed in counts toward the average
+match         average weight of how each check matched: exact 1.0, normalised 0.95, alias 0.85, fuzzy 0.6, none 0.5
 tag           1.0 if the room tag was read cleanly (or no tag is involved), else 0.6
 
 An injection flag on any field caps the result at 0.5. Below CONFIDENCE_REVIEW_THRESHOLD the verdict goes to a human.
@@ -18,22 +19,20 @@ from amber_lens.schemas import CONFIDENCE_REVIEW_THRESHOLD, CheckResult, ReadFie
 
 __all__ = ["CONFIDENCE_REVIEW_THRESHOLD", "MATCH_WEIGHT", "compute_confidence", "field_agreement", "needs_human"]
 
-MATCH_WEIGHT = {"exact": 1.0, "normalised": 0.95, "alias": 0.85, "fuzzy": 0.6, "none": 0.7}
+MATCH_WEIGHT = {"exact": 1.0, "normalised": 0.95, "alias": 0.85, "fuzzy": 0.6, "none": 0.5}
 INJECTION_CAP = 0.5
 BAD_TAG = 0.6
 
 
 def field_agreement(fields: Sequence[ReadField]) -> float:
-    """READ with the format rule passed and no OCR contradiction = 1.0; READ otherwise = 0.6; disputed/unreadable = 0."""
+    """READ = 1.0, disputed/unreadable = 0.
+
+    Perception already checked the format rule and that OCR found the same characters before it says READ, and the OCR
+    span legitimately differs from the vision value in units and spacing, so the raw strings are not compared here.
+    """
     if not fields:
         return 0.0
-    total = 0.0
-    for f in fields:
-        if f.status != ReadStatus.READ:
-            continue
-        contradicted = f.ocr_value is not None and f.vision_value is not None and f.ocr_value != f.vision_value
-        total += 1.0 if f.format_rule_passed and not contradicted else 0.6
-    return total / len(fields)
+    return sum(1.0 for f in fields if f.status == ReadStatus.READ) / len(fields)
 
 
 def compute_confidence(
