@@ -85,9 +85,14 @@ class ReadField(BaseModel):
     status: ReadStatus
     source: SourceRef | None = Field(default=None, description="Required when READ; None if nothing was located")
     injection_flag: bool = Field(default=False, description="Read text looked like an instruction to an AI")
+    reason: Literal["format_fail", "readers_disagree", "not_located", "model_missing"] | None = Field(
+        default=None, description="Why a field is not READ; None when READ (and optional otherwise)"
+    )
 
     @model_validator(mode="after")
     def _value_only_when_read(self) -> ReadField:
+        if self.status == ReadStatus.READ and self.reason is not None:
+            raise ValueError("a READ field cannot have a reason")
         if self.status != ReadStatus.READ and self.value is not None:
             raise ValueError("value must be None unless the field is READ (flag, never guess)")
         if self.status == ReadStatus.READ and self.source is None:
