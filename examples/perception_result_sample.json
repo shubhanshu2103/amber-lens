@@ -1,0 +1,139 @@
+{
+  "observation_id": "hf_038",
+  "fields": [
+    {
+      "name": "model_number",
+      "value": "EPT0754",
+      "vision_value": "EPT0754",
+      "ocr_value": "EPT0754",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+        "kind": "photo_crop",
+        "ref_id": "hf_038.jpg",
+        "detail": "field=model_number; label=MODEL; located_by=rapidocr; pass=rapidocr",
+        "bbox": {
+          "x": 140,
+          "y": 117,
+          "w": 81,
+          "h": 23
+        }
+      },
+      "injection_flag": false
+    },
+    {
+      "name": "catalog_number",
+      "value": null,
+      "vision_value": "CC086A",
+      "ocr_value": "CC086A",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+    },
+    {
+      "name": "voltage",
+      "value": "208-230/460",
+      "vision_value": "208-230/460",
+      "ocr_value": "208-230/460",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+        "kind": "photo_crop",
+        "ref_id": "hf_038.jpg",
+        "detail": "field=voltage; label=VOLTS; located_by=rapidocr; pass=rapidocr",
+        "bbox": {
+          "x": 132,
+          "y": 279,
+          "w": 114,
+          "h": 25
+        }
+      },
+      "injection_flag": false
+    },
+    {
+      "name": "rated_current",
+      "value": null,
+      "vision_value": "180-166/83",
+      "ocr_value": "086",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": {
+        "kind": "photo_crop",
+        "ref_id": "hf_038.jpg",
+        "detail": "field=rated_current; label=AMPS; located_by=rapidocr; pass=rapidocr",
+        "bbox": {
+          "x": 348,
+          "y": 279,
+          "w": 111,
+          "h": 24
+        }
+      },
+      "injection_flag": false
+    },
+    {
+      "name": "power",
+      "value": "75 HP",
+      "vision_value": "75",
+      "ocr_value": "75",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+        "kind": "photo_crop",
+        "ref_id": "hf_038.jpg",
+        "detail": "field=power; label=HP; located_by=full_ocr; pass=psm11-gray",
+        "bbox": {
+          "x": 119,
+          "y": 202,
+          "w": 21,
+          "h": 17
+        }
+      },
+      "injection_flag": false
+    },
+    {
+      "name": "frequency",
+      "value": null,
+      "vision_value": "50",
+      "ocr_value": "50 | 60",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": {
+        "kind": "photo_crop",
+        "ref_id": "hf_038.jpg",
+        "detail": "field=frequency; label=Hz; located_by=rapidocr; pass=rapidocr",
+        "bbox": {
+          "x": 142,
+          "y": 319,
+          "w": 38,
+          "h": 25
+        }
+      },
+      "injection_flag": false
+    },
+    {
+      "name": "manufacturer",
+      "value": "Motors & Drives International",
+      "vision_value": "Motors & Drives International",
+      "ocr_value": "Motors & Drives International",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+        "kind": "photo_crop",
+        "ref_id": "hf_038.jpg",
+        "detail": "field=manufacturer; label=none; located_by=rapidocr; pass=rapidocr",
+        "bbox": {
+          "x": 282,
+          "y": 42,
+          "w": 245,
+          "h": 23
+        }
+      },
+      "injection_flag": false
+    }
+  ],
+  "tag_read_ok": false,
+  "model_name": "qwen2.5vl:7b",
+  "latency_ms": 19512,
+  "cost_usd": 0.0
+}
