@@ -4,7 +4,8 @@ One verdict per ticket line (a crate label is a single line). Quantities are com
 
     po_line_found       the ticket's PO number and line exist in the records
     model_matches_po    the model on the ticket is the PO line's model (spacing, dashes and case ignored)
-    qty_matches_po      delivered quantity equals ordered quantity
+    qty_matches_po      delivered quantity equals what is still outstanding (ordered minus already received), so a
+                        partial shipment is not flagged for being smaller than the whole PO
 
 Outcome: anything we could not read or find -> CANT_MATCH (an unread quantity is never 0, and a different model means
 we cannot trust the quantity comparison). Otherwise fewer than ordered -> SHORT, more -> OVER, equal -> GO.
@@ -37,6 +38,10 @@ LINE_FIELD = re.compile(r"^line\[(\d+)\]\.(.+)$")
 
 class GateRecords(Protocol):
     def po_line(self, po_number: str, line: int) -> POLine | None: ...
+
+    def received_so_far(self, po_number: str, line: int) -> int:
+        """Quantity already received on this PO line before this ticket (0 if none)."""
+        ...
 
 
 def _norm(s: str) -> str:
@@ -80,6 +85,7 @@ def _check_line(fields: dict[str, ReadField], records: GateRecords) -> tuple[lis
     po_src = SourceRef(kind="po_line", ref_id=f"{po.po_number}:{po.line}")
     model, qty = _read(fields, "model_number"), _read(fields, "qty")
     qty_n = _int(qty.value) if qty else None
+    outstanding = max(0, po.qty - records.received_so_far(po.po_number, po.line))
 
     if model is None:
         model_check = CheckResult(name="model_matches_po", passed=None, expected=po.model_number)
@@ -93,9 +99,9 @@ def _check_line(fields: dict[str, ReadField], records: GateRecords) -> tuple[lis
         model_check = CheckResult(name="model_matches_po", passed=None, expected=po.model_number, found=model.value)
 
     if qty_n is None:
-        qty_check = CheckResult(name="qty_matches_po", passed=None, expected=str(po.qty))
+        qty_check = CheckResult(name="qty_matches_po", passed=None, expected=str(outstanding))
     else:
-        qty_check = CheckResult(name="qty_matches_po", passed=qty_n == po.qty, expected=str(po.qty), found=str(qty_n),
+        qty_check = CheckResult(name="qty_matches_po", passed=qty_n == outstanding, expected=str(outstanding), found=str(qty_n),
                                 match_type="exact", sources=[*_crop(qty), po_src])
     found = CheckResult(name="po_line_found", passed=True, expected=f"{po.po_number}:{po.line}",
                         found=f"{po.po_number}:{po.line}", match_type="exact", sources=[po_src])
@@ -115,7 +121,7 @@ def _explain(code: VerdictCode, checks: list[CheckResult]) -> tuple[str, str]:
     qty = next(c for c in checks if c.name == "qty_matches_po")
     if code in (VerdictCode.SHORT, VerdictCode.OVER):
         word = "short" if code == VerdictCode.SHORT else "over"
-        return f"Delivered {qty.found}, ordered {qty.expected} ({word} by {abs(int(qty.found) - int(qty.expected))}).", \
+        return f"Delivered {qty.found}, outstanding {qty.expected} ({word} by {abs(int(qty.found) - int(qty.expected))}).", \
             "Review the drafted Site PR."
     if code == VerdictCode.CANT_MATCH:
         names = ", ".join(c.name.replace("_", " ") for c in checks if c.passed is None)

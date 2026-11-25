@@ -137,15 +137,19 @@ class FuzzyRecords:
 
 
 class GateRecords:
-    def __init__(self, lines=()):
+    def __init__(self, lines=(), received=None):
         self.lines = {(p.po_number, p.line): p for p in lines}
+        self.received = received or {}
 
     def po_line(self, po_number, line):
         return self.lines.get((po_number, line))
 
+    def received_so_far(self, po_number, line):
+        return self.received.get((po_number, line), 0)
 
-def gate_records():
-    return GateRecords([
+
+def gate_records(received=None):
+    return GateRecords(received=received, lines=[
         POLine(po_number="PO-7", line=1, equipment_tag="P-101", model_number="ACME-50HP", description="pump", qty=12),
         POLine(po_number="PO-7", line=2, equipment_tag="V-201", model_number="VALVE-2", description="valve", qty=4),
     ])

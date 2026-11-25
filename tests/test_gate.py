@@ -98,3 +98,27 @@ def test_short_and_over_draft_a_site_pr_with_evidence(qty, field, diff):
 def test_go_and_cant_match_draft_nothing():
     assert draft_gate_site_pr(run(ticket())[0], "sitepr-1") is None
     assert draft_gate_site_pr(run(ticket([("ACME-50HP", None, "1")]))[0], "sitepr-2") is None
+
+
+# -- partial deliveries: compare against what is still outstanding, not the whole PO ------------------------------------
+
+
+def test_a_partial_shipment_that_completes_the_order_is_go():
+    [v] = run(ticket([("ACME-50HP", "4", "1")]), gate_records(received={("PO-7", 1): 8}))
+    assert v.verdict == VerdictCode.GO
+    assert check(v, "qty_matches_po").expected == "4"
+
+
+def test_more_than_is_outstanding_is_over_even_if_below_the_full_po_quantity():
+    [v] = run(ticket([("ACME-50HP", "6", "1")]), gate_records(received={("PO-7", 1): 8}))
+    assert v.verdict == VerdictCode.OVER
+
+
+def test_less_than_is_outstanding_is_short():
+    [v] = run(ticket([("ACME-50HP", "2", "1")]), gate_records(received={("PO-7", 1): 8}))
+    assert v.verdict == VerdictCode.SHORT and check(v, "qty_matches_po").expected == "4"
+
+
+def test_a_line_that_is_already_fully_received_makes_any_new_delivery_over():
+    [v] = run(ticket([("ACME-50HP", "1", "1")]), gate_records(received={("PO-7", 1): 12}))
+    assert v.verdict == VerdictCode.OVER
