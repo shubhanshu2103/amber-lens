@@ -137,19 +137,23 @@ class FuzzyRecords:
 
 
 class GateRecords:
-    def __init__(self, lines=(), received=None):
+    def __init__(self, lines=(), received=None, receipts=None):
         self.lines = {(p.po_number, p.line): p for p in lines}
-        self.received = received or {}
+        self.received = received or {}  # {(po, line): qty}, receipts with no ticket id
+        self.receipts = receipts or {}  # {(po, line): [(ticket_id, qty)]}
+        self.asked = []  # the exclude_ticket_id of every received_so_far call
 
     def po_line(self, po_number, line):
         return self.lines.get((po_number, line))
 
-    def received_so_far(self, po_number, line):
-        return self.received.get((po_number, line), 0)
+    def received_so_far(self, po_number, line, exclude_ticket_id=None):
+        self.asked.append(exclude_ticket_id)
+        by_ticket = sum(q for t, q in self.receipts.get((po_number, line), []) if t != exclude_ticket_id)
+        return self.received.get((po_number, line), 0) + by_ticket
 
 
-def gate_records(received=None):
-    return GateRecords(received=received, lines=[
+def gate_records(received=None, receipts=None):
+    return GateRecords(received=received, receipts=receipts, lines=[
         POLine(po_number="PO-7", line=1, equipment_tag="P-101", model_number="ACME-50HP", description="pump", qty=12),
         POLine(po_number="PO-7", line=2, equipment_tag="V-201", model_number="VALVE-2", description="valve", qty=4),
     ])
@@ -164,9 +168,10 @@ def _doc_field(name, value, status=ReadStatus.READ, inj=False):
     )
 
 
-def ticket(lines=(("ACME-50HP", "12", "1"),), po="PO-7", extra=()):
+def ticket(lines=(("ACME-50HP", "12", "1"),), po="PO-7", extra=(), ticket_id="T-1"):
     """A delivery ticket: one (model, qty, po_line) per printed row. A value of None is a DISPUTED cell."""
-    fields = [_doc_field("po_number", po, ReadStatus.READ if po else ReadStatus.DISPUTED)]
+    fields = [_doc_field("po_number", po, ReadStatus.READ if po else ReadStatus.DISPUTED),
+              _doc_field("delivery_ticket_id", ticket_id)]
     for n, (model, qty, line) in enumerate(lines, 1):
         for name, v in (("model_number", model), ("qty", qty), ("po_line", line)):
             fields.append(_doc_field(f"line[{n}].{name}", v, ReadStatus.READ if v else ReadStatus.DISPUTED))
