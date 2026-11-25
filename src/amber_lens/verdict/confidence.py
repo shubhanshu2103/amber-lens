@@ -8,7 +8,7 @@ agreement     share of the fields behind the verdict that were READ (see `field_
 match         average weight of how each check matched: exact 1.0, normalised 0.95, alias 0.85, fuzzy 0.6, none 0.5
 tag           1.0 if the room tag was read cleanly (or no tag is involved), else 0.6
 
-An injection flag on any field caps the result at 0.5. Below CONFIDENCE_REVIEW_THRESHOLD the verdict goes to a human.
+An injection flag on any field of the document caps the result at 0.5. Below CONFIDENCE_REVIEW_THRESHOLD the verdict goes to a human.
 """
 
 from __future__ import annotations
@@ -39,8 +39,12 @@ def compute_confidence(
     checks: Sequence[CheckResult],
     fields: Sequence[ReadField],
     tag_read_ok: bool | None = None,
+    injection: bool = False,
 ) -> float:
-    """tag_read_ok=None means the check does not use a room tag (substitution, gate)."""
+    """tag_read_ok=None means the check does not use a room tag (substitution, gate).
+
+    injection=True means some field on the document was flagged, including a free_text_n line the check never reads.
+    """
     if not checks:
         return 0.0
     ran = [c for c in checks if c.passed is not None]
@@ -50,7 +54,7 @@ def compute_confidence(
     match = sum(MATCH_WEIGHT[c.match_type] for c in ran) / len(ran)
     tag = 1.0 if tag_read_ok in (None, True) else BAD_TAG
     conf = completeness * (0.4 * field_agreement(fields) + 0.4 * match + 0.2 * tag)
-    if any(f.injection_flag for f in fields):
+    if injection or any(f.injection_flag for f in fields):
         conf = min(conf, INJECTION_CAP)
     return round(max(0.0, min(1.0, conf)), 3)
 

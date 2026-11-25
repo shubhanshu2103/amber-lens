@@ -64,3 +64,9 @@ def test_injection_flag_caps_confidence_and_forces_human():
 def test_no_checks_or_no_data_is_zero():
     assert compute_confidence([], [rf()]) == 0.0
     assert compute_confidence([chk(passed=None)], [rf()]) == 0.0
+
+
+def test_a_flag_on_a_field_that_is_not_one_of_the_checked_fields_still_caps_confidence():
+    # perception puts a flagged line in its own free_text_n field, which the check does not read
+    assert compute_confidence([chk()], [rf()], injection=True) == 0.5
+    assert compute_confidence([chk()], [rf()], injection=False) == 1.0

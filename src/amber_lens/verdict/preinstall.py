@@ -188,7 +188,7 @@ def check_pre_install(
     if flagged:
         flags.append("injection_flag")
 
-    confidence = compute_confidence(checks, fields, tag_read_ok=perception.tag_read_ok)
+    confidence = compute_confidence(checks, fields, tag_read_ok=perception.tag_read_ok, injection=bool(flagged))
     explanation, next_action = _explain(code, checks)
     sources = [s for c in checks for s in c.sources]
 
