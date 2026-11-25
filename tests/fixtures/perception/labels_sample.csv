@@ -1,0 +1,4 @@
+image_id,photo_id,file_name,source,source_url,license,model_group,manufacturer,model_number,equipment_type,rating_1,rating_2,frequency,power,voltage,amps,hp_or_kw,readable,true_verdict,planted_problem,quality,angle,lighting,glare,obscured,small_text,split,verified_by,human_checked,notes
+fx_01,fx_01,fx_01.jpg,test-fixture,,,FX100A,Example Motors,FX-100A,motor,230/460 V,4.2/2.1 A,60 Hz,2 HP,230/460 V,4.2/2.1 A,2 HP,yes,,,clear,frontal,good,no,no,no,tuning,test-fixture,,fixture row
+fx_02,fx_02,fx_02.png,test-fixture,,,,unbranded,,motor,,,,,,,,no,CANT_MATCH,,blurry,frontal,poor,no,yes,no,tuning,test-fixture,,fixture row
+fx_03,fx_03,fx_03.jpg,test-fixture,,,FX200B,Example Motors,FX-200B,motor,400 V,10 A,50 Hz,5 kW,400 V,10 A,5 kW,yes,,,clear,frontal,good,no,no,no,heldout,test-fixture,,fixture row
