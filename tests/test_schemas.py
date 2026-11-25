@@ -107,3 +107,25 @@ def test_naive_datetimes_rejected():
 
     with pytest.raises(ValidationError):
         Sighting(model_number="M", room_tag="R", observation_id="o", seen_at=datetime(2026, 11, 24))
+
+
+def test_a_read_field_cannot_carry_a_reason():
+    with pytest.raises(ValueError, match="reason"):
+        ReadField(name="voltage", value="460 V", status=ReadStatus.READ, source=CROP, reason="not_located")
+
+
+@pytest.mark.parametrize(
+    "reason", ["format_fail", "readers_disagree", "not_located", "model_missing", "vision_unavailable"]
+)
+def test_an_unread_field_can_say_why(reason):
+    f = ReadField(name="voltage", value=None, status=ReadStatus.DISPUTED, reason=reason)
+    assert f.reason == reason
+
+
+def test_an_unread_field_without_a_reason_is_still_valid_so_existing_results_keep_loading():
+    assert ReadField(name="voltage", value=None, status=ReadStatus.UNREADABLE).reason is None
+
+
+def test_an_unknown_reason_is_rejected():
+    with pytest.raises(ValueError):
+        ReadField(name="voltage", value=None, status=ReadStatus.DISPUTED, reason="because")
