@@ -7,6 +7,9 @@ frequency; hp / kw / amps / hz are accepted as aliases).
     submittal_approved        that submittal is approved or approved as noted; otherwise there is no baseline
     rating_<field>            the nameplate value equals the approved value
 
+Ratings are compared only for an approved, non-fuzzy submittal, and only the ratings it lists: a READ field it does not
+list (say frequency) is deliberately left alone, because the approved list defines what is checked.
+
 Outcome: a rating that differs -> DEVIATES. Otherwise anything we could not decide (unread field, ambiguous
 multi-rating plate, suffix not on the allowed list, unmapped rating, no approved submittal) -> CANT_MATCH, never assumed
 harmless. Otherwise GO. A model whose suffix is not on the allowed list simply has no submittal match, so it is CANT_MATCH.
@@ -41,46 +44,74 @@ class SubstitutionRecords(Protocol):
     def submittal_for_model(self, model_number: str) -> Matched[Submittal] | None: ...
 
 
-def _numbers(s: str) -> list[str]:
-    return [str(float(n)).rstrip("0").rstrip(".") for n in re.findall(r"\d+(?:\.\d+)?", s)]
+UNIT_WORDS = {"V": "V", "VAC": "V", "VDC": "V", "A": "A", "AMP": "A", "AMPS": "A", "HP": "HP", "KW": "KW", "W": "W",
+              "HZ": "HZ", "KVA": "KVA", "RPM": "RPM"}
+KEY_UNITS = {"voltage": "V", "rated_current": "A", "current": "A", "amps": "A", "hp": "HP", "kw": "KW", "hz": "HZ",
+             "frequency": "HZ"}
+TOKEN = re.compile(r"(?P<num>\d+,\d{1,2}(?!\d)|\d+(?:\.\d+)?)|(?<![A-Za-z])(?P<unit>[A-Za-z]+)(?![A-Za-z])")
 
 
-def _unit(s: str) -> str:
-    return re.sub(r"[^A-Z]", "", s.upper())
+def _pairs(text: str) -> list[tuple[str, str | None]]:
+    """(number, unit) pairs as printed. A number takes the next known unit after it; wiring letters (delta, Y) are not
+    units, and a decimal comma (15,5) is a decimal point while 230,460 is two numbers."""
+    tokens = [(m.lastgroup, m.group()) for m in TOKEN.finditer(text)]
+    out = []
+    for i, (kind, val) in enumerate(tokens):
+        if kind != "num":
+            continue
+        unit = next((UNIT_WORDS[v.upper()] for k, v in tokens[i + 1:] if k == "unit" and v.upper() in UNIT_WORDS), None)
+        out.append((format(float(val.replace(",", ".")), "g"), unit))
+    return out
 
 
-def compare_rating(approved: str, found: str) -> bool | None:
-    """True equal, False different, None cannot tell (a multi-rating plate that contains the approved value)."""
-    an, fn = _numbers(approved), _numbers(found)
-    if not an or not fn:
-        return None if (an or fn) else approved.strip().upper() == found.strip().upper()
-    au, fu = _unit(approved), _unit(found)
-    if au and fu and au != fu:
-        return False
-    if an == fn:
+def compare_rating(approved: str, found: str, key: str | None = None) -> bool | None:
+    """True equal, False different, None cannot tell (a multi-rating plate that contains the approved value).
+
+    A unit missing from the approved value is taken from its key (hp -> HP). Values in another unit are different values,
+    so 50 HP against 50 kW is a mismatch, while a second unit in brackets (1.0 HP (0.75 kW)) is ignored.
+    """
+    ap, fp = _pairs(approved), _pairs(found)
+    if not ap or not fp:
+        return None if (ap or fp) else approved.strip().upper() == found.strip().upper()
+    number, unit = ap[0]
+    unit = unit or KEY_UNITS.get((key or "").lower())
+    candidates = [n for n, u in fp if unit is None or u in (None, unit)]
+    if not candidates:
+        return False  # the plate states this rating only in another unit
+    values = set(candidates)
+    if values == {number}:
         return True
-    if set(an) < set(fn) or set(fn) < set(an):
-        return None
-    return False
+    return None if number in values else False
 
 
 def _unknown(name: str) -> CheckResult:
     return CheckResult(name=name, passed=None)
 
 
-def _rating_checks(sub: Submittal, fields: list[ReadField], model_src: list[SourceRef]) -> list[CheckResult]:
-    out = []
+def _combine(results: list[bool | None]) -> bool | None:
+    """Several approved keys for one plate field (hp and kw): pass only if all pass, deviate only if all differ."""
+    if all(r is True for r in results):
+        return True
+    if all(r is False for r in results):
+        return False
+    return None
+
+
+def _rating_checks(sub: Submittal, fields: list[ReadField], sub_src: SourceRef) -> list[CheckResult]:
+    """Only ratings the approved submittal lists are compared; a READ field it does not list is left alone."""
+    groups: dict[str, list[tuple[str, str]]] = {}
     for key, approved in sub.ratings.items():
-        target = RATING_FIELDS.get(key.lower())
-        name = f"rating_{target or key.lower()}"
+        groups.setdefault(RATING_FIELDS.get(key.lower()) or f"?{key.lower()}", []).append((key, approved))
+    out = []
+    for target, items in groups.items():
+        expected = ", ".join(f"{k}={v}" if len(items) > 1 else v for k, v in items)
         field = next((f for f in fields if f.name == target and f.status == ReadStatus.READ and f.value), None)
-        if target is None or field is None:
-            out.append(CheckResult(name=name, passed=None, expected=approved))
+        if target.startswith("?") or field is None:
+            out.append(CheckResult(name=f"rating_{target.lstrip('?')}", passed=None, expected=expected))
             continue
-        out.append(CheckResult(
-            name=name, passed=compare_rating(approved, field.value), expected=approved, found=field.value,
-            match_type="exact", sources=[field.source, *model_src],
-        ))
+        passed = _combine([compare_rating(v, field.value, k) for k, v in items])
+        out.append(CheckResult(name=f"rating_{target}", passed=passed, expected=expected, found=field.value,
+                               match_type="exact", sources=[field.source, sub_src]))
     return out
 
 
@@ -114,8 +145,9 @@ def check_substitution(observation: Observation, perception: PerceptionResult, r
                         found=field.value, match_type=sub.match_type, sources=[field.source, sub_src]),
             CheckResult(name="submittal_approved", passed=True if s.status in APPROVED else None, expected="approved",
                         found=s.status, match_type="exact", sources=[sub_src]),
-            *(_rating_checks(s, perception.fields, [sub_src]) or [_unknown("ratings_present")]),
         ]
+        if s.status in APPROVED and sub.match_type != "fuzzy":
+            checks += _rating_checks(s, perception.fields, sub_src) or [_unknown("ratings_present")]
         used += [f for f in perception.fields if f.name in set(RATING_FIELDS.values()) and f.status == ReadStatus.READ]
 
     if any(c.passed is False for c in checks):
@@ -128,7 +160,7 @@ def check_substitution(observation: Observation, perception: PerceptionResult, r
     flagged = [f for f in perception.fields if f.injection_flag]
     if flagged:
         flags.append("injection_flag")
-    confidence = compute_confidence(checks, used)
+    confidence = compute_confidence(checks, used, injection=bool(flagged))
     explanation, next_action = _explain(code, checks)
 
     return Verdict(
