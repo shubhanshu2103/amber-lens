@@ -85,7 +85,9 @@ class ReadField(BaseModel):
     status: ReadStatus
     source: SourceRef | None = Field(default=None, description="Required when READ; None if nothing was located")
     injection_flag: bool = Field(default=False, description="Read text looked like an instruction to an AI")
-    reason: Literal["format_fail", "readers_disagree", "not_located", "model_missing"] | None = Field(
+    reason: Literal[
+        "format_fail", "readers_disagree", "not_located", "model_missing", "vision_unavailable"
+    ] | None = Field(
         default=None, description="Why a field is not READ; None when READ (and optional otherwise)"
     )
 

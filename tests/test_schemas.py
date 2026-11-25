@@ -114,7 +114,9 @@ def test_a_read_field_cannot_carry_a_reason():
         ReadField(name="voltage", value="460 V", status=ReadStatus.READ, source=CROP, reason="not_located")
 
 
-@pytest.mark.parametrize("reason", ["format_fail", "readers_disagree", "not_located", "model_missing"])
+@pytest.mark.parametrize(
+    "reason", ["format_fail", "readers_disagree", "not_located", "model_missing", "vision_unavailable"]
+)
 def test_an_unread_field_can_say_why(reason):
     f = ReadField(name="voltage", value=None, status=ReadStatus.DISPUTED, reason=reason)
     assert f.reason == reason
