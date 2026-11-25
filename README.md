@@ -64,7 +64,7 @@ confidence = completeness * (0.4 * agreement + 0.4 * match + 0.2 * tag)
 | match | average over checks: exact 1.0, normalised 0.95, alias 0.85, fuzzy 0.6, no match type 0.5 |
 | tag | 1.0 if the room tag was read cleanly or isn't used, else 0.6 |
 
-An injection flag on any read field caps confidence at 0.5. Below 0.80 the verdict is marked `needs_human`. The model's own self-reported number is never used. Code: `src/amber_lens/verdict/confidence.py`.
+An injection flag on any field of the document caps confidence at 0.5. Below 0.80 the verdict is marked `needs_human`. The model's own self-reported number is never used. Code: `src/amber_lens/verdict/confidence.py`.
 
 ## Architecture
 
