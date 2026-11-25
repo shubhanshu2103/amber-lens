@@ -12,6 +12,9 @@ from .record_store import MockRecordStore
 from .state import TransitionError, evidence_pack_hash, rebuild
 
 SYSTEM = "sitepr"
+# Only a project manager approves. Site engineers, storekeepers and inspectors capture findings, so letting them
+# approve their own would skip the second person. Widen deliberately if that ever changes.
+REVIEWER_ROLES = ("project manager",)
 
 
 class SitePRService:
@@ -58,7 +61,9 @@ class SitePRService:
         return self.get(site_pr_id)
 
     def approve(self, site_pr_id: str, reviewer_role: str, note: str = "") -> SitePR:
-        """Freeze the evidence pack hash at approval."""
+        """Freeze the evidence pack hash at approval. Only a person's role may approve, never the system."""
+        if reviewer_role not in REVIEWER_ROLES:
+            raise TransitionError(f"{site_pr_id}: {reviewer_role!r} is not a reviewer role; only a person may approve")
         pr = self.get(site_pr_id)
         self._emit(
             site_pr_id,
@@ -106,9 +111,14 @@ class SitePRService:
         return self.get(site_pr_id)
 
     def recover(self) -> list[str]:
-        """After a restart: finish any approved-but-unwritten Site PRs. Returns the ids it wrote."""
+        """After a restart: write approved-but-unwritten Site PRs, then verify every written one.
+
+        Returns the ids it wrote. A PR that died after `written` is verified here too, so it never sits unverified.
+        """
         done = []
         for pr in self.list(SitePRStatus.APPROVED):
             self.write(pr.site_pr_id)
             done.append(pr.site_pr_id)
+        for pr in self.list(SitePRStatus.WRITTEN):
+            self.verify(pr.site_pr_id)
         return done

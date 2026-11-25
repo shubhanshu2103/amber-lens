@@ -2,6 +2,7 @@ import sqlite3
 import subprocess
 import sys
 import textwrap
+from pathlib import Path
 
 import pytest
 
@@ -36,7 +37,7 @@ def approved(svc, pid="sitepr-0042"):
     svc.draft(make_pr(pid))
     svc.self_check(pid, "no recent sighting")
     svc.submit(pid)
-    return svc.approve(pid, "site engineer")
+    return svc.approve(pid, "project manager")
 
 
 def test_happy_path_writes_once_and_verifies(svc):
@@ -59,7 +60,7 @@ def test_no_write_without_approval(svc):
 def test_illegal_transitions_rejected(svc):
     svc.draft(make_pr())
     with pytest.raises(TransitionError):
-        svc.approve("sitepr-0042", "site engineer")  # draft -> approved
+        svc.approve("sitepr-0042", "project manager")  # draft -> approved
     svc.submit("sitepr-0042")
     svc.reject("sitepr-0042", "site engineer", "wrong")
     with pytest.raises(TransitionError):
@@ -106,7 +107,7 @@ def test_readback_mismatch_reopens_and_bumps_key(svc):
     assert pr.recurrence_count == 0
     # re-review and re-write lands, because the key moved to v2
     svc.submit("sitepr-0042")
-    svc.approve("sitepr-0042", "site engineer")
+    svc.approve("sitepr-0042", "project manager")
     svc.write("sitepr-0042")
     assert svc.verify("sitepr-0042").status == SitePRStatus.VERIFIED
     assert svc.store.read("delivery", "D-7", "qty_received") == "10"
@@ -141,7 +142,7 @@ CHILD = textwrap.dedent(
         if point == die_at:
             os._exit(137)  # no cleanup, like kill -9
     svc = SitePRService(Ledger(sys.argv[1]), MockRecordStore(sys.argv[2]), fault=fault)
-    svc.draft(make_pr()); svc.submit("sitepr-0042"); svc.approve("sitepr-0042", "site engineer")
+    svc.draft(make_pr()); svc.submit("sitepr-0042"); svc.approve("sitepr-0042", "project manager")
     if die_at == "after_approve":
         os._exit(137)
     svc.write("sitepr-0042")
@@ -154,7 +155,7 @@ def test_kill_between_approve_and_write_lands_exactly_once(tmp_path, die_at):
     ledger_db, store_db = tmp_path / "l.db", tmp_path / "s.db"
     seed = MockRecordStore(store_db)
     seed.seed("delivery", "D-7", "qty_received", "12")
-    code = CHILD.format(tests=str(__file__).rsplit("/", 1)[0])
+    code = CHILD.format(tests=str(Path(__file__).parent))
     proc = subprocess.run([sys.executable, "-c", code, str(ledger_db), str(store_db), die_at], check=False)
     assert proc.returncode == 137  # the process really died
 
@@ -162,8 +163,28 @@ def test_kill_between_approve_and_write_lands_exactly_once(tmp_path, die_at):
     svc = SitePRService(Ledger(ledger_db), MockRecordStore(store_db))
     assert svc.get("sitepr-0042").status == SitePRStatus.APPROVED  # the ledger still says approved
     assert svc.recover() == ["sitepr-0042"]
+    assert svc.get("sitepr-0042").status == SitePRStatus.VERIFIED  # recover also verifies what it wrote
     assert svc.recover() == []  # a second restart does nothing
-    assert svc.verify("sitepr-0042").status == SitePRStatus.VERIFIED
     assert svc.store.read("delivery", "D-7", "qty_received") == "10"
     assert svc.store.write_count("sitepr-0042:claim:v1") == 1
     assert [e.type for e in svc.ledger.events("sitepr-0042")].count("written") == 1
+
+
+@pytest.mark.parametrize("role", ["sitepr", "admin", "", "Site Engineer", "site engineer"])
+def test_only_a_person_can_approve(svc, role):
+    svc.draft(make_pr())
+    svc.submit("sitepr-0042")
+    with pytest.raises(TransitionError):
+        svc.approve("sitepr-0042", role)
+    assert svc.get("sitepr-0042").status == SitePRStatus.PENDING_REVIEW
+
+
+def test_recover_verifies_a_pr_that_died_after_written(svc):
+    svc.store.seed("delivery", "D-7", "qty_received", "12")
+    svc.draft(make_pr())
+    svc.submit("sitepr-0042")
+    svc.approve("sitepr-0042", "project manager")
+    svc.write("sitepr-0042")  # process "dies" here, before verify
+    assert svc.get("sitepr-0042").status == SitePRStatus.WRITTEN
+    assert svc.recover() == []
+    assert svc.get("sitepr-0042").status == SitePRStatus.VERIFIED
