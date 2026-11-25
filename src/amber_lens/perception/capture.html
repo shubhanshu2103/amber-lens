@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Amber Lens capture</title>
+<style>
+:root { --bg: #fff; --fg: #1d1d1f; --muted: #6b6b70; --line: #d9d9de; --accent: #1f5fbf; --bad: #b3261e; }
+@media (prefers-color-scheme: dark) { :root { --bg: #161618; --fg: #f2f2f4; --muted: #a0a0a8; --line: #3a3a40; --accent: #7aa7ff; --bad: #ff8a80; } }
+body { background: var(--bg); color: var(--fg); font: 17px/1.4 system-ui, sans-serif; margin: 0 16px 48px; }
+main { max-width: 480px; margin: 0 auto; }
+label { display: block; margin: 18px 0 6px; font-weight: 600; }
+select, input[type=text], input[type=file] { width: 100%; box-sizing: border-box; font: inherit; padding: 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); color: var(--fg); }
+.check { display: flex; gap: 10px; align-items: center; font-weight: 600; margin-top: 22px; }
+.check input { width: 26px; height: 26px; }
+.hint { color: var(--muted); font-size: 15px; margin: 4px 0 0; }
+button { width: 100%; margin-top: 24px; padding: 14px; font: inherit; font-weight: 600; color: #fff; background: var(--accent); border: 0; border-radius: 10px; }
+#result { margin-top: 20px; white-space: pre-wrap; }
+.error { color: var(--bad); font-weight: 600; }
+</style>
+</head>
+<body>
+<main>
+<h1>Amber Lens capture</h1>
+<p class="hint">Photograph the label only. No people in the frame. No location is recorded.</p>
+<label for="kind">What are you photographing?</label>
+<select id="kind">
+  <option value="nameplate">Equipment nameplate</option>
+  <option value="crate_label">Crate label</option>
+  <option value="delivery_ticket">Delivery ticket</option>
+  <option value="packing_slip">Packing slip</option>
+</select>
+<label for="role">Your role</label>
+<select id="role">
+  <option>site engineer</option><option>storekeeper</option><option>quality inspector</option><option>project manager</option>
+</select>
+<label for="photo">Photo</label>
+<input id="photo" type="file" accept="image/*" capture="environment">
+<label for="tag-photo">Room QR tag photo (if it is not in the photo above)</label>
+<input id="tag-photo" type="file" accept="image/*" capture="environment">
+<label for="tag">Or type the room tag</label>
+<input id="tag" type="text" placeholder="e.g. ELEC-2.04" autocapitalize="characters">
+<label class="check"><input id="no-people" type="checkbox"> No people in this photo</label>
+<button id="send">Send</button>
+<div id="result" aria-live="polite"></div>
+</main>
+<script>
+function deviceId() {
+  try {
+    var saved = localStorage.getItem("amber-device-id");
+    if (saved) { return saved; }
+  } catch (e) {}
+  // crypto.randomUUID needs HTTPS; getRandomValues also works over plain http on the site wifi.
+  var b = crypto.getRandomValues(new Uint8Array(16));
+  b[6] = (b[6] & 15) | 64; b[8] = (b[8] & 63) | 128;
+  var h = Array.from(b, function (x) { return x.toString(16).padStart(2, "0"); }).join("");
+  var id = h.slice(0, 8) + "-" + h.slice(8, 12) + "-" + h.slice(12, 16) + "-" + h.slice(16, 20) + "-" + h.slice(20);
+  try { localStorage.setItem("amber-device-id", id); } catch (e) {}
+  return id;
+}
+function base64(file) {
+  return new Promise(function (resolve, reject) {
+    if (!file) { resolve(null); return; }
+    var reader = new FileReader();
+    reader.onload = function () { resolve(String(reader.result).split(",")[1]); };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+function show(text, isError) {
+  var box = document.getElementById("result");
+  box.className = isError ? "error" : "";
+  box.textContent = text;
+}
+document.getElementById("send").addEventListener("click", async function () {
+  var photo = document.getElementById("photo").files[0];
+  if (!photo) { show("Take a photo first.", true); return; }
+  if (!document.getElementById("no-people").checked) { show("Tick 'No people in this photo' after checking the frame.", true); return; }
+  show("Sending...", false);
+  var body = {
+    kind: document.getElementById("kind").value,
+    role: document.getElementById("role").value,
+    device_id: deviceId(),
+    no_people_confirmed: true,
+    photo_b64: await base64(photo),
+    tag_photo_b64: await base64(document.getElementById("tag-photo").files[0]),
+    room_tag_typed: document.getElementById("tag").value || null
+  };
+  var response;
+  try {
+    response = await fetch("/api/observations", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+  } catch (e) {
+    show("Could not reach the laptop. Check that you are on the site wifi.", true);
+    return;
+  }
+  var data = null;
+  try { data = await response.json(); } catch (e) {}
+  if (!response.ok || !data || !data.observation) {
+    var detail = data && data.detail ? (typeof data.detail === "string" ? data.detail : JSON.stringify(data.detail)) : "no details";
+    show("Not saved (HTTP " + response.status + "): " + detail, true);
+    return;
+  }
+  var o = data.observation;
+  show("Saved " + o.observation_id + "\nRoom tag: " + (o.room_tag || "none") + (data.room_tag_source ? " (" + data.room_tag_source + ")" : "") + "\n\n" + JSON.stringify(o, null, 2), false);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,7203 @@
+{
+ "model": "qwen2.5vl:7b",
+ "ocr": "both",
+ "runs": {
+  "darjja_train_01": {
+   "result": {
+    "observation_id": "darjja_train_01",
+    "fields": [
+     {
+      "name": "model_number",
+      "value": "6-030-732021",
+      "vision_value": "6-030-732021",
+      "ocr_value": "6-030-732021",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "darjja_train_01.png",
+       "detail": "field=model_number; label=Type:; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 66,
+        "y": 49,
+        "w": 57,
+        "h": 10
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "catalog_number",
+      "value": null,
+      "vision_value": "ITF312500",
+      "ocr_value": null,
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "voltage",
+      "value": null,
+      "vision_value": "480V / 400V",
+      "ocr_value": "480",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "darjja_train_01.png",
+       "detail": "field=voltage; label=none; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 67,
+        "y": 78,
+        "w": 22,
+        "h": 26
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "rated_current",
+      "value": null,
+      "vision_value": "15,5A / 18,0A",
+      "ocr_value": "15,5",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "darjja_train_01.png",
+       "detail": "field=rated_current; label=none; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 105,
+        "y": 78,
+        "w": 24,
+        "h": 27
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "power",
+      "value": "12.5 KVA",
+      "vision_value": "12.5 KVA",
+      "ocr_value": "12.5",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "darjja_train_01.png",
+       "detail": "field=power; label=Power:; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 68,
+        "y": 63,
+        "w": 16,
+        "h": 11
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "frequency",
+      "value": null,
+      "vision_value": "50/60Hz",
+      "ocr_value": "50/60 | 60",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "darjja_train_01.png",
+       "detail": "field=frequency; label=Frequency:; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 212,
+        "y": 62,
+        "w": 35,
+        "h": 12
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "manufacturer",
+      "value": "Noratel Finland Oy",
+      "vision_value": "Noratel Finland Oy",
+      "ocr_value": "Noratel Finland Oy",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "darjja_train_01.png",
+       "detail": "field=manufacturer; label=none; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 130,
+        "y": 16,
+        "w": 97,
+        "h": 14
+       }
+      },
+      "injection_flag": false
+     }
+    ],
+    "tag_read_ok": false,
+    "model_name": "qwen2.5vl:7b",
+    "latency_ms": 20370,
+    "cost_usd": 0.0
+   },
+   "reasons": {
+    "model_number": null,
+    "catalog_number": "not_located",
+    "voltage": "readers_disagree",
+    "rated_current": "readers_disagree",
+    "power": null,
+    "frequency": "readers_disagree",
+    "manufacturer": null
+   },
+   "rules": {
+    "model_number": null,
+    "catalog_number": "not_found",
+    "voltage": "ocr_label_value_differs",
+    "rated_current": "ocr_label_value_differs",
+    "power": null,
+    "frequency": "multi_rating",
+    "manufacturer": null
+   },
+   "located_by": {
+    "model_number": "rapidocr",
+    "catalog_number": null,
+    "voltage": "rapidocr",
+    "rated_current": "rapidocr",
+    "power": "rapidocr",
+    "frequency": "rapidocr",
+    "manufacturer": "rapidocr"
+   },
+   "warnings": {
+    "model_number": null,
+    "catalog_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": null,
+    "frequency": null,
+    "manufacturer": null
+   }
+  },
+  "darjja_train_10": {
+   "result": {
+    "observation_id": "darjja_train_10",
+    "fields": [
+     {
+      "name": "model_number",
+      "value": null,
+      "vision_value": "ML14XC1S030-230A04",
+      "ocr_value": "ML14XC1S030-230A04",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "catalog_number",
+      "value": null,
+      "vision_value": "1922D14393",
+      "ocr_value": "1922D14393",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "voltage",
+      "value": "208/230",
+      "vision_value": "208/230",
+      "ocr_value": "208/230",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "darjja_train_10.png",
+       "detail": "field=voltage; label=none; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 177,
+        "y": 114,
+        "w": 28,
+        "h": 13
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "rated_current",
+      "value": null,
+      "vision_value": "17.0",
+      "ocr_value": "410",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "darjja_train_10.png",
+       "detail": "field=rated_current; label=none; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 88,
+        "y": 180,
+        "w": 13,
+        "h": 10
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "power",
+      "value": null,
+      "vision_value": "1/6",
+      "ocr_value": null,
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "frequency",
+      "value": "60",
+      "vision_value": "60",
+      "ocr_value": "60",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "darjja_train_10.png",
+       "detail": "field=frequency; label=HZ; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 74,
+        "y": 125,
+        "w": 12,
+        "h": 12
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "manufacturer",
+      "value": "LENNOX",
+      "vision_value": "LENNOX",
+      "ocr_value": "LENNOX",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "darjja_train_10.png",
+       "detail": "field=manufacturer; label=none; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 16,
+        "y": 3,
+        "w": 80,
+        "h": 20
+       }
+      },
+      "injection_flag": false
+     }
+    ],
+    "tag_read_ok": false,
+    "model_name": "qwen2.5vl:7b",
+    "latency_ms": 20758,
+    "cost_usd": 0.0
+   },
+   "reasons": {
+    "model_number": "not_located",
+    "catalog_number": "not_located",
+    "voltage": null,
+    "rated_current": "readers_disagree",
+    "power": "not_located",
+    "frequency": null,
+    "manufacturer": null
+   },
+   "rules": {
+    "model_number": "label_anchor_missing",
+    "catalog_number": "label_anchor_missing",
+    "voltage": null,
+    "rated_current": "ocr_label_value_differs",
+    "power": "not_found",
+    "frequency": null,
+    "manufacturer": null
+   },
+   "located_by": {
+    "model_number": null,
+    "catalog_number": null,
+    "voltage": "rapidocr",
+    "rated_current": "rapidocr",
+    "power": null,
+    "frequency": "rapidocr",
+    "manufacturer": "rapidocr"
+   },
+   "warnings": {
+    "model_number": null,
+    "catalog_number": null,
+    "voltage": "multi_row_table",
+    "rated_current": "multi_row_table",
+    "power": null,
+    "frequency": "multi_row_table",
+    "manufacturer": null
+   }
+  },
+  "darjja_train_11": {
+   "result": {
+    "observation_id": "darjja_train_11",
+    "fields": [
+     {
+      "name": "model_number",
+      "value": null,
+      "vision_value": "13ACD",
+      "ocr_value": "13ACD",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "darjja_train_11.png",
+       "detail": "field=model_number; label=none; located_by=full_ocr; pass=psm6-gray",
+       "bbox": {
+        "x": 42,
+        "y": 0,
+        "w": 39,
+        "h": 27
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "catalog_number",
+      "value": null,
+      "vision_value": "036",
+      "ocr_value": null,
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "voltage",
+      "value": "208/230",
+      "vision_value": "208/230",
+      "ocr_value": "208/230",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "darjja_train_11.png",
+       "detail": "field=voltage; label=none; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 177,
+        "y": 95,
+        "w": 30,
+        "h": 14
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "rated_current",
+      "value": null,
+      "vision_value": "197 / 253",
+      "ocr_value": null,
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "power",
+      "value": null,
+      "vision_value": "1/5",
+      "ocr_value": null,
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "frequency",
+      "value": "60",
+      "vision_value": "60",
+      "ocr_value": "60",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "darjja_train_11.png",
+       "detail": "field=frequency; label=HZ; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 71,
+        "y": 112,
+        "w": 11,
+        "h": 16
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "manufacturer",
+      "value": null,
+      "vision_value": null,
+      "ocr_value": null,
+      "format_rule_passed": null,
+      "status": "unreadable",
+      "source": null,
+      "injection_flag": false
+     }
+    ],
+    "tag_read_ok": false,
+    "model_name": "qwen2.5vl:7b",
+    "latency_ms": 18412,
+    "cost_usd": 0.0
+   },
+   "reasons": {
+    "model_number": "readers_disagree",
+    "catalog_number": "not_located",
+    "voltage": null,
+    "rated_current": "not_located",
+    "power": "not_located",
+    "frequency": null,
+    "manufacturer": "model_missing"
+   },
+   "rules": {
+    "model_number": "fragment",
+    "catalog_number": "not_found",
+    "voltage": null,
+    "rated_current": "not_found",
+    "power": "not_found",
+    "frequency": null,
+    "manufacturer": "no_value"
+   },
+   "located_by": {
+    "model_number": "full_ocr",
+    "catalog_number": null,
+    "voltage": "rapidocr",
+    "rated_current": null,
+    "power": null,
+    "frequency": "rapidocr",
+    "manufacturer": null
+   },
+   "warnings": {
+    "model_number": null,
+    "catalog_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": null,
+    "frequency": null,
+    "manufacturer": null
+   }
+  },
+  "darjja_train_12": {
+   "result": {
+    "observation_id": "darjja_train_12",
+    "fields": [
+     {
+      "name": "model_number",
+      "value": null,
+      "vision_value": "RSG1436S1P",
+      "ocr_value": "RSG1436S1P",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "catalog_number",
+      "value": null,
+      "vision_value": "1922A04412",
+      "ocr_value": "1922A04412",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "voltage",
+      "value": "208/230",
+      "vision_value": "208/230",
+      "ocr_value": "208/230",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "darjja_train_12.png",
+       "detail": "field=voltage; label=none; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 201,
+        "y": 112,
+        "w": 21,
+        "h": 9
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "rated_current",
+      "value": "13.5",
+      "vision_value": "13.5",
+      "ocr_value": "13.5",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "darjja_train_12.png",
+       "detail": "field=rated_current; label=RLA; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 129,
+        "y": 150,
+        "w": 11,
+        "h": 8
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "power",
+      "value": null,
+      "vision_value": "13",
+      "ocr_value": null,
+      "format_rule_passed": false,
+      "status": "unreadable",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "frequency",
+      "value": "60",
+      "vision_value": "60",
+      "ocr_value": "60",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "darjja_train_12.png",
+       "detail": "field=frequency; label=HZ; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 117,
+        "y": 122,
+        "w": 9,
+        "h": 9
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "manufacturer",
+      "value": "Heat Controller LLC",
+      "vision_value": "Heat Controller LLC",
+      "ocr_value": "Heat Controller LLC",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "darjja_train_12.png",
+       "detail": "field=manufacturer; label=none; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 65,
+        "y": 24,
+        "w": 90,
+        "h": 14
+       }
+      },
+      "injection_flag": false
+     }
+    ],
+    "tag_read_ok": false,
+    "model_name": "qwen2.5vl:7b",
+    "latency_ms": 19526,
+    "cost_usd": 0.0
+   },
+   "reasons": {
+    "model_number": "not_located",
+    "catalog_number": "not_located",
+    "voltage": null,
+    "rated_current": null,
+    "power": "format_fail",
+    "frequency": null,
+    "manufacturer": null
+   },
+   "rules": {
+    "model_number": "label_anchor_missing",
+    "catalog_number": "label_anchor_missing",
+    "voltage": null,
+    "rated_current": null,
+    "power": "format_rule",
+    "frequency": null,
+    "manufacturer": null
+   },
+   "located_by": {
+    "model_number": null,
+    "catalog_number": null,
+    "voltage": "rapidocr",
+    "rated_current": "rapidocr",
+    "power": null,
+    "frequency": "rapidocr",
+    "manufacturer": "rapidocr"
+   },
+   "warnings": {
+    "model_number": null,
+    "catalog_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": null,
+    "frequency": null,
+    "manufacturer": null
+   }
+  },
+  "darjja_train_14": {
+   "result": {
+    "observation_id": "darjja_train_14",
+    "fields": [
+     {
+      "name": "model_number",
+      "value": null,
+      "vision_value": "21600-7",
+      "ocr_value": "21600-7",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "catalog_number",
+      "value": null,
+      "vision_value": "9873",
+      "ocr_value": "9873",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "voltage",
+      "value": null,
+      "vision_value": "138-105",
+      "ocr_value": null,
+      "format_rule_passed": false,
+      "status": "unreadable",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "rated_current",
+      "value": null,
+      "vision_value": "41/3/6.09/7.47MHY",
+      "ocr_value": null,
+      "format_rule_passed": false,
+      "status": "unreadable",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "power",
+      "value": null,
+      "vision_value": "34",
+      "ocr_value": null,
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "frequency",
+      "value": "60",
+      "vision_value": "60",
+      "ocr_value": "60",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "darjja_train_14.png",
+       "detail": "field=frequency; label=HZ; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 117,
+        "y": 46,
+        "w": 11,
+        "h": 16
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "manufacturer",
+      "value": "POWER MAGNETICS, INC.",
+      "vision_value": "POWER MAGNETICS, INC.",
+      "ocr_value": "PO W ER M AGNETICS,INC.",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "darjja_train_14.png",
+       "detail": "field=manufacturer; label=none; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 48,
+        "y": 137,
+        "w": 169,
+        "h": 13
+       }
+      },
+      "injection_flag": false
+     }
+    ],
+    "tag_read_ok": false,
+    "model_name": "qwen2.5vl:7b",
+    "latency_ms": 17843,
+    "cost_usd": 0.0
+   },
+   "reasons": {
+    "model_number": "not_located",
+    "catalog_number": "not_located",
+    "voltage": "format_fail",
+    "rated_current": "format_fail",
+    "power": "not_located",
+    "frequency": null,
+    "manufacturer": null
+   },
+   "rules": {
+    "model_number": "label_anchor_missing",
+    "catalog_number": "label_anchor_missing",
+    "voltage": "format_rule",
+    "rated_current": "format_rule",
+    "power": "not_found",
+    "frequency": null,
+    "manufacturer": null
+   },
+   "located_by": {
+    "model_number": null,
+    "catalog_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": null,
+    "frequency": "rapidocr",
+    "manufacturer": "rapidocr"
+   },
+   "warnings": {
+    "model_number": null,
+    "catalog_number": null,
+    "voltage": "multi_row_table",
+    "rated_current": "multi_row_table",
+    "power": null,
+    "frequency": "multi_row_table",
+    "manufacturer": null
+   }
+  },
+  "darjja_train_18": {
+   "result": {
+    "observation_id": "darjja_train_18",
+    "fields": [
+     {
+      "name": "model_number",
+      "value": "3LT50-440/230-Dyn11-23",
+      "vision_value": "3LT50-440/230-Dyn11-23",
+      "ocr_value": "TYPE:3LT50-440/230-Dyn11-23",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "darjja_train_18.png",
+       "detail": "field=model_number; label=TYPE; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 17,
+        "y": 71,
+        "w": 96,
+        "h": 9
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "catalog_number",
+      "value": null,
+      "vision_value": "3-020-000515",
+      "ocr_value": null,
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "voltage",
+      "value": null,
+      "vision_value": "440 / 230",
+      "ocr_value": null,
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "rated_current",
+      "value": null,
+      "vision_value": "67 / 126",
+      "ocr_value": null,
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "power",
+      "value": "50 KVA",
+      "vision_value": "50",
+      "ocr_value": "50",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "darjja_train_18.png",
+       "detail": "field=power; label=KVA; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 36,
+        "y": 159,
+        "w": 6,
+        "h": 9
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "frequency",
+      "value": null,
+      "vision_value": "50Hz",
+      "ocr_value": "60",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "manufacturer",
+      "value": "NORATEL",
+      "vision_value": "NORATEL",
+      "ocr_value": "NORATEL",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "darjja_train_18.png",
+       "detail": "field=manufacturer; label=none; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 72,
+        "y": 21,
+        "w": 126,
+        "h": 29
+       }
+      },
+      "injection_flag": false
+     }
+    ],
+    "tag_read_ok": false,
+    "model_name": "qwen2.5vl:7b",
+    "latency_ms": 19972,
+    "cost_usd": 0.0
+   },
+   "reasons": {
+    "model_number": null,
+    "catalog_number": "not_located",
+    "voltage": "not_located",
+    "rated_current": "not_located",
+    "power": null,
+    "frequency": "not_located",
+    "manufacturer": null
+   },
+   "rules": {
+    "model_number": null,
+    "catalog_number": "not_found",
+    "voltage": "not_found",
+    "rated_current": "not_found",
+    "power": null,
+    "frequency": "not_found",
+    "manufacturer": null
+   },
+   "located_by": {
+    "model_number": "rapidocr",
+    "catalog_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": "rapidocr",
+    "frequency": null,
+    "manufacturer": "rapidocr"
+   },
+   "warnings": {
+    "model_number": null,
+    "catalog_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": null,
+    "frequency": null,
+    "manufacturer": null
+   }
+  },
+  "darjja_train_22": {
+   "result": {
+    "observation_id": "darjja_train_22",
+    "fields": [
+     {
+      "name": "model_number",
+      "value": null,
+      "vision_value": "468863",
+      "ocr_value": "468863",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "catalog_number",
+      "value": null,
+      "vision_value": "468863",
+      "ocr_value": "468863",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "voltage",
+      "value": null,
+      "vision_value": "220/440-3000",
+      "ocr_value": "226/440-3000",
+      "format_rule_passed": false,
+      "status": "unreadable",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "rated_current",
+      "value": null,
+      "vision_value": "25",
+      "ocr_value": null,
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "power",
+      "value": null,
+      "vision_value": "50000",
+      "ocr_value": null,
+      "format_rule_passed": false,
+      "status": "unreadable",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "frequency",
+      "value": null,
+      "vision_value": "2",
+      "ocr_value": "000",
+      "format_rule_passed": false,
+      "status": "unreadable",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "manufacturer",
+      "value": "GENERAL ELECTRIC CO",
+      "vision_value": "GENERAL ELECTRIC CO",
+      "ocr_value": "GENERALELECTRIC CO",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "darjja_train_22.png",
+       "detail": "field=manufacturer; label=none; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 19,
+        "y": 126,
+        "w": 231,
+        "h": 28
+       }
+      },
+      "injection_flag": false
+     }
+    ],
+    "tag_read_ok": false,
+    "model_name": "qwen2.5vl:7b",
+    "latency_ms": 19347,
+    "cost_usd": 0.0
+   },
+   "reasons": {
+    "model_number": "not_located",
+    "catalog_number": "not_located",
+    "voltage": "format_fail",
+    "rated_current": "not_located",
+    "power": "format_fail",
+    "frequency": "format_fail",
+    "manufacturer": null
+   },
+   "rules": {
+    "model_number": "label_anchor_missing",
+    "catalog_number": "label_anchor_missing",
+    "voltage": "format_rule",
+    "rated_current": "not_found",
+    "power": "format_rule",
+    "frequency": "format_rule",
+    "manufacturer": null
+   },
+   "located_by": {
+    "model_number": null,
+    "catalog_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": null,
+    "frequency": null,
+    "manufacturer": "rapidocr"
+   },
+   "warnings": {
+    "model_number": null,
+    "catalog_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": null,
+    "frequency": null,
+    "manufacturer": null
+   }
+  },
+  "hf_013": {
+   "result": {
+    "observation_id": "hf_013",
+    "fields": [
+     {
+      "name": "model_number",
+      "value": null,
+      "vision_value": "M3538",
+      "ocr_value": "M3538",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "catalog_number",
+      "value": "M3538",
+      "vision_value": "M3538",
+      "ocr_value": "M3538",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_013.jpg",
+       "detail": "field=catalog_number; label=CAT. NO.; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 180,
+        "y": 86,
+        "w": 59,
+        "h": 20
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "voltage",
+      "value": null,
+      "vision_value": "230/460",
+      "ocr_value": "208",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_013.jpg",
+       "detail": "field=voltage; label=VOLTS; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 174,
+        "y": 158,
+        "w": 86,
+        "h": 26
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "rated_current",
+      "value": null,
+      "vision_value": "2/1",
+      "ocr_value": null,
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "power",
+      "value": null,
+      "vision_value": "1/2",
+      "ocr_value": null,
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "frequency",
+      "value": null,
+      "vision_value": "60",
+      "ocr_value": null,
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "manufacturer",
+      "value": null,
+      "vision_value": "BALDOR-RELIANCE",
+      "ocr_value": null,
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     }
+    ],
+    "tag_read_ok": false,
+    "model_name": "qwen2.5vl:7b",
+    "latency_ms": 19517,
+    "cost_usd": 0.0
+   },
+   "reasons": {
+    "model_number": "not_located",
+    "catalog_number": null,
+    "voltage": "readers_disagree",
+    "rated_current": "not_located",
+    "power": "not_located",
+    "frequency": "not_located",
+    "manufacturer": "not_located"
+   },
+   "rules": {
+    "model_number": "label_anchor_missing",
+    "catalog_number": null,
+    "voltage": "ocr_label_value_differs",
+    "rated_current": "not_found",
+    "power": "not_found",
+    "frequency": "not_found",
+    "manufacturer": "not_found"
+   },
+   "located_by": {
+    "model_number": null,
+    "catalog_number": "rapidocr",
+    "voltage": "rapidocr",
+    "rated_current": null,
+    "power": null,
+    "frequency": null,
+    "manufacturer": null
+   },
+   "warnings": {
+    "model_number": null,
+    "catalog_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": null,
+    "frequency": null,
+    "manufacturer": null
+   }
+  },
+  "hf_019": {
+   "result": {
+    "observation_id": "hf_019",
+    "fields": [
+     {
+      "name": "model_number",
+      "value": "FM 140156",
+      "vision_value": "FM 140156",
+      "ocr_value": "FM 140156",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_019.jpg",
+       "detail": "field=model_number; label=MODEL; located_by=full_ocr; pass=psm11-gray",
+       "bbox": {
+        "x": 187,
+        "y": 137,
+        "w": 95,
+        "h": 18
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "catalog_number",
+      "value": null,
+      "vision_value": "FM 14015624040001",
+      "ocr_value": null,
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "voltage",
+      "value": null,
+      "vision_value": "115/230V",
+      "ocr_value": "115/230",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "rated_current",
+      "value": null,
+      "vision_value": "13.6/6.8A",
+      "ocr_value": "13.6/6.8",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "power",
+      "value": "1 HP",
+      "vision_value": "1",
+      "ocr_value": "1",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_019.jpg",
+       "detail": "field=power; label=HP; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 298,
+        "y": 205,
+        "w": 13,
+        "h": 25
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "frequency",
+      "value": "60",
+      "vision_value": "60",
+      "ocr_value": "HZ:60",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_019.jpg",
+       "detail": "field=frequency; label=HZ; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 350,
+        "y": 205,
+        "w": 56,
+        "h": 27
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "manufacturer",
+      "value": null,
+      "vision_value": "SINGLE PHASE INDUCTION MOTOR",
+      "ocr_value": null,
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     }
+    ],
+    "tag_read_ok": false,
+    "model_name": "qwen2.5vl:7b",
+    "latency_ms": 20931,
+    "cost_usd": 0.0
+   },
+   "reasons": {
+    "model_number": null,
+    "catalog_number": "not_located",
+    "voltage": "not_located",
+    "rated_current": "not_located",
+    "power": null,
+    "frequency": null,
+    "manufacturer": "not_located"
+   },
+   "rules": {
+    "model_number": null,
+    "catalog_number": "not_found",
+    "voltage": "not_found",
+    "rated_current": "not_found",
+    "power": null,
+    "frequency": null,
+    "manufacturer": "not_found"
+   },
+   "located_by": {
+    "model_number": "full_ocr",
+    "catalog_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": "rapidocr",
+    "frequency": "rapidocr",
+    "manufacturer": null
+   },
+   "warnings": {
+    "model_number": null,
+    "catalog_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": null,
+    "frequency": null,
+    "manufacturer": null
+   }
+  },
+  "hf_02": {
+   "result": {
+    "observation_id": "hf_02",
+    "fields": [
+     {
+      "name": "model_number",
+      "value": "DI0034PCI",
+      "vision_value": "DI0034PCI",
+      "ocr_value": "DI0034PCI",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_02.jpg",
+       "detail": "field=model_number; label=MODEL NO.; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 363,
+        "y": 14,
+        "w": 115,
+        "h": 33
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "catalog_number",
+      "value": null,
+      "vision_value": null,
+      "ocr_value": null,
+      "format_rule_passed": null,
+      "status": "unreadable",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "voltage",
+      "value": "230/460",
+      "vision_value": "230/460",
+      "ocr_value": "230/460",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_02.jpg",
+       "detail": "field=voltage; label=VOLTS; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 312,
+        "y": 52,
+        "w": 79,
+        "h": 34
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "rated_current",
+      "value": "7.8/3.9",
+      "vision_value": "7.8/3.9",
+      "ocr_value": "7.8/3.9",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_02.jpg",
+       "detail": "field=rated_current; label=AMP.; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 566,
+        "y": 51,
+        "w": 72,
+        "h": 38
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "power",
+      "value": null,
+      "vision_value": "3",
+      "ocr_value": null,
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "frequency",
+      "value": null,
+      "vision_value": "60",
+      "ocr_value": null,
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "manufacturer",
+      "value": null,
+      "vision_value": "ee",
+      "ocr_value": null,
+      "format_rule_passed": false,
+      "status": "unreadable",
+      "source": null,
+      "injection_flag": false
+     }
+    ],
+    "tag_read_ok": false,
+    "model_name": "qwen2.5vl:7b",
+    "latency_ms": 17754,
+    "cost_usd": 0.0
+   },
+   "reasons": {
+    "model_number": null,
+    "catalog_number": "model_missing",
+    "voltage": null,
+    "rated_current": null,
+    "power": "not_located",
+    "frequency": "not_located",
+    "manufacturer": "format_fail"
+   },
+   "rules": {
+    "model_number": null,
+    "catalog_number": "no_value",
+    "voltage": null,
+    "rated_current": null,
+    "power": "not_found",
+    "frequency": "not_found",
+    "manufacturer": "format_rule"
+   },
+   "located_by": {
+    "model_number": "rapidocr",
+    "catalog_number": null,
+    "voltage": "rapidocr",
+    "rated_current": "rapidocr",
+    "power": null,
+    "frequency": null,
+    "manufacturer": null
+   },
+   "warnings": {
+    "model_number": null,
+    "catalog_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": null,
+    "frequency": null,
+    "manufacturer": null
+   }
+  },
+  "hf_020": {
+   "result": {
+    "observation_id": "hf_020",
+    "fields": [
+     {
+      "name": "model_number",
+      "value": null,
+      "vision_value": "0.75KNE4FLG",
+      "ocr_value": "0.75KNE4FLG",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "catalog_number",
+      "value": null,
+      "vision_value": "ND 80",
+      "ocr_value": ":ND 80",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "voltage",
+      "value": null,
+      "vision_value": "415±10%",
+      "ocr_value": "415",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_020.jpg",
+       "detail": "field=voltage; label=VOLT:; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 175,
+        "y": 247,
+        "w": 76,
+        "h": 22
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "rated_current",
+      "value": null,
+      "vision_value": "1.82Y",
+      "ocr_value": null,
+      "format_rule_passed": false,
+      "status": "unreadable",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "power",
+      "value": null,
+      "vision_value": "0.75(1.00)",
+      "ocr_value": null,
+      "format_rule_passed": false,
+      "status": "unreadable",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "frequency",
+      "value": "50±5%",
+      "vision_value": "50±5%",
+      "ocr_value": "5 0 ± 5 %",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_020.jpg",
+       "detail": "field=frequency; label=Hz:; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 490,
+        "y": 269,
+        "w": 49,
+        "h": 23
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "manufacturer",
+      "value": "CG Power and Industrial Solutions Ltd",
+      "vision_value": "CG Power and Industrial Solutions Ltd",
+      "ocr_value": "CG Power and Industrial Solutions Ltd",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_020.jpg",
+       "detail": "field=manufacturer; label=none; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 163,
+        "y": 41,
+        "w": 546,
+        "h": 46
+       }
+      },
+      "injection_flag": false
+     }
+    ],
+    "tag_read_ok": false,
+    "model_name": "qwen2.5vl:7b",
+    "latency_ms": 22222,
+    "cost_usd": 0.0
+   },
+   "reasons": {
+    "model_number": "not_located",
+    "catalog_number": "not_located",
+    "voltage": "readers_disagree",
+    "rated_current": "format_fail",
+    "power": "format_fail",
+    "frequency": null,
+    "manufacturer": null
+   },
+   "rules": {
+    "model_number": "label_anchor_missing",
+    "catalog_number": "label_anchor_missing",
+    "voltage": "ocr_label_value_differs",
+    "rated_current": "format_rule",
+    "power": "format_rule",
+    "frequency": null,
+    "manufacturer": null
+   },
+   "located_by": {
+    "model_number": null,
+    "catalog_number": null,
+    "voltage": "rapidocr",
+    "rated_current": null,
+    "power": null,
+    "frequency": "rapidocr",
+    "manufacturer": "rapidocr"
+   },
+   "warnings": {
+    "model_number": null,
+    "catalog_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": null,
+    "frequency": null,
+    "manufacturer": null
+   }
+  },
+  "hf_022": {
+   "result": {
+    "observation_id": "hf_022",
+    "fields": [
+     {
+      "name": "model_number",
+      "value": "MY 7124",
+      "vision_value": "MY 7124",
+      "ocr_value": "MY 7124",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_022.jpg",
+       "detail": "field=model_number; label=TYPE; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 254,
+        "y": 252,
+        "w": 31,
+        "h": 11
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "catalog_number",
+      "value": null,
+      "vision_value": "1202190103",
+      "ocr_value": "1202190103",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "voltage",
+      "value": null,
+      "vision_value": "230 V",
+      "ocr_value": null,
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "rated_current",
+      "value": null,
+      "vision_value": "2.82 A",
+      "ocr_value": "2.82 | 282 | 4",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_022.jpg",
+       "detail": "field=rated_current; label=A; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 269,
+        "y": 280,
+        "w": 15,
+        "h": 13
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "power",
+      "value": "0.37 kW",
+      "vision_value": "0.37 kW",
+      "ocr_value": "0.37kW",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_022.jpg",
+       "detail": "field=power; label=kW; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 283,
+        "y": 265,
+        "w": 33,
+        "h": 14
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "frequency",
+      "value": null,
+      "vision_value": "50 Hz",
+      "ocr_value": null,
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "manufacturer",
+      "value": null,
+      "vision_value": "SINGLE PHASE INDUCTION MOTOR",
+      "ocr_value": null,
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     }
+    ],
+    "tag_read_ok": false,
+    "model_name": "qwen2.5vl:7b",
+    "latency_ms": 19318,
+    "cost_usd": 0.0
+   },
+   "reasons": {
+    "model_number": null,
+    "catalog_number": "not_located",
+    "voltage": "not_located",
+    "rated_current": "readers_disagree",
+    "power": null,
+    "frequency": "not_located",
+    "manufacturer": "not_located"
+   },
+   "rules": {
+    "model_number": null,
+    "catalog_number": "label_anchor_missing",
+    "voltage": "not_found",
+    "rated_current": "multi_rating",
+    "power": null,
+    "frequency": "not_found",
+    "manufacturer": "not_found"
+   },
+   "located_by": {
+    "model_number": "rapidocr",
+    "catalog_number": null,
+    "voltage": null,
+    "rated_current": "rapidocr",
+    "power": "rapidocr",
+    "frequency": null,
+    "manufacturer": null
+   },
+   "warnings": {
+    "model_number": null,
+    "catalog_number": null,
+    "voltage": "multi_row_table",
+    "rated_current": "multi_row_table",
+    "power": null,
+    "frequency": "multi_row_table",
+    "manufacturer": null
+   }
+  },
+  "hf_025": {
+   "result": {
+    "observation_id": "hf_025",
+    "fields": [
+     {
+      "name": "model_number",
+      "value": "00536ET3E184JM-W22",
+      "vision_value": "00536ET3E184JM-W22",
+      "ocr_value": "00536ET3E184JM-W22",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_025.jpg",
+       "detail": "field=model_number; label=MODEL; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 126,
+        "y": 62,
+        "w": 123,
+        "h": 23
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "catalog_number",
+      "value": null,
+      "vision_value": "12034382",
+      "ocr_value": "12034382",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "voltage",
+      "value": null,
+      "vision_value": "230/460",
+      "ocr_value": "208",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "rated_current",
+      "value": null,
+      "vision_value": "11.8/5.90",
+      "ocr_value": "029",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_025.jpg",
+       "detail": "field=rated_current; label=A; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 123,
+        "y": 106,
+        "w": 95,
+        "h": 31
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "power",
+      "value": null,
+      "vision_value": "5.0(3.7)",
+      "ocr_value": "5.0 HP",
+      "format_rule_passed": false,
+      "status": "unreadable",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "frequency",
+      "value": null,
+      "vision_value": "60",
+      "ocr_value": "60 | 50",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_025.jpg",
+       "detail": "field=frequency; label=Hz; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 405,
+        "y": 83,
+        "w": 23,
+        "h": 27
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "manufacturer",
+      "value": "WEG",
+      "vision_value": "WEG",
+      "ocr_value": "Weg",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_025.jpg",
+       "detail": "field=manufacturer; label=none; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 78,
+        "y": 19,
+        "w": 62,
+        "h": 42
+       }
+      },
+      "injection_flag": false
+     }
+    ],
+    "tag_read_ok": false,
+    "model_name": "qwen2.5vl:7b",
+    "latency_ms": 22681,
+    "cost_usd": 0.0
+   },
+   "reasons": {
+    "model_number": null,
+    "catalog_number": "not_located",
+    "voltage": "not_located",
+    "rated_current": "readers_disagree",
+    "power": "format_fail",
+    "frequency": "readers_disagree",
+    "manufacturer": null
+   },
+   "rules": {
+    "model_number": null,
+    "catalog_number": "label_anchor_missing",
+    "voltage": "not_found",
+    "rated_current": "ocr_label_value_differs",
+    "power": "format_rule",
+    "frequency": "multi_rating",
+    "manufacturer": null
+   },
+   "located_by": {
+    "model_number": "rapidocr",
+    "catalog_number": null,
+    "voltage": null,
+    "rated_current": "rapidocr",
+    "power": null,
+    "frequency": "rapidocr",
+    "manufacturer": "rapidocr"
+   },
+   "warnings": {
+    "model_number": null,
+    "catalog_number": null,
+    "voltage": "multi_row_table",
+    "rated_current": "multi_row_table",
+    "power": null,
+    "frequency": "multi_row_table",
+    "manufacturer": null
+   }
+  },
+  "hf_038": {
+   "result": {
+    "observation_id": "hf_038",
+    "fields": [
+     {
+      "name": "model_number",
+      "value": "EPT0754",
+      "vision_value": "EPT0754",
+      "ocr_value": "EPT0754",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_038.jpg",
+       "detail": "field=model_number; label=MODEL; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 140,
+        "y": 117,
+        "w": 81,
+        "h": 23
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "catalog_number",
+      "value": null,
+      "vision_value": "CC086A",
+      "ocr_value": "CC086A",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "voltage",
+      "value": "208-230/460",
+      "vision_value": "208-230/460",
+      "ocr_value": "208-230/460",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_038.jpg",
+       "detail": "field=voltage; label=VOLTS; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 132,
+        "y": 279,
+        "w": 114,
+        "h": 25
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "rated_current",
+      "value": null,
+      "vision_value": "180-166/83",
+      "ocr_value": "086",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_038.jpg",
+       "detail": "field=rated_current; label=AMPS; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 348,
+        "y": 279,
+        "w": 111,
+        "h": 24
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "power",
+      "value": "75 HP",
+      "vision_value": "75",
+      "ocr_value": "75",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_038.jpg",
+       "detail": "field=power; label=HP; located_by=full_ocr; pass=psm11-gray",
+       "bbox": {
+        "x": 119,
+        "y": 202,
+        "w": 21,
+        "h": 17
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "frequency",
+      "value": null,
+      "vision_value": "50",
+      "ocr_value": "50 | 60",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_038.jpg",
+       "detail": "field=frequency; label=Hz; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 142,
+        "y": 319,
+        "w": 38,
+        "h": 25
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "manufacturer",
+      "value": "Motors & Drives International",
+      "vision_value": "Motors & Drives International",
+      "ocr_value": "Motors & Drives International",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_038.jpg",
+       "detail": "field=manufacturer; label=none; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 282,
+        "y": 42,
+        "w": 245,
+        "h": 23
+       }
+      },
+      "injection_flag": false
+     }
+    ],
+    "tag_read_ok": false,
+    "model_name": "qwen2.5vl:7b",
+    "latency_ms": 20175,
+    "cost_usd": 0.0
+   },
+   "reasons": {
+    "model_number": null,
+    "catalog_number": "not_located",
+    "voltage": null,
+    "rated_current": "readers_disagree",
+    "power": null,
+    "frequency": "readers_disagree",
+    "manufacturer": null
+   },
+   "rules": {
+    "model_number": null,
+    "catalog_number": "label_anchor_missing",
+    "voltage": null,
+    "rated_current": "ocr_label_value_differs",
+    "power": null,
+    "frequency": "multi_rating",
+    "manufacturer": null
+   },
+   "located_by": {
+    "model_number": "rapidocr",
+    "catalog_number": null,
+    "voltage": "rapidocr",
+    "rated_current": "rapidocr",
+    "power": "full_ocr",
+    "frequency": "rapidocr",
+    "manufacturer": "rapidocr"
+   },
+   "warnings": {
+    "model_number": null,
+    "catalog_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": null,
+    "frequency": null,
+    "manufacturer": null
+   }
+  },
+  "hf_04": {
+   "result": {
+    "observation_id": "hf_04",
+    "fields": [
+     {
+      "name": "model_number",
+      "value": "HLS447SR0608",
+      "vision_value": "HLS447SR0608",
+      "ocr_value": "HLS447SR0608",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_04.jpg",
+       "detail": "field=model_number; label=Model; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 87,
+        "y": 164,
+        "w": 118,
+        "h": 21
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "catalog_number",
+      "value": null,
+      "vision_value": "HHI150-12-447T",
+      "ocr_value": "HHI150-12-447T",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "voltage",
+      "value": null,
+      "vision_value": "460V",
+      "ocr_value": "460 | 380 | 480",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_04.jpg",
+       "detail": "field=voltage; label=VOLTS; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 213,
+        "y": 146,
+        "w": 34,
+        "h": 22
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "rated_current",
+      "value": null,
+      "vision_value": "169.5A",
+      "ocr_value": "038",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_04.jpg",
+       "detail": "field=rated_current; label=Amps; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 512,
+        "y": 172,
+        "w": 48,
+        "h": 20
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "power",
+      "value": "150HP",
+      "vision_value": "150HP",
+      "ocr_value": "150HP",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_04.jpg",
+       "detail": "field=power; label=HP; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 30,
+        "y": 141,
+        "w": 53,
+        "h": 23
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "frequency",
+      "value": null,
+      "vision_value": "60Hz",
+      "ocr_value": "60 | 50",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_04.jpg",
+       "detail": "field=frequency; label=Hertz; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 507,
+        "y": 189,
+        "w": 38,
+        "h": 20
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "manufacturer",
+      "value": "Crown Triton",
+      "vision_value": "Crown Triton",
+      "ocr_value": "Crown Triton",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_04.jpg",
+       "detail": "field=manufacturer; label=none; located_by=full_ocr; pass=psm11-gray",
+       "bbox": {
+        "x": 68,
+        "y": 84,
+        "w": 268,
+        "h": 40
+       }
+      },
+      "injection_flag": false
+     }
+    ],
+    "tag_read_ok": false,
+    "model_name": "qwen2.5vl:7b",
+    "latency_ms": 19043,
+    "cost_usd": 0.0
+   },
+   "reasons": {
+    "model_number": null,
+    "catalog_number": "not_located",
+    "voltage": "readers_disagree",
+    "rated_current": "readers_disagree",
+    "power": null,
+    "frequency": "readers_disagree",
+    "manufacturer": null
+   },
+   "rules": {
+    "model_number": null,
+    "catalog_number": "label_anchor_missing",
+    "voltage": "multi_rating",
+    "rated_current": "ocr_label_value_differs",
+    "power": null,
+    "frequency": "multi_rating",
+    "manufacturer": null
+   },
+   "located_by": {
+    "model_number": "rapidocr",
+    "catalog_number": null,
+    "voltage": "rapidocr",
+    "rated_current": "rapidocr",
+    "power": "rapidocr",
+    "frequency": "rapidocr",
+    "manufacturer": "full_ocr"
+   },
+   "warnings": {
+    "model_number": null,
+    "catalog_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": null,
+    "frequency": null,
+    "manufacturer": null
+   }
+  },
+  "hf_047": {
+   "result": {
+    "observation_id": "hf_047",
+    "fields": [
+     {
+      "name": "model_number",
+      "value": null,
+      "vision_value": "A36-8063-4076",
+      "ocr_value": null,
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "catalog_number",
+      "value": null,
+      "vision_value": "A2408022002",
+      "ocr_value": "A2408022002",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "voltage",
+      "value": "230/460",
+      "vision_value": "230/460",
+      "ocr_value": "230/460",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_047.jpg",
+       "detail": "field=voltage; label=VOLTS; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 234,
+        "y": 193,
+        "w": 40,
+        "h": 20
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "rated_current",
+      "value": null,
+      "vision_value": "171/85.6",
+      "ocr_value": "010",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_047.jpg",
+       "detail": "field=rated_current; label=AMPS; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 238,
+        "y": 210,
+        "w": 44,
+        "h": 20
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "power",
+      "value": "75 HP",
+      "vision_value": "75",
+      "ocr_value": "75",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_047.jpg",
+       "detail": "field=power; label=HP; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 163,
+        "y": 198,
+        "w": 13,
+        "h": 19
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "frequency",
+      "value": "6-60",
+      "vision_value": "6-60",
+      "ocr_value": "HZ6-60",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_047.jpg",
+       "detail": "field=frequency; label=HZ; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 314,
+        "y": 205,
+        "w": 37,
+        "h": 20
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "manufacturer",
+      "value": "BALDOR",
+      "vision_value": "BALDOR",
+      "ocr_value": "B A L D O R",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_047.jpg",
+       "detail": "field=manufacturer; label=none; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 147,
+        "y": 122,
+        "w": 145,
+        "h": 29
+       }
+      },
+      "injection_flag": false
+     }
+    ],
+    "tag_read_ok": false,
+    "model_name": "qwen2.5vl:7b",
+    "latency_ms": 23542,
+    "cost_usd": 0.0
+   },
+   "reasons": {
+    "model_number": "not_located",
+    "catalog_number": "not_located",
+    "voltage": null,
+    "rated_current": "readers_disagree",
+    "power": null,
+    "frequency": null,
+    "manufacturer": null
+   },
+   "rules": {
+    "model_number": "not_found",
+    "catalog_number": "label_anchor_missing",
+    "voltage": null,
+    "rated_current": "ocr_label_value_differs",
+    "power": null,
+    "frequency": null,
+    "manufacturer": null
+   },
+   "located_by": {
+    "model_number": null,
+    "catalog_number": null,
+    "voltage": "rapidocr",
+    "rated_current": "rapidocr",
+    "power": "rapidocr",
+    "frequency": "rapidocr",
+    "manufacturer": "rapidocr"
+   },
+   "warnings": {
+    "model_number": null,
+    "catalog_number": null,
+    "voltage": "multi_row_table",
+    "rated_current": "multi_row_table",
+    "power": null,
+    "frequency": "multi_row_table",
+    "manufacturer": null
+   }
+  },
+  "hf_048": {
+   "result": {
+    "observation_id": "hf_048",
+    "fields": [
+     {
+      "name": "model_number",
+      "value": "EPT0754",
+      "vision_value": "EPT0754",
+      "ocr_value": "EPT0754",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_048.jpg",
+       "detail": "field=model_number; label=MODEL; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 141,
+        "y": 117,
+        "w": 79,
+        "h": 24
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "catalog_number",
+      "value": null,
+      "vision_value": "TEFC",
+      "ocr_value": null,
+      "format_rule_passed": false,
+      "status": "unreadable",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "voltage",
+      "value": "208-230/460",
+      "vision_value": "208-230/460",
+      "ocr_value": "208-230/460",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_048.jpg",
+       "detail": "field=voltage; label=VOLTS; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 132,
+        "y": 281,
+        "w": 114,
+        "h": 24
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "rated_current",
+      "value": null,
+      "vision_value": "180-166/83",
+      "ocr_value": "086",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_048.jpg",
+       "detail": "field=rated_current; label=AMPS; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 347,
+        "y": 281,
+        "w": 110,
+        "h": 23
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "power",
+      "value": "75 HP",
+      "vision_value": "75",
+      "ocr_value": "75",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_048.jpg",
+       "detail": "field=power; label=HP; located_by=full_ocr; pass=psm11-gray",
+       "bbox": {
+        "x": 119,
+        "y": 203,
+        "w": 20,
+        "h": 17
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "frequency",
+      "value": null,
+      "vision_value": "50",
+      "ocr_value": "50 | 60",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_048.jpg",
+       "detail": "field=frequency; label=Hz; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 140,
+        "y": 322,
+        "w": 38,
+        "h": 25
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "manufacturer",
+      "value": "Motors & Drives International",
+      "vision_value": "Motors & Drives International",
+      "ocr_value": "Motors & Drives International",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_048.jpg",
+       "detail": "field=manufacturer; label=none; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 280,
+        "y": 42,
+        "w": 247,
+        "h": 23
+       }
+      },
+      "injection_flag": false
+     }
+    ],
+    "tag_read_ok": false,
+    "model_name": "qwen2.5vl:7b",
+    "latency_ms": 20185,
+    "cost_usd": 0.0
+   },
+   "reasons": {
+    "model_number": null,
+    "catalog_number": "format_fail",
+    "voltage": null,
+    "rated_current": "readers_disagree",
+    "power": null,
+    "frequency": "readers_disagree",
+    "manufacturer": null
+   },
+   "rules": {
+    "model_number": null,
+    "catalog_number": "format_rule",
+    "voltage": null,
+    "rated_current": "ocr_label_value_differs",
+    "power": null,
+    "frequency": "multi_rating",
+    "manufacturer": null
+   },
+   "located_by": {
+    "model_number": "rapidocr",
+    "catalog_number": null,
+    "voltage": "rapidocr",
+    "rated_current": "rapidocr",
+    "power": "full_ocr",
+    "frequency": "rapidocr",
+    "manufacturer": "rapidocr"
+   },
+   "warnings": {
+    "model_number": null,
+    "catalog_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": null,
+    "frequency": null,
+    "manufacturer": null
+   }
+  },
+  "hf_053": {
+   "result": {
+    "observation_id": "hf_053",
+    "fields": [
+     {
+      "name": "model_number",
+      "value": "HMC2-160L-4",
+      "vision_value": "HMC2-160L-4",
+      "ocr_value": "TYPE.HMC2-160L-4",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_053.jpg",
+       "detail": "field=model_number; label=TYPE; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 56,
+        "y": 92,
+        "w": 196,
+        "h": 28
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "catalog_number",
+      "value": null,
+      "vision_value": "SH554736-068",
+      "ocr_value": null,
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "voltage",
+      "value": "400/690",
+      "vision_value": "400/690",
+      "ocr_value": "400/690",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_053.jpg",
+       "detail": "field=voltage; label=none; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 61,
+        "y": 163,
+        "w": 69,
+        "h": 26
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "rated_current",
+      "value": "28/16.5",
+      "vision_value": "28/16.5",
+      "ocr_value": "28/16.5",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_053.jpg",
+       "detail": "field=rated_current; label=none; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 348,
+        "y": 168,
+        "w": 64,
+        "h": 25
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "power",
+      "value": null,
+      "vision_value": "15",
+      "ocr_value": null,
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "frequency",
+      "value": "50",
+      "vision_value": "50",
+      "ocr_value": "50Hz",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_053.jpg",
+       "detail": "field=frequency; label=Hz; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 226,
+        "y": 239,
+        "w": 40,
+        "h": 26
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "manufacturer",
+      "value": "HOYER",
+      "vision_value": "HOYER",
+      "ocr_value": "HOYER",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_053.jpg",
+       "detail": "field=manufacturer; label=none; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 232,
+        "y": 0,
+        "w": 213,
+        "h": 60
+       }
+      },
+      "injection_flag": false
+     }
+    ],
+    "tag_read_ok": false,
+    "model_name": "qwen2.5vl:7b",
+    "latency_ms": 21457,
+    "cost_usd": 0.0
+   },
+   "reasons": {
+    "model_number": null,
+    "catalog_number": "not_located",
+    "voltage": null,
+    "rated_current": null,
+    "power": "not_located",
+    "frequency": null,
+    "manufacturer": null
+   },
+   "rules": {
+    "model_number": null,
+    "catalog_number": "not_found",
+    "voltage": null,
+    "rated_current": null,
+    "power": "not_found",
+    "frequency": null,
+    "manufacturer": null
+   },
+   "located_by": {
+    "model_number": "rapidocr",
+    "catalog_number": null,
+    "voltage": "rapidocr",
+    "rated_current": "rapidocr",
+    "power": null,
+    "frequency": "rapidocr",
+    "manufacturer": "rapidocr"
+   },
+   "warnings": {
+    "model_number": null,
+    "catalog_number": null,
+    "voltage": "multi_row_table",
+    "rated_current": "multi_row_table",
+    "power": null,
+    "frequency": "multi_row_table",
+    "manufacturer": null
+   }
+  },
+  "hf_06": {
+   "result": {
+    "observation_id": "hf_06",
+    "fields": [
+     {
+      "name": "model_number",
+      "value": null,
+      "vision_value": "37J776T859G1",
+      "ocr_value": "37J776T859G1",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "catalog_number",
+      "value": "094914",
+      "vision_value": "094914",
+      "ocr_value": "094914",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_06.jpg",
+       "detail": "field=catalog_number; label=CAT. NO.; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 279,
+        "y": 102,
+        "w": 55,
+        "h": 22
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "voltage",
+      "value": null,
+      "vision_value": "208-230/460",
+      "ocr_value": "208",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_06.jpg",
+       "detail": "field=voltage; label=VOLTS; located_by=full_ocr; pass=psm6-gray",
+       "bbox": {
+        "x": 282,
+        "y": 175,
+        "w": 98,
+        "h": 17
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "rated_current",
+      "value": "21-18.8/9.4",
+      "vision_value": "21-18.8/9.4",
+      "ocr_value": "21-18.8/9.4",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_06.jpg",
+       "detail": "field=rated_current; label=AMPS; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 282,
+        "y": 194,
+        "w": 92,
+        "h": 21
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "power",
+      "value": null,
+      "vision_value": "7.5",
+      "ocr_value": null,
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "frequency",
+      "value": null,
+      "vision_value": "60",
+      "ocr_value": null,
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "manufacturer",
+      "value": "Baldor Electric Co.",
+      "vision_value": "Baldor Electric Co.",
+      "ocr_value": "BALDOR ELECTRIC CO.",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_06.jpg",
+       "detail": "field=manufacturer; label=none; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 219,
+        "y": 72,
+        "w": 131,
+        "h": 23
+       }
+      },
+      "injection_flag": false
+     }
+    ],
+    "tag_read_ok": false,
+    "model_name": "qwen2.5vl:7b",
+    "latency_ms": 19715,
+    "cost_usd": 0.0
+   },
+   "reasons": {
+    "model_number": "not_located",
+    "catalog_number": null,
+    "voltage": "readers_disagree",
+    "rated_current": null,
+    "power": "not_located",
+    "frequency": "not_located",
+    "manufacturer": null
+   },
+   "rules": {
+    "model_number": "label_anchor_missing",
+    "catalog_number": null,
+    "voltage": "ocr_label_value_differs",
+    "rated_current": null,
+    "power": "not_found",
+    "frequency": "not_found",
+    "manufacturer": null
+   },
+   "located_by": {
+    "model_number": null,
+    "catalog_number": "rapidocr",
+    "voltage": "full_ocr",
+    "rated_current": "rapidocr",
+    "power": null,
+    "frequency": null,
+    "manufacturer": "rapidocr"
+   },
+   "warnings": {
+    "model_number": null,
+    "catalog_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": null,
+    "frequency": null,
+    "manufacturer": null
+   }
+  },
+  "hf_066": {
+   "result": {
+    "observation_id": "hf_066",
+    "fields": [
+     {
+      "name": "model_number",
+      "value": null,
+      "vision_value": "MY90L-4",
+      "ocr_value": "MYSOL-4",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "catalog_number",
+      "value": null,
+      "vision_value": "000005",
+      "ocr_value": "000005",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "voltage",
+      "value": null,
+      "vision_value": "230",
+      "ocr_value": null,
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "rated_current",
+      "value": null,
+      "vision_value": "5.40",
+      "ocr_value": null,
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "power",
+      "value": null,
+      "vision_value": "1.5",
+      "ocr_value": null,
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "frequency",
+      "value": null,
+      "vision_value": "50",
+      "ocr_value": null,
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "manufacturer",
+      "value": null,
+      "vision_value": "Gibbons",
+      "ocr_value": null,
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     }
+    ],
+    "tag_read_ok": false,
+    "model_name": "qwen2.5vl:7b",
+    "latency_ms": 16322,
+    "cost_usd": 0.0
+   },
+   "reasons": {
+    "model_number": "not_located",
+    "catalog_number": "not_located",
+    "voltage": "not_located",
+    "rated_current": "not_located",
+    "power": "not_located",
+    "frequency": "not_located",
+    "manufacturer": "not_located"
+   },
+   "rules": {
+    "model_number": "not_found",
+    "catalog_number": "label_anchor_missing",
+    "voltage": "not_found",
+    "rated_current": "not_found",
+    "power": "not_found",
+    "frequency": "not_found",
+    "manufacturer": "not_found"
+   },
+   "located_by": {
+    "model_number": null,
+    "catalog_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": null,
+    "frequency": null,
+    "manufacturer": null
+   },
+   "warnings": {
+    "model_number": null,
+    "catalog_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": null,
+    "frequency": null,
+    "manufacturer": null
+   }
+  },
+  "hf_069": {
+   "result": {
+    "observation_id": "hf_069",
+    "fields": [
+     {
+      "name": "model_number",
+      "value": "D8SJ1-6000-BWM/D",
+      "vision_value": "D8SJ1-6000-BWM/D",
+      "ocr_value": "D8SJ1-6000-BWM/D",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_069.jpg",
+       "detail": "field=model_number; label=MODEL; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 81,
+        "y": 106,
+        "w": 184,
+        "h": 43
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "catalog_number",
+      "value": null,
+      "vision_value": "03D 87250",
+      "ocr_value": "03D. 87250",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "voltage",
+      "value": null,
+      "vision_value": "380/420",
+      "ocr_value": null,
+      "format_rule_passed": false,
+      "status": "unreadable",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "rated_current",
+      "value": "106,0",
+      "vision_value": "106,0",
+      "ocr_value": "106.0",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_069.jpg",
+       "detail": "field=rated_current; label=A; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 533,
+        "y": 263,
+        "w": 87,
+        "h": 40
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "power",
+      "value": null,
+      "vision_value": "475-544",
+      "ocr_value": null,
+      "format_rule_passed": false,
+      "status": "unreadable",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "frequency",
+      "value": null,
+      "vision_value": "50",
+      "ocr_value": null,
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "manufacturer",
+      "value": null,
+      "vision_value": "DWM COPELAND",
+      "ocr_value": null,
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     }
+    ],
+    "tag_read_ok": false,
+    "model_name": "qwen2.5vl:7b",
+    "latency_ms": 20214,
+    "cost_usd": 0.0
+   },
+   "reasons": {
+    "model_number": null,
+    "catalog_number": "not_located",
+    "voltage": "format_fail",
+    "rated_current": null,
+    "power": "format_fail",
+    "frequency": "not_located",
+    "manufacturer": "not_located"
+   },
+   "rules": {
+    "model_number": null,
+    "catalog_number": "label_anchor_missing",
+    "voltage": "format_rule",
+    "rated_current": null,
+    "power": "format_rule",
+    "frequency": "not_found",
+    "manufacturer": "not_found"
+   },
+   "located_by": {
+    "model_number": "rapidocr",
+    "catalog_number": null,
+    "voltage": null,
+    "rated_current": "rapidocr",
+    "power": null,
+    "frequency": null,
+    "manufacturer": null
+   },
+   "warnings": {
+    "model_number": null,
+    "catalog_number": null,
+    "voltage": "multi_row_table",
+    "rated_current": "multi_row_table",
+    "power": null,
+    "frequency": "multi_row_table",
+    "manufacturer": null
+   }
+  },
+  "hf_072": {
+   "result": {
+    "observation_id": "hf_072",
+    "fields": [
+     {
+      "name": "model_number",
+      "value": null,
+      "vision_value": "GSA632-4",
+      "ocr_value": "GSA632-4",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "catalog_number",
+      "value": null,
+      "vision_value": "20190906383",
+      "ocr_value": null,
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "voltage",
+      "value": "220/380 V",
+      "vision_value": "220/380 V",
+      "ocr_value": "220/380",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_072.jpg",
+       "detail": "field=voltage; label=V; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 325,
+        "y": 284,
+        "w": 35,
+        "h": 13
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "rated_current",
+      "value": null,
+      "vision_value": "0.62 A",
+      "ocr_value": "0.62 | 82 | 2",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_072.jpg",
+       "detail": "field=rated_current; label=A; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 336,
+        "y": 295,
+        "w": 16,
+        "h": 14
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "power",
+      "value": null,
+      "vision_value": "0.18 kW",
+      "ocr_value": "18 KW",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "frequency",
+      "value": "50 Hz",
+      "vision_value": "50 Hz",
+      "ocr_value": "50",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_072.jpg",
+       "detail": "field=frequency; label=Hz; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 290,
+        "y": 284,
+        "w": 9,
+        "h": 13
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "manufacturer",
+      "value": null,
+      "vision_value": "THREE PHASE INDUCTION MOTOR",
+      "ocr_value": null,
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     }
+    ],
+    "tag_read_ok": false,
+    "model_name": "qwen2.5vl:7b",
+    "latency_ms": 19518,
+    "cost_usd": 0.0
+   },
+   "reasons": {
+    "model_number": "not_located",
+    "catalog_number": "not_located",
+    "voltage": null,
+    "rated_current": "readers_disagree",
+    "power": "not_located",
+    "frequency": null,
+    "manufacturer": "not_located"
+   },
+   "rules": {
+    "model_number": "label_anchor_missing",
+    "catalog_number": "not_found",
+    "voltage": null,
+    "rated_current": "multi_rating",
+    "power": "not_found",
+    "frequency": null,
+    "manufacturer": "not_found"
+   },
+   "located_by": {
+    "model_number": null,
+    "catalog_number": null,
+    "voltage": "rapidocr",
+    "rated_current": "rapidocr",
+    "power": null,
+    "frequency": "rapidocr",
+    "manufacturer": null
+   },
+   "warnings": {
+    "model_number": null,
+    "catalog_number": null,
+    "voltage": "multi_row_table",
+    "rated_current": "multi_row_table",
+    "power": null,
+    "frequency": "multi_row_table",
+    "manufacturer": null
+   }
+  },
+  "hf_075": {
+   "result": {
+    "observation_id": "hf_075",
+    "fields": [
+     {
+      "name": "model_number",
+      "value": null,
+      "vision_value": "1LE15062CA234AB0",
+      "ocr_value": "1LE15062CA234AB0",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "catalog_number",
+      "value": null,
+      "vision_value": "1LE15062CA234AB0",
+      "ocr_value": "1LE15062CA234AB0",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "voltage",
+      "value": "400 Δ / 690 Y",
+      "vision_value": "400 Δ / 690 Y",
+      "ocr_value": "400Δ / 690 Y",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_075.jpg",
+       "detail": "field=voltage; label=V; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 28,
+        "y": 283,
+        "w": 64,
+        "h": 57
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "rated_current",
+      "value": null,
+      "vision_value": "95 / 55",
+      "ocr_value": "400 | 460",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_075.jpg",
+       "detail": "field=rated_current; label=A; located_by=full_ocr; pass=psm6-gray",
+       "bbox": {
+        "x": 157,
+        "y": 288,
+        "w": 80,
+        "h": 22
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "power",
+      "value": null,
+      "vision_value": "55 / 55",
+      "ocr_value": null,
+      "format_rule_passed": false,
+      "status": "unreadable",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "frequency",
+      "value": null,
+      "vision_value": "50 / 50",
+      "ocr_value": null,
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "manufacturer",
+      "value": "SIEMENS",
+      "vision_value": "SIEMENS",
+      "ocr_value": "SIEM ENS",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_075.jpg",
+       "detail": "field=manufacturer; label=none; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 24,
+        "y": 7,
+        "w": 180,
+        "h": 36
+       }
+      },
+      "injection_flag": false
+     }
+    ],
+    "tag_read_ok": false,
+    "model_name": "qwen2.5vl:7b",
+    "latency_ms": 21633,
+    "cost_usd": 0.0
+   },
+   "reasons": {
+    "model_number": "not_located",
+    "catalog_number": "not_located",
+    "voltage": null,
+    "rated_current": "readers_disagree",
+    "power": "format_fail",
+    "frequency": "not_located",
+    "manufacturer": null
+   },
+   "rules": {
+    "model_number": "label_anchor_missing",
+    "catalog_number": "label_anchor_missing",
+    "voltage": null,
+    "rated_current": "multi_rating",
+    "power": "format_rule",
+    "frequency": "not_found",
+    "manufacturer": null
+   },
+   "located_by": {
+    "model_number": null,
+    "catalog_number": null,
+    "voltage": "rapidocr",
+    "rated_current": "full_ocr",
+    "power": null,
+    "frequency": null,
+    "manufacturer": "rapidocr"
+   },
+   "warnings": {
+    "model_number": null,
+    "catalog_number": null,
+    "voltage": "multi_row_table",
+    "rated_current": "multi_row_table",
+    "power": null,
+    "frequency": "multi_row_table",
+    "manufacturer": null
+   }
+  },
+  "hf_09": {
+   "result": {
+    "observation_id": "hf_09",
+    "fields": [
+     {
+      "name": "model_number",
+      "value": "00118ET3E143T-W22",
+      "vision_value": "00118ET3E143T-W22",
+      "ocr_value": "00118ET3E143T-W22",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_09.jpg",
+       "detail": "field=model_number; label=MODEL; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 184,
+        "y": 38,
+        "w": 111,
+        "h": 15
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "catalog_number",
+      "value": null,
+      "vision_value": "CC029A",
+      "ocr_value": "CC029A",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "voltage",
+      "value": null,
+      "vision_value": "230/460",
+      "ocr_value": "208",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "rated_current",
+      "value": null,
+      "vision_value": "2.94/1.47",
+      "ocr_value": "029",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_09.jpg",
+       "detail": "field=rated_current; label=A; located_by=full_ocr; pass=psm6-gray",
+       "bbox": {
+        "x": 198,
+        "y": 68,
+        "w": 106,
+        "h": 24
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "power",
+      "value": null,
+      "vision_value": "1.0(0.75)",
+      "ocr_value": "1.0 HP",
+      "format_rule_passed": false,
+      "status": "unreadable",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "frequency",
+      "value": null,
+      "vision_value": "60",
+      "ocr_value": "60 | 50",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_09.jpg",
+       "detail": "field=frequency; label=Hz; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 466,
+        "y": 53,
+        "w": 20,
+        "h": 20
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "manufacturer",
+      "value": null,
+      "vision_value": "W20",
+      "ocr_value": null,
+      "format_rule_passed": false,
+      "status": "unreadable",
+      "source": null,
+      "injection_flag": false
+     }
+    ],
+    "tag_read_ok": false,
+    "model_name": "qwen2.5vl:7b",
+    "latency_ms": 22150,
+    "cost_usd": 0.0
+   },
+   "reasons": {
+    "model_number": null,
+    "catalog_number": "not_located",
+    "voltage": "not_located",
+    "rated_current": "readers_disagree",
+    "power": "format_fail",
+    "frequency": "readers_disagree",
+    "manufacturer": "format_fail"
+   },
+   "rules": {
+    "model_number": null,
+    "catalog_number": "label_anchor_missing",
+    "voltage": "not_found",
+    "rated_current": "ocr_label_value_differs",
+    "power": "format_rule",
+    "frequency": "multi_rating",
+    "manufacturer": "format_rule"
+   },
+   "located_by": {
+    "model_number": "rapidocr",
+    "catalog_number": null,
+    "voltage": null,
+    "rated_current": "full_ocr",
+    "power": null,
+    "frequency": "rapidocr",
+    "manufacturer": null
+   },
+   "warnings": {
+    "model_number": null,
+    "catalog_number": null,
+    "voltage": "multi_row_table",
+    "rated_current": "multi_row_table",
+    "power": null,
+    "frequency": "multi_row_table",
+    "manufacturer": null
+   }
+  },
+  "hf_090": {
+   "result": {
+    "observation_id": "hf_090",
+    "fields": [
+     {
+      "name": "model_number",
+      "value": null,
+      "vision_value": "36G271S268G1",
+      "ocr_value": "36G271S268G1",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "catalog_number",
+      "value": "EM3615T",
+      "vision_value": "EM3615T",
+      "ocr_value": "EM3615T",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_090.jpg",
+       "detail": "field=catalog_number; label=CAT. NO.; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 124,
+        "y": 106,
+        "w": 47,
+        "h": 16
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "voltage",
+      "value": null,
+      "vision_value": "208-230/460",
+      "ocr_value": "208",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_090.jpg",
+       "detail": "field=voltage; label=VOLTS; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 123,
+        "y": 169,
+        "w": 74,
+        "h": 21
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "rated_current",
+      "value": null,
+      "vision_value": "13.9-13.4/6.7",
+      "ocr_value": "010",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_090.jpg",
+       "detail": "field=rated_current; label=AMPS; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 124,
+        "y": 190,
+        "w": 73,
+        "h": 20
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "power",
+      "value": null,
+      "vision_value": "5",
+      "ocr_value": null,
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "frequency",
+      "value": "60",
+      "vision_value": "60",
+      "ocr_value": "60",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_090.jpg",
+       "detail": "field=frequency; label=HZ; located_by=full_ocr; pass=psm11-binary",
+       "bbox": {
+        "x": 212,
+        "y": 242,
+        "w": 16,
+        "h": 12
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "manufacturer",
+      "value": "Baldor",
+      "vision_value": "Baldor",
+      "ocr_value": "BALDOR:",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_090.jpg",
+       "detail": "field=manufacturer; label=none; located_by=full_ocr; pass=psm11-gray",
+       "bbox": {
+        "x": 70,
+        "y": 33,
+        "w": 136,
+        "h": 19
+       }
+      },
+      "injection_flag": false
+     }
+    ],
+    "tag_read_ok": false,
+    "model_name": "qwen2.5vl:7b",
+    "latency_ms": 19138,
+    "cost_usd": 0.0
+   },
+   "reasons": {
+    "model_number": "not_located",
+    "catalog_number": null,
+    "voltage": "readers_disagree",
+    "rated_current": "readers_disagree",
+    "power": "not_located",
+    "frequency": null,
+    "manufacturer": null
+   },
+   "rules": {
+    "model_number": "label_anchor_missing",
+    "catalog_number": null,
+    "voltage": "ocr_label_value_differs",
+    "rated_current": "ocr_label_value_differs",
+    "power": "not_found",
+    "frequency": null,
+    "manufacturer": null
+   },
+   "located_by": {
+    "model_number": null,
+    "catalog_number": "rapidocr",
+    "voltage": "rapidocr",
+    "rated_current": "rapidocr",
+    "power": null,
+    "frequency": "full_ocr",
+    "manufacturer": "full_ocr"
+   },
+   "warnings": {
+    "model_number": null,
+    "catalog_number": null,
+    "voltage": "multi_row_table",
+    "rated_current": "multi_row_table",
+    "power": null,
+    "frequency": "multi_row_table",
+    "manufacturer": null
+   }
+  },
+  "hf_092": {
+   "result": {
+    "observation_id": "hf_092",
+    "fields": [
+     {
+      "name": "model_number",
+      "value": "5KS184BCT205B",
+      "vision_value": "5KS184BCT205B",
+      "ocr_value": "5KS184BCT205B",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_092.jpg",
+       "detail": "field=model_number; label=none; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 146,
+        "y": 8,
+        "w": 144,
+        "h": 29
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "catalog_number",
+      "value": null,
+      "vision_value": "E829",
+      "ocr_value": "E829",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "voltage",
+      "value": null,
+      "vision_value": "230/460",
+      "ocr_value": "230",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_092.jpg",
+       "detail": "field=voltage; label=VOLTS; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 176,
+        "y": 65,
+        "w": 99,
+        "h": 27
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "rated_current",
+      "value": null,
+      "vision_value": "12.3 / 6.15",
+      "ocr_value": "12.3/6.15 | 4 | 2",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_092.jpg",
+       "detail": "field=rated_current; label=AMP; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 136,
+        "y": 93,
+        "w": 111,
+        "h": 27
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "power",
+      "value": null,
+      "vision_value": "5",
+      "ocr_value": null,
+      "format_rule_passed": false,
+      "status": "unreadable",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "frequency",
+      "value": null,
+      "vision_value": "60",
+      "ocr_value": null,
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "manufacturer",
+      "value": "GE Motors",
+      "vision_value": "GE Motors",
+      "ocr_value": "GE Motors",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_092.jpg",
+       "detail": "field=manufacturer; label=none; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 140,
+        "y": 365,
+        "w": 134,
+        "h": 40
+       }
+      },
+      "injection_flag": false
+     }
+    ],
+    "tag_read_ok": false,
+    "model_name": "qwen2.5vl:7b",
+    "latency_ms": 19401,
+    "cost_usd": 0.0
+   },
+   "reasons": {
+    "model_number": null,
+    "catalog_number": "not_located",
+    "voltage": "readers_disagree",
+    "rated_current": "readers_disagree",
+    "power": "format_fail",
+    "frequency": "not_located",
+    "manufacturer": null
+   },
+   "rules": {
+    "model_number": null,
+    "catalog_number": "label_anchor_missing",
+    "voltage": "ocr_label_value_differs",
+    "rated_current": "multi_rating",
+    "power": "format_rule",
+    "frequency": "not_found",
+    "manufacturer": null
+   },
+   "located_by": {
+    "model_number": "rapidocr",
+    "catalog_number": null,
+    "voltage": "rapidocr",
+    "rated_current": "rapidocr",
+    "power": null,
+    "frequency": null,
+    "manufacturer": "rapidocr"
+   },
+   "warnings": {
+    "model_number": null,
+    "catalog_number": null,
+    "voltage": "multi_row_table",
+    "rated_current": "multi_row_table",
+    "power": null,
+    "frequency": "multi_row_table",
+    "manufacturer": null
+   }
+  },
+  "hf_110": {
+   "result": {
+    "observation_id": "hf_110",
+    "fields": [
+     {
+      "name": "model_number",
+      "value": "00112EP3ER145TC-W22",
+      "vision_value": "00112EP3ER145TC-W22",
+      "ocr_value": "00112EP3ER145TC-W22",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_110.jpg",
+       "detail": "field=model_number; label=MODEL; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 263,
+        "y": 58,
+        "w": 149,
+        "h": 20
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "catalog_number",
+      "value": null,
+      "vision_value": "09MAR2015",
+      "ocr_value": "09MAR2015",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "voltage",
+      "value": null,
+      "vision_value": "208-230/460",
+      "ocr_value": null,
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "rated_current",
+      "value": null,
+      "vision_value": "3.76-3.26/1.63",
+      "ocr_value": "4.07/2.04",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_110.jpg",
+       "detail": "field=rated_current; label=A; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 113,
+        "y": 124,
+        "w": 122,
+        "h": 24
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "power",
+      "value": null,
+      "vision_value": "1.0(0.75)",
+      "ocr_value": "3 HP",
+      "format_rule_passed": false,
+      "status": "unreadable",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "frequency",
+      "value": null,
+      "vision_value": "60",
+      "ocr_value": "60",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "manufacturer",
+      "value": null,
+      "vision_value": "WEG",
+      "ocr_value": null,
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     }
+    ],
+    "tag_read_ok": false,
+    "model_name": "qwen2.5vl:7b",
+    "latency_ms": 23098,
+    "cost_usd": 0.0
+   },
+   "reasons": {
+    "model_number": null,
+    "catalog_number": "not_located",
+    "voltage": "not_located",
+    "rated_current": "readers_disagree",
+    "power": "format_fail",
+    "frequency": "not_located",
+    "manufacturer": "not_located"
+   },
+   "rules": {
+    "model_number": null,
+    "catalog_number": "label_anchor_missing",
+    "voltage": "not_found",
+    "rated_current": "ocr_label_value_differs",
+    "power": "format_rule",
+    "frequency": "not_found",
+    "manufacturer": "not_found"
+   },
+   "located_by": {
+    "model_number": "rapidocr",
+    "catalog_number": null,
+    "voltage": null,
+    "rated_current": "rapidocr",
+    "power": null,
+    "frequency": null,
+    "manufacturer": null
+   },
+   "warnings": {
+    "model_number": null,
+    "catalog_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": null,
+    "frequency": null,
+    "manufacturer": null
+   }
+  },
+  "hf_174": {
+   "result": {
+    "observation_id": "hf_174",
+    "fields": [
+     {
+      "name": "model_number",
+      "value": "5KS324ZWL305",
+      "vision_value": "5KS324ZWL305",
+      "ocr_value": "5KS324ZWL305",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_174.jpg",
+       "detail": "field=model_number; label=MODEL; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 288,
+        "y": 133,
+        "w": 106,
+        "h": 20
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "catalog_number",
+      "value": "W7549",
+      "vision_value": "W7549",
+      "ocr_value": "W7549",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_174.jpg",
+       "detail": "field=catalog_number; label=CAT; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 113,
+        "y": 132,
+        "w": 48,
+        "h": 21
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "voltage",
+      "value": "230/460",
+      "vision_value": "230/460",
+      "ocr_value": "230/460",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_174.jpg",
+       "detail": "field=voltage; label=V; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 106,
+        "y": 175,
+        "w": 63,
+        "h": 20
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "rated_current",
+      "value": "64.2/32.1",
+      "vision_value": "64.2/32.1",
+      "ocr_value": "64.2/32.1",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_174.jpg",
+       "detail": "field=rated_current; label=A; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 227,
+        "y": 174,
+        "w": 71,
+        "h": 21
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "power",
+      "value": null,
+      "vision_value": "25",
+      "ocr_value": null,
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "frequency",
+      "value": "60",
+      "vision_value": "60",
+      "ocr_value": "60",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_174.jpg",
+       "detail": "field=frequency; label=HZ; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 106,
+        "y": 194,
+        "w": 22,
+        "h": 24
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "manufacturer",
+      "value": "GE INDUSTRIAL MOTORS",
+      "vision_value": "GE INDUSTRIAL MOTORS",
+      "ocr_value": "GE INDUSTRIAL MOTORS",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_174.jpg",
+       "detail": "field=manufacturer; label=none; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 173,
+        "y": 75,
+        "w": 219,
+        "h": 26
+       }
+      },
+      "injection_flag": false
+     }
+    ],
+    "tag_read_ok": false,
+    "model_name": "qwen2.5vl:7b",
+    "latency_ms": 20593,
+    "cost_usd": 0.0
+   },
+   "reasons": {
+    "model_number": null,
+    "catalog_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": "not_located",
+    "frequency": null,
+    "manufacturer": null
+   },
+   "rules": {
+    "model_number": null,
+    "catalog_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": "not_found",
+    "frequency": null,
+    "manufacturer": null
+   },
+   "located_by": {
+    "model_number": "rapidocr",
+    "catalog_number": "rapidocr",
+    "voltage": "rapidocr",
+    "rated_current": "rapidocr",
+    "power": null,
+    "frequency": "rapidocr",
+    "manufacturer": "rapidocr"
+   },
+   "warnings": {
+    "model_number": null,
+    "catalog_number": null,
+    "voltage": "multi_row_table",
+    "rated_current": "multi_row_table",
+    "power": null,
+    "frequency": "multi_row_table",
+    "manufacturer": null
+   }
+  },
+  "hf_175": {
+   "result": {
+    "observation_id": "hf_175",
+    "fields": [
+     {
+      "name": "model_number",
+      "value": null,
+      "vision_value": "W40",
+      "ocr_value": "W40",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "catalog_number",
+      "value": null,
+      "vision_value": "CC029A",
+      "ocr_value": "CC029A",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "voltage",
+      "value": null,
+      "vision_value": "230/460",
+      "ocr_value": "200-230",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_175.jpg",
+       "detail": "field=voltage; label=V; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 116,
+        "y": 157,
+        "w": 52,
+        "h": 19
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "rated_current",
+      "value": null,
+      "vision_value": "69.8/34.9",
+      "ocr_value": "029",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "power",
+      "value": null,
+      "vision_value": "30.0(22.0)",
+      "ocr_value": "25 HP",
+      "format_rule_passed": false,
+      "status": "unreadable",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "frequency",
+      "value": null,
+      "vision_value": "60",
+      "ocr_value": "60 | 50",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_175.jpg",
+       "detail": "field=frequency; label=Hz; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 377,
+        "y": 141,
+        "w": 17,
+        "h": 18
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "manufacturer",
+      "value": null,
+      "vision_value": "WEG",
+      "ocr_value": null,
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     }
+    ],
+    "tag_read_ok": false,
+    "model_name": "qwen2.5vl:7b",
+    "latency_ms": 20605,
+    "cost_usd": 0.0
+   },
+   "reasons": {
+    "model_number": "not_located",
+    "catalog_number": "not_located",
+    "voltage": "readers_disagree",
+    "rated_current": "not_located",
+    "power": "format_fail",
+    "frequency": "readers_disagree",
+    "manufacturer": "not_located"
+   },
+   "rules": {
+    "model_number": "label_anchor_missing",
+    "catalog_number": "label_anchor_missing",
+    "voltage": "ocr_label_value_differs",
+    "rated_current": "not_found",
+    "power": "format_rule",
+    "frequency": "multi_rating",
+    "manufacturer": "not_found"
+   },
+   "located_by": {
+    "model_number": null,
+    "catalog_number": null,
+    "voltage": "rapidocr",
+    "rated_current": null,
+    "power": null,
+    "frequency": "rapidocr",
+    "manufacturer": null
+   },
+   "warnings": {
+    "model_number": null,
+    "catalog_number": null,
+    "voltage": "multi_row_table",
+    "rated_current": "multi_row_table",
+    "power": null,
+    "frequency": "multi_row_table",
+    "manufacturer": null
+   }
+  },
+  "hf_247": {
+   "result": {
+    "observation_id": "hf_247",
+    "fields": [
+     {
+      "name": "model_number",
+      "value": "EPT0754",
+      "vision_value": "EPT0754",
+      "ocr_value": "EPT0754",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_247.jpg",
+       "detail": "field=model_number; label=MODEL; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 130,
+        "y": 118,
+        "w": 53,
+        "h": 16
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "catalog_number",
+      "value": null,
+      "vision_value": "CC086A",
+      "ocr_value": "CC086A",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "voltage",
+      "value": "208-230/460",
+      "vision_value": "208-230/460",
+      "ocr_value": "208-230/460",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_247.jpg",
+       "detail": "field=voltage; label=VOLTS; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 123,
+        "y": 226,
+        "w": 77,
+        "h": 16
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "rated_current",
+      "value": null,
+      "vision_value": "180-166/83",
+      "ocr_value": "086",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_247.jpg",
+       "detail": "field=rated_current; label=AMPS; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 263,
+        "y": 226,
+        "w": 75,
+        "h": 17
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "power",
+      "value": "75 HP",
+      "vision_value": "75",
+      "ocr_value": "75",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_247.jpg",
+       "detail": "field=power; label=HP; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 117,
+        "y": 170,
+        "w": 13,
+        "h": 19
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "frequency",
+      "value": null,
+      "vision_value": "50Hz",
+      "ocr_value": "50 | 60",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_247.jpg",
+       "detail": "field=frequency; label=Hz; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 130,
+        "y": 253,
+        "w": 24,
+        "h": 16
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "manufacturer",
+      "value": "Galt",
+      "vision_value": "Galt",
+      "ocr_value": "Galt",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_247.jpg",
+       "detail": "field=manufacturer; label=none; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 241,
+        "y": 47,
+        "w": 81,
+        "h": 68
+       }
+      },
+      "injection_flag": false
+     }
+    ],
+    "tag_read_ok": false,
+    "model_name": "qwen2.5vl:7b",
+    "latency_ms": 17869,
+    "cost_usd": 0.0
+   },
+   "reasons": {
+    "model_number": null,
+    "catalog_number": "not_located",
+    "voltage": null,
+    "rated_current": "readers_disagree",
+    "power": null,
+    "frequency": "readers_disagree",
+    "manufacturer": null
+   },
+   "rules": {
+    "model_number": null,
+    "catalog_number": "label_anchor_missing",
+    "voltage": null,
+    "rated_current": "ocr_label_value_differs",
+    "power": null,
+    "frequency": "multi_rating",
+    "manufacturer": null
+   },
+   "located_by": {
+    "model_number": "rapidocr",
+    "catalog_number": null,
+    "voltage": "rapidocr",
+    "rated_current": "rapidocr",
+    "power": "rapidocr",
+    "frequency": "rapidocr",
+    "manufacturer": "rapidocr"
+   },
+   "warnings": {
+    "model_number": null,
+    "catalog_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": null,
+    "frequency": null,
+    "manufacturer": null
+   }
+  },
+  "hf_259": {
+   "result": {
+    "observation_id": "hf_259",
+    "fields": [
+     {
+      "name": "model_number",
+      "value": null,
+      "vision_value": "M2AA 160 L 4",
+      "ocr_value": "M2AA160L4",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "catalog_number",
+      "value": null,
+      "vision_value": "6209-22/C3",
+      "ocr_value": "6209-22/C3",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "voltage",
+      "value": null,
+      "vision_value": "530 Y / 420 Δ / 660 Y / 380 Δ / 415 Δ / 440 Δ",
+      "ocr_value": null,
+      "format_rule_passed": false,
+      "status": "unreadable",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "rated_current",
+      "value": null,
+      "vision_value": "16.5 / 28.5 / 17.3 / 30 / 28 / 30",
+      "ocr_value": "400",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "power",
+      "value": null,
+      "vision_value": null,
+      "ocr_value": null,
+      "format_rule_passed": null,
+      "status": "unreadable",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "frequency",
+      "value": null,
+      "vision_value": "50",
+      "ocr_value": null,
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "manufacturer",
+      "value": null,
+      "vision_value": "ABB Motors",
+      "ocr_value": "ABB Motors",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_259.jpg",
+       "detail": "field=manufacturer; label=none; located_by=full_ocr; pass=psm6-gray",
+       "bbox": {
+        "x": 34,
+        "y": 118,
+        "w": 79,
+        "h": 13
+       }
+      },
+      "injection_flag": false
+     }
+    ],
+    "tag_read_ok": false,
+    "model_name": "qwen2.5vl:7b",
+    "latency_ms": 22519,
+    "cost_usd": 0.0
+   },
+   "reasons": {
+    "model_number": "not_located",
+    "catalog_number": "not_located",
+    "voltage": "format_fail",
+    "rated_current": "not_located",
+    "power": "model_missing",
+    "frequency": "not_located",
+    "manufacturer": "readers_disagree"
+   },
+   "rules": {
+    "model_number": "label_anchor_missing",
+    "catalog_number": "label_anchor_missing",
+    "voltage": "format_rule",
+    "rated_current": "not_found",
+    "power": "no_value",
+    "frequency": "not_found",
+    "manufacturer": "fragment"
+   },
+   "located_by": {
+    "model_number": null,
+    "catalog_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": null,
+    "frequency": null,
+    "manufacturer": "full_ocr"
+   },
+   "warnings": {
+    "model_number": null,
+    "catalog_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": null,
+    "frequency": null,
+    "manufacturer": null
+   }
+  },
+  "hf_286": {
+   "result": {
+    "observation_id": "hf_286",
+    "fields": [
+     {
+      "name": "model_number",
+      "value": null,
+      "vision_value": "RGZESD",
+      "ocr_value": null,
+      "format_rule_passed": false,
+      "status": "unreadable",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "catalog_number",
+      "value": "1LA02864SE41",
+      "vision_value": "1LA02864SE41",
+      "ocr_value": "1LA02864SE41",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_286.jpg",
+       "detail": "field=catalog_number; label=ORD. NO.; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 87,
+        "y": 94,
+        "w": 116,
+        "h": 17
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "voltage",
+      "value": "460",
+      "vision_value": "460",
+      "ocr_value": "460",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_286.jpg",
+       "detail": "field=voltage; label=VOLTS; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 327,
+        "y": 148,
+        "w": 27,
+        "h": 19
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "rated_current",
+      "value": "34.9",
+      "vision_value": "34.9",
+      "ocr_value": "34.9",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_286.jpg",
+       "detail": "field=rated_current; label=AMPS; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 88,
+        "y": 148,
+        "w": 31,
+        "h": 20
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "power",
+      "value": null,
+      "vision_value": "30.00",
+      "ocr_value": null,
+      "format_rule_passed": false,
+      "status": "unreadable",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "frequency",
+      "value": null,
+      "vision_value": "60",
+      "ocr_value": null,
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "manufacturer",
+      "value": "SIEMENS",
+      "vision_value": "SIEMENS",
+      "ocr_value": "SIEM ENS",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_286.jpg",
+       "detail": "field=manufacturer; label=none; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 205,
+        "y": 33,
+        "w": 165,
+        "h": 33
+       }
+      },
+      "injection_flag": false
+     }
+    ],
+    "tag_read_ok": false,
+    "model_name": "qwen2.5vl:7b",
+    "latency_ms": 19559,
+    "cost_usd": 0.0
+   },
+   "reasons": {
+    "model_number": "format_fail",
+    "catalog_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": "format_fail",
+    "frequency": "not_located",
+    "manufacturer": null
+   },
+   "rules": {
+    "model_number": "format_rule",
+    "catalog_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": "format_rule",
+    "frequency": "not_found",
+    "manufacturer": null
+   },
+   "located_by": {
+    "model_number": null,
+    "catalog_number": "rapidocr",
+    "voltage": "rapidocr",
+    "rated_current": "rapidocr",
+    "power": null,
+    "frequency": null,
+    "manufacturer": "rapidocr"
+   },
+   "warnings": {
+    "model_number": null,
+    "catalog_number": null,
+    "voltage": "multi_row_table",
+    "rated_current": "multi_row_table",
+    "power": null,
+    "frequency": "multi_row_table",
+    "manufacturer": null
+   }
+  },
+  "hf_295": {
+   "result": {
+    "observation_id": "hf_295",
+    "fields": [
+     {
+      "name": "model_number",
+      "value": null,
+      "vision_value": "822-V TEK-2501",
+      "ocr_value": null,
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "catalog_number",
+      "value": null,
+      "vision_value": null,
+      "ocr_value": null,
+      "format_rule_passed": null,
+      "status": "unreadable",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "voltage",
+      "value": null,
+      "vision_value": "400/230",
+      "ocr_value": null,
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "rated_current",
+      "value": null,
+      "vision_value": "0050",
+      "ocr_value": null,
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "power",
+      "value": null,
+      "vision_value": "11",
+      "ocr_value": null,
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "frequency",
+      "value": null,
+      "vision_value": "50",
+      "ocr_value": null,
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "manufacturer",
+      "value": null,
+      "vision_value": "HØYER MOTORS",
+      "ocr_value": null,
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     }
+    ],
+    "tag_read_ok": false,
+    "model_name": "qwen2.5vl:7b",
+    "latency_ms": 18168,
+    "cost_usd": 0.0
+   },
+   "reasons": {
+    "model_number": "not_located",
+    "catalog_number": "model_missing",
+    "voltage": "not_located",
+    "rated_current": "not_located",
+    "power": "not_located",
+    "frequency": "not_located",
+    "manufacturer": "not_located"
+   },
+   "rules": {
+    "model_number": "not_found",
+    "catalog_number": "no_value",
+    "voltage": "not_found",
+    "rated_current": "not_found",
+    "power": "not_found",
+    "frequency": "not_found",
+    "manufacturer": "not_found"
+   },
+   "located_by": {
+    "model_number": null,
+    "catalog_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": null,
+    "frequency": null,
+    "manufacturer": null
+   },
+   "warnings": {
+    "model_number": null,
+    "catalog_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": null,
+    "frequency": null,
+    "manufacturer": null
+   }
+  },
+  "hf_306": {
+   "result": {
+    "observation_id": "hf_306",
+    "fields": [
+     {
+      "name": "model_number",
+      "value": null,
+      "vision_value": "160 M 4",
+      "ocr_value": "160 M4",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "catalog_number",
+      "value": null,
+      "vision_value": "160 M/L 421",
+      "ocr_value": null,
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "voltage",
+      "value": null,
+      "vision_value": "400",
+      "ocr_value": null,
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "rated_current",
+      "value": "21.5",
+      "vision_value": "21.5",
+      "ocr_value": "21.5",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_306.jpg",
+       "detail": "field=rated_current; label=A; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 245,
+        "y": 181,
+        "w": 44,
+        "h": 25
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "power",
+      "value": null,
+      "vision_value": "11",
+      "ocr_value": null,
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "frequency",
+      "value": null,
+      "vision_value": "50",
+      "ocr_value": null,
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "manufacturer",
+      "value": "ABB",
+      "vision_value": "ABB",
+      "ocr_value": "ABB",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_306.jpg",
+       "detail": "field=manufacturer; label=none; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 83,
+        "y": 38,
+        "w": 59,
+        "h": 43
+       }
+      },
+      "injection_flag": false
+     }
+    ],
+    "tag_read_ok": false,
+    "model_name": "qwen2.5vl:7b",
+    "latency_ms": 17707,
+    "cost_usd": 0.0
+   },
+   "reasons": {
+    "model_number": "not_located",
+    "catalog_number": "not_located",
+    "voltage": "not_located",
+    "rated_current": null,
+    "power": "not_located",
+    "frequency": "not_located",
+    "manufacturer": null
+   },
+   "rules": {
+    "model_number": "label_anchor_missing",
+    "catalog_number": "not_found",
+    "voltage": "not_found",
+    "rated_current": null,
+    "power": "not_found",
+    "frequency": "not_found",
+    "manufacturer": null
+   },
+   "located_by": {
+    "model_number": null,
+    "catalog_number": null,
+    "voltage": null,
+    "rated_current": "rapidocr",
+    "power": null,
+    "frequency": null,
+    "manufacturer": "rapidocr"
+   },
+   "warnings": {
+    "model_number": null,
+    "catalog_number": null,
+    "voltage": "multi_row_table",
+    "rated_current": "multi_row_table",
+    "power": null,
+    "frequency": "multi_row_table",
+    "manufacturer": null
+   }
+  },
+  "hf_330": {
+   "result": {
+    "observation_id": "hf_330",
+    "fields": [
+     {
+      "name": "model_number",
+      "value": "C143T11FK2F",
+      "vision_value": "C143T11FK2F",
+      "ocr_value": "MODEL:C143T11FK2F",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_330.jpg",
+       "detail": "field=model_number; label=MODEL; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 62,
+        "y": 78,
+        "w": 78,
+        "h": 13
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "catalog_number",
+      "value": "120485.00",
+      "vision_value": "120485.00",
+      "ocr_value": "CAT.NO:120485.00",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_330.jpg",
+       "detail": "field=catalog_number; label=CAT. NO.; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 62,
+        "y": 68,
+        "w": 74,
+        "h": 13
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "voltage",
+      "value": "208-230/460",
+      "vision_value": "208-230/460",
+      "ocr_value": "208-230/460",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_330.jpg",
+       "detail": "field=voltage; label=VOLT; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 253,
+        "y": 102,
+        "w": 40,
+        "h": 12
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "rated_current",
+      "value": null,
+      "vision_value": "3/1.5",
+      "ocr_value": "31.5 | 311.5 | 1",
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_330.jpg",
+       "detail": "field=rated_current; label=FLA; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 265,
+        "y": 112,
+        "w": 17,
+        "h": 13
+       }
+      },
+      "injection_flag": false
+     },
+     {
+      "name": "power",
+      "value": null,
+      "vision_value": "3/4 / 0.56",
+      "ocr_value": "3/4 KW",
+      "format_rule_passed": false,
+      "status": "unreadable",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "frequency",
+      "value": null,
+      "vision_value": "60",
+      "ocr_value": null,
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+     },
+     {
+      "name": "manufacturer",
+      "value": "LEESON",
+      "vision_value": "LEESON",
+      "ocr_value": "LEESON",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+       "kind": "photo_crop",
+       "ref_id": "hf_330.jpg",
+       "detail": "field=manufacturer; label=none; located_by=rapidocr; pass=rapidocr",
+       "bbox": {
+        "x": 171,
+        "y": 42,
+        "w": 92,
+        "h": 22
+       }
+      },
+      "injection_flag": false
+     }
+    ],
+    "tag_read_ok": false,
+    "model_name": "qwen2.5vl:7b",
+    "latency_ms": 21208,
+    "cost_usd": 0.0
+   },
+   "reasons": {
+    "model_number": null,
+    "catalog_number": null,
+    "voltage": null,
+    "rated_current": "readers_disagree",
+    "power": "format_fail",
+    "frequency": "not_located",
+    "manufacturer": null
+   },
+   "rules": {
+    "model_number": null,
+    "catalog_number": null,
+    "voltage": null,
+    "rated_current": "multi_rating",
+    "power": "format_rule",
+    "frequency": "not_found",
+    "manufacturer": null
+   },
+   "located_by": {
+    "model_number": "rapidocr",
+    "catalog_number": "rapidocr",
+    "voltage": "rapidocr",
+    "rated_current": "rapidocr",
+    "power": null,
+    "frequency": null,
+    "manufacturer": "rapidocr"
+   },
+   "warnings": {
+    "model_number": null,
+    "catalog_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": null,
+    "frequency": null,
+    "manufacturer": null
+   }
+  }
+ },
+ "scores": [
+  {
+   "photo_id": "darjja_train_01",
+   "field": "model_number",
+   "outcome": "correct",
+   "read_value": "6-030-732021",
+   "truth": "6-030-732021",
+   "matched_via": "model_number",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "darjja_train_01",
+   "field": "voltage",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "480 V (input) / 400 V (output)",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "darjja_train_01",
+   "field": "rated_current",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "15,5 A / 18,0 A",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "darjja_train_01",
+   "field": "power",
+   "outcome": "correct",
+   "read_value": "12.5 KVA",
+   "truth": "12.5 KVA",
+   "matched_via": "power",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "darjja_train_01",
+   "field": "frequency",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "50/60 Hz",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "darjja_train_01",
+   "field": "manufacturer",
+   "outcome": "correct",
+   "read_value": "Noratel Finland Oy",
+   "truth": "Noratel",
+   "matched_via": "manufacturer",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "darjja_train_10",
+   "field": "model_number",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "ML14XC1S030-230A04",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "darjja_train_10",
+   "field": "voltage",
+   "outcome": "correct",
+   "read_value": "208/230",
+   "truth": "208/230 V",
+   "matched_via": "voltage",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "darjja_train_10",
+   "field": "rated_current",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "12.8 A (compressor RLA)",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "darjja_train_10",
+   "field": "power",
+   "outcome": "abstained_ok",
+   "read_value": null,
+   "truth": null,
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "darjja_train_10",
+   "field": "frequency",
+   "outcome": "correct",
+   "read_value": "60",
+   "truth": "60 Hz",
+   "matched_via": "frequency",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "darjja_train_10",
+   "field": "manufacturer",
+   "outcome": "correct",
+   "read_value": "LENNOX",
+   "truth": "Lennox",
+   "matched_via": "manufacturer",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "darjja_train_11",
+   "field": "model_number",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "13ACD-036-230-05",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "darjja_train_11",
+   "field": "voltage",
+   "outcome": "correct",
+   "read_value": "208/230",
+   "truth": "208/230 V",
+   "matched_via": "voltage",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "darjja_train_11",
+   "field": "rated_current",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "14.4 A (compressor RLA)",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "darjja_train_11",
+   "field": "power",
+   "outcome": "abstained_ok",
+   "read_value": null,
+   "truth": null,
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "darjja_train_11",
+   "field": "frequency",
+   "outcome": "correct",
+   "read_value": "60",
+   "truth": "60 Hz",
+   "matched_via": "frequency",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "darjja_train_11",
+   "field": "manufacturer",
+   "outcome": "abstained_ok",
+   "read_value": null,
+   "truth": null,
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "darjja_train_12",
+   "field": "model_number",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "RSG1436S1P",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "darjja_train_12",
+   "field": "voltage",
+   "outcome": "correct",
+   "read_value": "208/230",
+   "truth": "208/230 V",
+   "matched_via": "voltage",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "darjja_train_12",
+   "field": "rated_current",
+   "outcome": "correct",
+   "read_value": "13.5",
+   "truth": "13.5 A (compressor RLA)",
+   "matched_via": "rated_current",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "darjja_train_12",
+   "field": "power",
+   "outcome": "abstained_ok",
+   "read_value": null,
+   "truth": null,
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "darjja_train_12",
+   "field": "frequency",
+   "outcome": "correct",
+   "read_value": "60",
+   "truth": "60 Hz",
+   "matched_via": "frequency",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "darjja_train_12",
+   "field": "manufacturer",
+   "outcome": "correct",
+   "read_value": "Heat Controller LLC",
+   "truth": "Heat Controller LLC",
+   "matched_via": "manufacturer",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "darjja_train_14",
+   "field": "model_number",
+   "outcome": "abstained_ok",
+   "read_value": null,
+   "truth": null,
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "darjja_train_14",
+   "field": "voltage",
+   "outcome": "abstained_ok",
+   "read_value": null,
+   "truth": null,
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "darjja_train_14",
+   "field": "rated_current",
+   "outcome": "abstained_ok",
+   "read_value": null,
+   "truth": null,
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "darjja_train_14",
+   "field": "power",
+   "outcome": "abstained_ok",
+   "read_value": null,
+   "truth": null,
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "darjja_train_14",
+   "field": "frequency",
+   "outcome": "extra",
+   "read_value": "60",
+   "truth": null,
+   "matched_via": null,
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "darjja_train_14",
+   "field": "manufacturer",
+   "outcome": "correct",
+   "read_value": "POWER MAGNETICS, INC.",
+   "truth": "Power Magnetics (PMI)",
+   "matched_via": "manufacturer",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "darjja_train_18",
+   "field": "model_number",
+   "outcome": "correct",
+   "read_value": "3LT50-440/230-Dyn11-23",
+   "truth": "3LT50-440/230-Dyn11-23",
+   "matched_via": "model_number",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "darjja_train_18",
+   "field": "voltage",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "440 V (input) / 230 V (output)",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "darjja_train_18",
+   "field": "rated_current",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "67 A / 126 A",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "darjja_train_18",
+   "field": "power",
+   "outcome": "correct",
+   "read_value": "50 KVA",
+   "truth": "50 kVA",
+   "matched_via": "power",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "darjja_train_18",
+   "field": "frequency",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "60 Hz",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "darjja_train_18",
+   "field": "manufacturer",
+   "outcome": "correct",
+   "read_value": "NORATEL",
+   "truth": "Noratel",
+   "matched_via": "manufacturer",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "darjja_train_22",
+   "field": "model_number",
+   "outcome": "abstained_ok",
+   "read_value": null,
+   "truth": null,
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "darjja_train_22",
+   "field": "voltage",
+   "outcome": "abstained_ok",
+   "read_value": null,
+   "truth": null,
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "darjja_train_22",
+   "field": "rated_current",
+   "outcome": "abstained_ok",
+   "read_value": null,
+   "truth": null,
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "darjja_train_22",
+   "field": "power",
+   "outcome": "abstained_ok",
+   "read_value": null,
+   "truth": null,
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "darjja_train_22",
+   "field": "frequency",
+   "outcome": "abstained_ok",
+   "read_value": null,
+   "truth": null,
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "darjja_train_22",
+   "field": "manufacturer",
+   "outcome": "correct",
+   "read_value": "GENERAL ELECTRIC CO",
+   "truth": "General Electric",
+   "matched_via": "manufacturer",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "hf_013",
+   "field": "model_number",
+   "outcome": "correct",
+   "read_value": "M3538",
+   "truth": "M3538",
+   "matched_via": "catalog_number",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "hf_013",
+   "field": "voltage",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "230/460 V",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_013",
+   "field": "rated_current",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "2/1 A",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_013",
+   "field": "power",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "1/2 HP",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_013",
+   "field": "frequency",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "60 Hz",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_013",
+   "field": "manufacturer",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "Baldor-Reliance",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_019",
+   "field": "model_number",
+   "outcome": "correct",
+   "read_value": "FM 140156",
+   "truth": "FM 140156",
+   "matched_via": "model_number",
+   "located_by": "full_ocr"
+  },
+  {
+   "photo_id": "hf_019",
+   "field": "voltage",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "115/230 V",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_019",
+   "field": "rated_current",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "13.6/6.8 A",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_019",
+   "field": "power",
+   "outcome": "correct",
+   "read_value": "1 HP",
+   "truth": "1 HP",
+   "matched_via": "power",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "hf_019",
+   "field": "frequency",
+   "outcome": "correct",
+   "read_value": "60",
+   "truth": "60 Hz",
+   "matched_via": "frequency",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "hf_019",
+   "field": "manufacturer",
+   "outcome": "abstained_ok",
+   "read_value": null,
+   "truth": null,
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_02",
+   "field": "model_number",
+   "outcome": "correct",
+   "read_value": "DI0034PCI",
+   "truth": "DI0034PCI",
+   "matched_via": "model_number",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "hf_02",
+   "field": "voltage",
+   "outcome": "correct",
+   "read_value": "230/460",
+   "truth": "230/460 V",
+   "matched_via": "voltage",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "hf_02",
+   "field": "rated_current",
+   "outcome": "correct",
+   "read_value": "7.8/3.9",
+   "truth": "7.8/3.9 A",
+   "matched_via": "rated_current",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "hf_02",
+   "field": "power",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "3 HP",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_02",
+   "field": "frequency",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "60 Hz",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_02",
+   "field": "manufacturer",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "Sterling Electric",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_020",
+   "field": "model_number",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "0.75KNE4FLG",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_020",
+   "field": "voltage",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "415±10% V",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_020",
+   "field": "rated_current",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "1.82 A",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_020",
+   "field": "power",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "0.75 kW (1.00 HP)",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_020",
+   "field": "frequency",
+   "outcome": "correct",
+   "read_value": "50±5%",
+   "truth": "50±5% Hz",
+   "matched_via": "frequency",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "hf_020",
+   "field": "manufacturer",
+   "outcome": "correct",
+   "read_value": "CG Power and Industrial Solutions Ltd",
+   "truth": "CG Power and Industrial Solutions",
+   "matched_via": "manufacturer",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "hf_022",
+   "field": "model_number",
+   "outcome": "correct",
+   "read_value": "MY 7124",
+   "truth": "MY 7124",
+   "matched_via": "model_number",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "hf_022",
+   "field": "voltage",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "230 V",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_022",
+   "field": "rated_current",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "2.82 A",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_022",
+   "field": "power",
+   "outcome": "correct",
+   "read_value": "0.37 kW",
+   "truth": "0.37 kW (0.5 HP)",
+   "matched_via": "power",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "hf_022",
+   "field": "frequency",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "50 Hz",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_022",
+   "field": "manufacturer",
+   "outcome": "abstained_ok",
+   "read_value": null,
+   "truth": null,
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_025",
+   "field": "model_number",
+   "outcome": "correct",
+   "read_value": "00536ET3E184JM-W22",
+   "truth": "00536ET3E184JM-W22",
+   "matched_via": "model_number",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "hf_025",
+   "field": "voltage",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "230/460 V",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_025",
+   "field": "rated_current",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "11.8/5.90 A",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_025",
+   "field": "power",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "5.0 HP (3.7 kW)",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_025",
+   "field": "frequency",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "60 Hz",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_025",
+   "field": "manufacturer",
+   "outcome": "correct",
+   "read_value": "WEG",
+   "truth": "WEG",
+   "matched_via": "manufacturer",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "hf_038",
+   "field": "model_number",
+   "outcome": "correct",
+   "read_value": "EPT0754",
+   "truth": "EPT0754",
+   "matched_via": "model_number",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "hf_038",
+   "field": "voltage",
+   "outcome": "correct",
+   "read_value": "208-230/460",
+   "truth": "208-230/460 V",
+   "matched_via": "voltage",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "hf_038",
+   "field": "rated_current",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "180-166/83 A",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_038",
+   "field": "power",
+   "outcome": "correct",
+   "read_value": "75 HP",
+   "truth": "75 HP",
+   "matched_via": "power",
+   "located_by": "full_ocr"
+  },
+  {
+   "photo_id": "hf_038",
+   "field": "frequency",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "60 Hz",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_038",
+   "field": "manufacturer",
+   "outcome": "correct",
+   "read_value": "Motors & Drives International",
+   "truth": "Motors & Drives International",
+   "matched_via": "manufacturer",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "hf_04",
+   "field": "model_number",
+   "outcome": "wrong",
+   "read_value": "HLS447SR0608",
+   "truth": "HHI150-12-447T",
+   "matched_via": null,
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "hf_04",
+   "field": "voltage",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "460 V",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_04",
+   "field": "rated_current",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "169.5 A",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_04",
+   "field": "power",
+   "outcome": "correct",
+   "read_value": "150HP",
+   "truth": "150 HP",
+   "matched_via": "power",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "hf_04",
+   "field": "frequency",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "60 Hz",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_04",
+   "field": "manufacturer",
+   "outcome": "wrong",
+   "read_value": "Crown Triton",
+   "truth": "Hyundai (Crown Triton)",
+   "matched_via": null,
+   "located_by": "full_ocr"
+  },
+  {
+   "photo_id": "hf_047",
+   "field": "model_number",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "A36-8063-4076",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_047",
+   "field": "voltage",
+   "outcome": "correct",
+   "read_value": "230/460",
+   "truth": "230/460 V",
+   "matched_via": "voltage",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "hf_047",
+   "field": "rated_current",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "171/85.6 A",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_047",
+   "field": "power",
+   "outcome": "correct",
+   "read_value": "75 HP",
+   "truth": "75 HP",
+   "matched_via": "power",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "hf_047",
+   "field": "frequency",
+   "outcome": "correct",
+   "read_value": "6-60",
+   "truth": "6-60 Hz",
+   "matched_via": "frequency",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "hf_047",
+   "field": "manufacturer",
+   "outcome": "correct",
+   "read_value": "BALDOR",
+   "truth": "Baldor-Reliance",
+   "matched_via": "manufacturer",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "hf_048",
+   "field": "model_number",
+   "outcome": "correct",
+   "read_value": "EPT0754",
+   "truth": "EPT0754",
+   "matched_via": "model_number",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "hf_048",
+   "field": "voltage",
+   "outcome": "correct",
+   "read_value": "208-230/460",
+   "truth": "208-230/460 V",
+   "matched_via": "voltage",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "hf_048",
+   "field": "rated_current",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "180-166/83 A",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_048",
+   "field": "power",
+   "outcome": "correct",
+   "read_value": "75 HP",
+   "truth": "75 HP",
+   "matched_via": "power",
+   "located_by": "full_ocr"
+  },
+  {
+   "photo_id": "hf_048",
+   "field": "frequency",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "60 Hz",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_048",
+   "field": "manufacturer",
+   "outcome": "correct",
+   "read_value": "Motors & Drives International",
+   "truth": "Motors & Drives International",
+   "matched_via": "manufacturer",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "hf_053",
+   "field": "model_number",
+   "outcome": "correct",
+   "read_value": "HMC2-160L-4",
+   "truth": "HMC2-160L-4",
+   "matched_via": "model_number",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "hf_053",
+   "field": "voltage",
+   "outcome": "correct",
+   "read_value": "400/690",
+   "truth": "400/690 V",
+   "matched_via": "voltage",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "hf_053",
+   "field": "rated_current",
+   "outcome": "correct",
+   "read_value": "28/16.5",
+   "truth": "28/16.5 A",
+   "matched_via": "rated_current",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "hf_053",
+   "field": "power",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "15 kW",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_053",
+   "field": "frequency",
+   "outcome": "correct",
+   "read_value": "50",
+   "truth": "50 Hz",
+   "matched_via": "frequency",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "hf_053",
+   "field": "manufacturer",
+   "outcome": "correct",
+   "read_value": "HOYER",
+   "truth": "Hoyer",
+   "matched_via": "manufacturer",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "hf_06",
+   "field": "model_number",
+   "outcome": "correct",
+   "read_value": "094914",
+   "truth": "094914",
+   "matched_via": "catalog_number",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "hf_06",
+   "field": "voltage",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "208-230/460 V",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_06",
+   "field": "rated_current",
+   "outcome": "correct",
+   "read_value": "21-18.8/9.4",
+   "truth": "21-18.8/9.4 A",
+   "matched_via": "rated_current",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "hf_06",
+   "field": "power",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "7.5 HP",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_06",
+   "field": "frequency",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "60 Hz",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_06",
+   "field": "manufacturer",
+   "outcome": "wrong",
+   "read_value": "Baldor Electric Co.",
+   "truth": "Baldor-Reliance",
+   "matched_via": null,
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "hf_066",
+   "field": "model_number",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "MY90L-4",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_066",
+   "field": "voltage",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "230 V",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_066",
+   "field": "rated_current",
+   "outcome": "abstained_ok",
+   "read_value": null,
+   "truth": null,
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_066",
+   "field": "power",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "1,5 kW (2 HP)",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_066",
+   "field": "frequency",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "50 Hz",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_066",
+   "field": "manufacturer",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "Gibbons",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_069",
+   "field": "model_number",
+   "outcome": "correct",
+   "read_value": "D8SJ1-6000-BWM/D",
+   "truth": "D8SJ1-6000-BWM/D",
+   "matched_via": "model_number",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "hf_069",
+   "field": "voltage",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "380/420 Δ/Δ V",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_069",
+   "field": "rated_current",
+   "outcome": "correct",
+   "read_value": "106,0",
+   "truth": "106,0 A",
+   "matched_via": "rated_current",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "hf_069",
+   "field": "power",
+   "outcome": "abstained_ok",
+   "read_value": null,
+   "truth": null,
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_069",
+   "field": "frequency",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "50 Hz",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_069",
+   "field": "manufacturer",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "Copeland (DWM Copeland)",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_072",
+   "field": "model_number",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "GSA632-4",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_072",
+   "field": "voltage",
+   "outcome": "correct",
+   "read_value": "220/380 V",
+   "truth": "220/380 V",
+   "matched_via": "voltage",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "hf_072",
+   "field": "rated_current",
+   "outcome": "abstained_ok",
+   "read_value": null,
+   "truth": null,
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_072",
+   "field": "power",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "0.18 KW (0.25 HP)",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_072",
+   "field": "frequency",
+   "outcome": "correct",
+   "read_value": "50 Hz",
+   "truth": "50 Hz",
+   "matched_via": "frequency",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "hf_072",
+   "field": "manufacturer",
+   "outcome": "abstained_ok",
+   "read_value": null,
+   "truth": null,
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_075",
+   "field": "model_number",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "1LE15062CA234AB0",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_075",
+   "field": "voltage",
+   "outcome": "wrong",
+   "read_value": "400 Δ / 690 Y",
+   "truth": "400 Δ V",
+   "matched_via": null,
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "hf_075",
+   "field": "rated_current",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "95 A",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_075",
+   "field": "power",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "55 kW",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_075",
+   "field": "frequency",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "50 Hz",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_075",
+   "field": "manufacturer",
+   "outcome": "correct",
+   "read_value": "SIEMENS",
+   "truth": "Siemens",
+   "matched_via": "manufacturer",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "hf_09",
+   "field": "model_number",
+   "outcome": "correct",
+   "read_value": "00118ET3E143T-W22",
+   "truth": "00118ET3E143T-W22",
+   "matched_via": "model_number",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "hf_09",
+   "field": "voltage",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "230/460 V",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_09",
+   "field": "rated_current",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "2.94/1.47 A",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_09",
+   "field": "power",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "1.0 HP (0.75 kW)",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_09",
+   "field": "frequency",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "60 Hz",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_09",
+   "field": "manufacturer",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "WEG",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_090",
+   "field": "model_number",
+   "outcome": "correct",
+   "read_value": "EM3615T",
+   "truth": "EM3615T",
+   "matched_via": "catalog_number",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "hf_090",
+   "field": "voltage",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "208-230/460 V",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_090",
+   "field": "rated_current",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "13.9-13.4/6.7 A",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_090",
+   "field": "power",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "5 HP",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_090",
+   "field": "frequency",
+   "outcome": "correct",
+   "read_value": "60",
+   "truth": "60 Hz",
+   "matched_via": "frequency",
+   "located_by": "full_ocr"
+  },
+  {
+   "photo_id": "hf_090",
+   "field": "manufacturer",
+   "outcome": "correct",
+   "read_value": "Baldor",
+   "truth": "Baldor-Reliance",
+   "matched_via": "manufacturer",
+   "located_by": "full_ocr"
+  },
+  {
+   "photo_id": "hf_092",
+   "field": "model_number",
+   "outcome": "correct",
+   "read_value": "5KS184BCT205B",
+   "truth": "5KS184BCT205B",
+   "matched_via": "model_number",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "hf_092",
+   "field": "voltage",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "230/460 V",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_092",
+   "field": "rated_current",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "12.3/6.15 A",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_092",
+   "field": "power",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "5 HP",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_092",
+   "field": "frequency",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "60 Hz",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_092",
+   "field": "manufacturer",
+   "outcome": "correct",
+   "read_value": "GE Motors",
+   "truth": "GE Motors",
+   "matched_via": "manufacturer",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "hf_110",
+   "field": "model_number",
+   "outcome": "correct",
+   "read_value": "00112EP3ER145TC-W22",
+   "truth": "00112EP3ER145TC-W22",
+   "matched_via": "model_number",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "hf_110",
+   "field": "voltage",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "208-230/460 V",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_110",
+   "field": "rated_current",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "3.76-3.26/1.63 A",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_110",
+   "field": "power",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "1.0 HP (0.75 kW)",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_110",
+   "field": "frequency",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "60 Hz",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_110",
+   "field": "manufacturer",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "WEG",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_174",
+   "field": "model_number",
+   "outcome": "correct",
+   "read_value": "5KS324ZWL305",
+   "truth": "5KS324ZWL305",
+   "matched_via": "model_number",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "hf_174",
+   "field": "voltage",
+   "outcome": "correct",
+   "read_value": "230/460",
+   "truth": "230/460 V",
+   "matched_via": "voltage",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "hf_174",
+   "field": "rated_current",
+   "outcome": "correct",
+   "read_value": "64.2/32.1",
+   "truth": "64.2/32.1 A",
+   "matched_via": "rated_current",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "hf_174",
+   "field": "power",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "25 HP",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_174",
+   "field": "frequency",
+   "outcome": "correct",
+   "read_value": "60",
+   "truth": "60 Hz",
+   "matched_via": "frequency",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "hf_174",
+   "field": "manufacturer",
+   "outcome": "correct",
+   "read_value": "GE INDUSTRIAL MOTORS",
+   "truth": "GE Industrial Motors (Wolong)",
+   "matched_via": "manufacturer",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "hf_175",
+   "field": "model_number",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "03018OT3E286T-W40",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_175",
+   "field": "voltage",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "230/460 V",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_175",
+   "field": "rated_current",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "69.8/34.9 A",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_175",
+   "field": "power",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "30.0 HP (22.0 kW)",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_175",
+   "field": "frequency",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "60 Hz",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_175",
+   "field": "manufacturer",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "WEG",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_247",
+   "field": "model_number",
+   "outcome": "correct",
+   "read_value": "EPT0754",
+   "truth": "EPT0754",
+   "matched_via": "model_number",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "hf_247",
+   "field": "voltage",
+   "outcome": "correct",
+   "read_value": "208-230/460",
+   "truth": "208-230/460 V",
+   "matched_via": "voltage",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "hf_247",
+   "field": "rated_current",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "180-166/83 A",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_247",
+   "field": "power",
+   "outcome": "correct",
+   "read_value": "75 HP",
+   "truth": "75 HP",
+   "matched_via": "power",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "hf_247",
+   "field": "frequency",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "60 Hz",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_247",
+   "field": "manufacturer",
+   "outcome": "correct",
+   "read_value": "Galt",
+   "truth": "Galt",
+   "matched_via": "manufacturer",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "hf_259",
+   "field": "model_number",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "M2AA 160 L 4",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_259",
+   "field": "voltage",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "400 Δ V",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_259",
+   "field": "rated_current",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "28.5 A",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_259",
+   "field": "power",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "15 kW",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_259",
+   "field": "frequency",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "50 Hz",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_259",
+   "field": "manufacturer",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "ABB",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_286",
+   "field": "model_number",
+   "outcome": "correct",
+   "read_value": "1LA02864SE41",
+   "truth": "1LA02864SE41",
+   "matched_via": "catalog_number",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "hf_286",
+   "field": "voltage",
+   "outcome": "correct",
+   "read_value": "460",
+   "truth": "460 V",
+   "matched_via": "voltage",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "hf_286",
+   "field": "rated_current",
+   "outcome": "correct",
+   "read_value": "34.9",
+   "truth": "34.9 A",
+   "matched_via": "rated_current",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "hf_286",
+   "field": "power",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "30.00 HP",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_286",
+   "field": "frequency",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "60 Hz",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_286",
+   "field": "manufacturer",
+   "outcome": "correct",
+   "read_value": "SIEMENS",
+   "truth": "Siemens",
+   "matched_via": "manufacturer",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "hf_295",
+   "field": "model_number",
+   "outcome": "abstained_ok",
+   "read_value": null,
+   "truth": null,
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_295",
+   "field": "voltage",
+   "outcome": "abstained_ok",
+   "read_value": null,
+   "truth": null,
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_295",
+   "field": "rated_current",
+   "outcome": "abstained_ok",
+   "read_value": null,
+   "truth": null,
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_295",
+   "field": "power",
+   "outcome": "abstained_ok",
+   "read_value": null,
+   "truth": null,
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_295",
+   "field": "frequency",
+   "outcome": "abstained_ok",
+   "read_value": null,
+   "truth": null,
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_295",
+   "field": "manufacturer",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "Hoyer Motors",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_306",
+   "field": "model_number",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "M2AA 160 M 4",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_306",
+   "field": "voltage",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "400 D V",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_306",
+   "field": "rated_current",
+   "outcome": "correct",
+   "read_value": "21.5",
+   "truth": "21.5 A",
+   "matched_via": "rated_current",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "hf_306",
+   "field": "power",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "11 kW",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_306",
+   "field": "frequency",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "50 Hz",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_306",
+   "field": "manufacturer",
+   "outcome": "correct",
+   "read_value": "ABB",
+   "truth": "ABB",
+   "matched_via": "manufacturer",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "hf_330",
+   "field": "model_number",
+   "outcome": "correct",
+   "read_value": "120485.00",
+   "truth": "120485.00",
+   "matched_via": "catalog_number",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "hf_330",
+   "field": "voltage",
+   "outcome": "correct",
+   "read_value": "208-230/460",
+   "truth": "208-230/460 V",
+   "matched_via": "voltage",
+   "located_by": "rapidocr"
+  },
+  {
+   "photo_id": "hf_330",
+   "field": "rated_current",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "3/1.5 A",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_330",
+   "field": "power",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "3/4 HP (0.56 kW)",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_330",
+   "field": "frequency",
+   "outcome": "missed",
+   "read_value": null,
+   "truth": "60 Hz",
+   "matched_via": null,
+   "located_by": null
+  },
+  {
+   "photo_id": "hf_330",
+   "field": "manufacturer",
+   "outcome": "correct",
+   "read_value": "LEESON",
+   "truth": "Leeson",
+   "matched_via": "manufacturer",
+   "located_by": "rapidocr"
+  }
+ ]
+}
