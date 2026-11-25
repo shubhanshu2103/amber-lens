@@ -134,3 +134,27 @@ class FuzzyRecords:
     def submittal_for_model(self, model_number):
         m = self.inner.submittal_for_model(model_number)
         return self._f(m) if m and "submittal" in self.only else m
+
+
+def rating(name, value, status=ReadStatus.READ):
+    read = status == ReadStatus.READ
+    return ReadField(
+        name=name, value=value if read else None, vision_value=value, ocr_value=value, format_rule_passed=True,
+        status=status, source=SourceRef(kind="photo_crop", ref_id="obs-1", detail=name, bbox=BBox(x=5, y=5, w=40, h=10))
+        if read else None,
+    )
+
+
+def sub_perception(model="ACME-50HP", voltage="460 V", power="50 HP", extra=()):
+    fields = [model_field(model)]
+    for f in (rating("voltage", voltage) if voltage else None, rating("power", power) if power else None):
+        if f:
+            fields.append(f)
+    return PerceptionResult(observation_id="obs-1", fields=[*fields, *extra], tag_read_ok=True, model_name="fake",
+                            latency_ms=1, cost_usd=0.0)
+
+
+def sub_records(status="approved", suffixes=(), ratings=None):
+    ratings = ratings or {"voltage": "460V", "power": "50 HP"}
+    return FakeRecords(submittals=[Submittal(submittal_id="SUB-9", model_number="ACME-50HP", status=status,
+                                             ratings=ratings, allowed_suffixes=list(suffixes))])
