@@ -49,11 +49,11 @@ class SitePRService:
         self._emit(pr.site_pr_id, "drafted", SYSTEM, {"site_pr": pr.model_dump(mode="json")})
         return self.get(pr.site_pr_id)
 
-    def self_check(self, site_pr_id: str, note: str, withdraw: bool = False) -> SitePR:
-        """Record the self-check result; withdraw the PR if the fix would be wrong."""
-        self._emit(site_pr_id, "self_checked", SYSTEM, {"note": note})
+    def self_check(self, site_pr_id: str, note: str, withdraw: bool = False, detail: dict | None = None) -> SitePR:
+        """Record the self-check result; withdraw the PR if the fix would be wrong. `detail` (e.g. the sighting) is logged."""
+        self._emit(site_pr_id, "self_checked", SYSTEM, {"note": note, **(detail or {})})
         if withdraw:
-            self._emit(site_pr_id, "withdrawn", SYSTEM, {"reason": note})
+            self._emit(site_pr_id, "withdrawn", SYSTEM, {"reason": note, **(detail or {})})
         return self.get(site_pr_id)
 
     def submit(self, site_pr_id: str) -> SitePR:
@@ -106,8 +106,12 @@ class SitePRService:
             self._emit(site_pr_id, "verified", SYSTEM)
         return self.get(site_pr_id)
 
-    def reopen(self, site_pr_id: str, reason: str, recurrence: bool = False) -> SitePR:
-        self._emit(site_pr_id, "reopened", SYSTEM, {"reason": reason, "recurrence": recurrence})
+    def reopen(self, site_pr_id: str, reason: str, recurrence: bool = False, refresh: SitePR | None = None) -> SitePR:
+        """Reopen. `refresh` is the new finding of a recurrence: its evidence replaces the old before re-review."""
+        payload = {"reason": reason, "recurrence": recurrence}
+        if refresh is not None:
+            payload["refresh"] = refresh.model_dump(mode="json")
+        self._emit(site_pr_id, "reopened", SYSTEM, payload)
         return self.get(site_pr_id)
 
     def recover(self) -> list[str]:

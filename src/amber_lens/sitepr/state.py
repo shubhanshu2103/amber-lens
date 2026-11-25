@@ -63,6 +63,11 @@ def evidence_pack_hash(pr: SitePR) -> str:
     return hashlib.sha256(json.dumps(pack, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
 
 
+def issue_key(pr: SitePR) -> frozenset[tuple[str, str, str]]:
+    """Which record fields a Site PR proposes to change. Two Site PRs with the same key are about the same issue."""
+    return frozenset((c.record_kind, c.record_id, c.field) for c in pr.changes)
+
+
 def key_for_version(base_key: str, version: int) -> str:
     """'sitepr-0042:claim:v1' with version 2 -> 'sitepr-0042:claim:v2'."""
     if re.search(r":v\d+$", base_key):
@@ -87,8 +92,15 @@ def rebuild(events: list[LedgerEvent]) -> SitePR:
             pr = pr.model_copy(update={"evidence_hash": ev.payload["evidence_hash"]})
         elif ev.type == "reopened":
             version = pr.idempotency_version + 1
+            fresh = ev.payload.get("refresh")  # a recurrence brings new evidence; the reviewer must not see the old
+            carried = {}
+            if fresh:
+                new = SitePR.model_validate(fresh)
+                carried = {"finding": new.finding, "changes": new.changes, "evidence": new.evidence,
+                           "confidence": new.confidence, "impact": new.impact}
             pr = pr.model_copy(
                 update={
+                    **carried,
                     "idempotency_version": version,
                     "idempotency_key": key_for_version(pr.idempotency_key, version),
                     "recurrence_count": pr.recurrence_count + (1 if ev.payload.get("recurrence") else 0),
