@@ -1,0 +1,109 @@
+{
+  "observation_id": "hf_02",
+  "fields": [
+    {
+      "name": "model_number",
+      "value": "DI0034PCI",
+      "vision_value": "DI0034PCI",
+      "ocr_value": "DI0034PCI",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+        "kind": "photo_crop",
+        "ref_id": "hf_02.jpg",
+        "detail": "field=model_number; label=MODEL NO.; located_by=rapidocr; pass=rapidocr",
+        "bbox": {
+          "x": 363,
+          "y": 14,
+          "w": 115,
+          "h": 33
+        }
+      },
+      "injection_flag": false
+    },
+    {
+      "name": "catalog_number",
+      "value": null,
+      "vision_value": null,
+      "ocr_value": null,
+      "format_rule_passed": null,
+      "status": "unreadable",
+      "source": null,
+      "injection_flag": false
+    },
+    {
+      "name": "voltage",
+      "value": "230/460",
+      "vision_value": "230/460",
+      "ocr_value": "230/460",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+        "kind": "photo_crop",
+        "ref_id": "hf_02.jpg",
+        "detail": "field=voltage; label=VOLTS; located_by=rapidocr; pass=rapidocr",
+        "bbox": {
+          "x": 312,
+          "y": 52,
+          "w": 79,
+          "h": 34
+        }
+      },
+      "injection_flag": false
+    },
+    {
+      "name": "rated_current",
+      "value": "7.8/3.9",
+      "vision_value": "7.8/3.9",
+      "ocr_value": "7.8/3.9",
+      "format_rule_passed": true,
+      "status": "read",
+      "source": {
+        "kind": "photo_crop",
+        "ref_id": "hf_02.jpg",
+        "detail": "field=rated_current; label=AMP.; located_by=rapidocr; pass=rapidocr",
+        "bbox": {
+          "x": 566,
+          "y": 51,
+          "w": 72,
+          "h": 38
+        }
+      },
+      "injection_flag": false
+    },
+    {
+      "name": "power",
+      "value": null,
+      "vision_value": "3",
+      "ocr_value": null,
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+    },
+    {
+      "name": "frequency",
+      "value": null,
+      "vision_value": "60",
+      "ocr_value": null,
+      "format_rule_passed": true,
+      "status": "disputed",
+      "source": null,
+      "injection_flag": false
+    },
+    {
+      "name": "manufacturer",
+      "value": null,
+      "vision_value": "ee",
+      "ocr_value": null,
+      "format_rule_passed": false,
+      "status": "unreadable",
+      "source": null,
+      "injection_flag": false
+    }
+  ],
+  "tag_read_ok": false,
+  "model_name": "qwen2.5vl:7b",
+  "latency_ms": 17006,
+  "cost_usd": 0.0
+}

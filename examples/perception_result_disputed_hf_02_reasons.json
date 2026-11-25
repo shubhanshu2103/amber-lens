@@ -1,0 +1,38 @@
+{
+  "reasons": {
+    "model_number": null,
+    "catalog_number": "model_missing",
+    "voltage": null,
+    "rated_current": null,
+    "power": "not_located",
+    "frequency": "not_located",
+    "manufacturer": "format_fail"
+  },
+  "rules": {
+    "model_number": null,
+    "catalog_number": "no_value",
+    "voltage": null,
+    "rated_current": null,
+    "power": "not_found",
+    "frequency": "not_found",
+    "manufacturer": "format_rule"
+  },
+  "located_by": {
+    "model_number": "rapidocr",
+    "catalog_number": null,
+    "voltage": "rapidocr",
+    "rated_current": "rapidocr",
+    "power": null,
+    "frequency": null,
+    "manufacturer": null
+  },
+  "warnings": {
+    "model_number": null,
+    "catalog_number": null,
+    "voltage": null,
+    "rated_current": null,
+    "power": null,
+    "frequency": null,
+    "manufacturer": null
+  }
+}
