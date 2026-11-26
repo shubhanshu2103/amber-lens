@@ -60,7 +60,7 @@ class RecordStore:
         self.db.executescript(_SCHEMA)
 
     @classmethod
-    def from_csv_dir(cls, folder: str | Path, db: str | Path = ":memory:") -> "RecordStore":
+    def from_csv_dir(cls, folder: str | Path, db: str | Path = ":memory:") -> RecordStore:
         store = cls(db)
         folder = Path(folder)
         for table in ("po_lines", "submittals", "schedule", "rooms", "deliveries"):
