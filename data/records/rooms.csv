@@ -1,0 +1,9 @@
+room_tag,room_name,floor,zone
+R-101,Pump Room,L1,Mechanical
+R-102,Generator Yard,L1,Power
+R-201,Chiller Plant,L2,Mechanical
+R-202,Compressor Room,L2,Utilities
+R-203,Electrical Room A,L2,Power
+R-301,Data Hall 1,L3,IT
+R-302,Data Hall 2,L3,IT
+R-401,Roof Plant,L4,Mechanical
