@@ -168,3 +168,39 @@ def test_a_rating_on_the_plate_that_the_submittal_does_not_list_is_not_compared(
 
 def test_a_flagged_free_text_line_caps_confidence():
     assert run(p=sub_perception(extra=[free_text()])).confidence <= 0.5
+
+
+# -- approved ratings that list several values (real rows from Project Alpha) ----------------------------------------
+
+
+@pytest.mark.parametrize("approved,found,key", [
+    ("208–230/460 V", "208-230/460 V", "voltage"),   # en dash in the record, hyphen on the plate
+    ("208–230/460 V", "208-230/460", "voltage"),     # unit missing on the plate
+    ("180/166/83 A", "180/166/83 A", "rated_current"),
+    ("230/460 V", "230/460 V", "voltage"),
+    ("2/1 A", "2/1 A", "rated_current"),
+])
+def test_an_approved_multi_value_rating_matches_the_same_plate_text(approved, found, key):
+    assert compare_rating(approved, found, key) is True
+
+
+@pytest.mark.parametrize("approved,found", [
+    ("230/460 V", "230/575 V"),      # a different second voltage is a different motor
+    ("230/460 V", "115/230 V"),
+    ("2/1 A", "3/1.5 A"),
+])
+def test_a_multi_value_rating_with_different_values_is_a_mismatch(approved, found):
+    assert compare_rating(approved, found) is False
+
+
+@pytest.mark.parametrize("approved,found", [
+    ("230/460 V", "460 V"),          # the plate shows only part of what was approved
+    ("230/460 V", "208-230/460 V"),  # the plate shows more than was approved
+])
+def test_a_multi_value_rating_the_plate_only_partly_shows_is_undecided(approved, found):
+    assert compare_rating(approved, found) is None
+
+
+def test_a_real_multi_voltage_motor_can_be_a_go():
+    records = sub_records(ratings={"voltage": "208–230/460 V", "power": "75 HP"})
+    assert run(records=records, p=sub_perception(voltage="208-230/460", power="75 HP")).verdict == VerdictCode.GO

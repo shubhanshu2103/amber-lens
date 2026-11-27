@@ -65,7 +65,10 @@ def _pairs(text: str) -> list[tuple[str, str | None]]:
 
 
 def compare_rating(approved: str, found: str, key: str | None = None) -> bool | None:
-    """True equal, False different, None cannot tell (a multi-rating plate that contains the approved value).
+    """True equal, False different, None cannot tell (the plate shows only part of the approved values, or more).
+
+    The approved value may list several values (208-230/460 V): all of them are compared as a set, so the same text on
+    the plate matches, a different second value (230/575 V) is a mismatch, and a plate showing only 460 V is undecided.
 
     A unit missing from the approved value is taken from its key (hp -> HP). Values in another unit are different values,
     so 50 HP against 50 kW is a mismatch, while a second unit in brackets (1.0 HP (0.75 kW)) is ignored.
@@ -73,15 +76,16 @@ def compare_rating(approved: str, found: str, key: str | None = None) -> bool | 
     ap, fp = _pairs(approved), _pairs(found)
     if not ap or not fp:
         return None if (ap or fp) else approved.strip().upper() == found.strip().upper()
-    number, unit = ap[0]
-    unit = unit or KEY_UNITS.get((key or "").lower())
-    candidates = [n for n, u in fp if unit is None or u in (None, unit)]
-    if not candidates:
+    unit = next((u for _, u in ap if u), None) or KEY_UNITS.get((key or "").lower())
+    wanted = {n for n, u in ap if u in (None, unit)}  # every value approved, e.g. {208, 230, 460} for 208-230/460 V
+    seen = {n for n, u in fp if unit is None or u in (None, unit)}
+    if not seen:
         return False  # the plate states this rating only in another unit
-    values = set(candidates)
-    if values == {number}:
+    if wanted == seen:
         return True
-    return None if number in values else False
+    if wanted < seen or seen < wanted:
+        return None  # the plate shows only part of what was approved, or more than was
+    return False
 
 
 def _unknown(name: str) -> CheckResult:
