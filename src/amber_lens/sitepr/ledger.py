@@ -68,7 +68,7 @@ class Ledger:
     def site_pr_ids(self) -> list[str]:
         con = self._connect()
         try:
-            return [r[0] for r in con.execute("SELECT DISTINCT site_pr_id FROM events ORDER BY site_pr_id")]
+            return [r[0] for r in con.execute("SELECT site_pr_id FROM events GROUP BY site_pr_id ORDER BY MIN(seq)")]
         finally:
             con.close()
 

@@ -44,8 +44,8 @@ def next_status(current: SitePRStatus | None, event_type: str) -> SitePRStatus:
     if event_type == "drafted":
         raise TransitionError("Site PR already drafted")
     target = EVENT_STATUS[event_type]
-    if target is None:  # self_checked: only while drafting
-        if current != S.DRAFT:
+    if target is None:  # self_checked: while drafting, or after a reopen (the new evidence needs its own check)
+        if current not in (S.DRAFT, S.REOPENED):
             raise TransitionError(f"self_checked not allowed from {current.value}")
         return current
     if target not in SITEPR_TRANSITIONS[current]:
@@ -61,6 +61,11 @@ def evidence_pack_hash(pr: SitePR) -> str:
         "evidence": [e.model_dump(mode="json") for e in pr.evidence],
     }
     return hashlib.sha256(json.dumps(pack, sort_keys=True, separators=(",", ":")).encode()).hexdigest()
+
+
+def issue_key(pr: SitePR) -> frozenset[tuple[str, str, str]]:
+    """Which record fields a Site PR proposes to change. Two Site PRs with the same key are about the same issue."""
+    return frozenset((c.record_kind, c.record_id, c.field) for c in pr.changes)
 
 
 def key_for_version(base_key: str, version: int) -> str:
@@ -87,8 +92,16 @@ def rebuild(events: list[LedgerEvent]) -> SitePR:
             pr = pr.model_copy(update={"evidence_hash": ev.payload["evidence_hash"]})
         elif ev.type == "reopened":
             version = pr.idempotency_version + 1
+            fresh = ev.payload.get("refresh")  # a recurrence brings new evidence; the reviewer must not see the old
+            carried = {}
+            if fresh:
+                new = SitePR.model_validate(fresh)
+                carried = {"verdict_id": new.verdict_id, "finding": new.finding, "changes": new.changes,
+                           "evidence": new.evidence, "confidence": new.confidence, "impact": new.impact}
             pr = pr.model_copy(
                 update={
+                    **carried,
+                    "self_check_note": None,
                     "idempotency_version": version,
                     "idempotency_key": key_for_version(pr.idempotency_key, version),
                     "recurrence_count": pr.recurrence_count + (1 if ev.payload.get("recurrence") else 0),
