@@ -44,8 +44,8 @@ def next_status(current: SitePRStatus | None, event_type: str) -> SitePRStatus:
     if event_type == "drafted":
         raise TransitionError("Site PR already drafted")
     target = EVENT_STATUS[event_type]
-    if target is None:  # self_checked: only while drafting
-        if current != S.DRAFT:
+    if target is None:  # self_checked: while drafting, or after a reopen (the new evidence needs its own check)
+        if current not in (S.DRAFT, S.REOPENED):
             raise TransitionError(f"self_checked not allowed from {current.value}")
         return current
     if target not in SITEPR_TRANSITIONS[current]:
@@ -96,11 +96,12 @@ def rebuild(events: list[LedgerEvent]) -> SitePR:
             carried = {}
             if fresh:
                 new = SitePR.model_validate(fresh)
-                carried = {"finding": new.finding, "changes": new.changes, "evidence": new.evidence,
-                           "confidence": new.confidence, "impact": new.impact}
+                carried = {"verdict_id": new.verdict_id, "finding": new.finding, "changes": new.changes,
+                           "evidence": new.evidence, "confidence": new.confidence, "impact": new.impact}
             pr = pr.model_copy(
                 update={
                     **carried,
+                    "self_check_note": None,
                     "idempotency_version": version,
                     "idempotency_key": key_for_version(pr.idempotency_key, version),
                     "recurrence_count": pr.recurrence_count + (1 if ev.payload.get("recurrence") else 0),

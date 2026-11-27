@@ -137,3 +137,54 @@ def test_two_drafts_for_the_same_reorder_do_not_withdraw_each_other(svc):
     first = self_check_claim(svc, "sitepr-0001", ItemRef("ACME-50HP"), FakeSightings(), now=NOW)
     second = self_check_claim(svc, "sitepr-0002", ItemRef("ACME-50HP"), FakeSightings(), now=NOW)
     assert first.status == SitePRStatus.DRAFT and second.status == SitePRStatus.WITHDRAWN
+
+
+# -- review round: conflicts, ordering, reopened PRs, naive clocks ---------------------------------------------------------
+
+
+def claim_value(pid, value, field="qty_received", rid="D-7"):
+    return SitePR(
+        site_pr_id=pid, verdict_id="v-1", finding=f"qty {value}", confidence=0.9, evidence=EVID,
+        changes=[RecordChange(record_kind="delivery", record_id=rid, field=field, old_value="12", new_value=value)],
+        idempotency_key=f"{pid}:claim:v1",
+    )
+
+
+def test_an_open_pr_that_sets_the_same_field_to_a_different_value_conflicts_but_does_not_withdraw_the_draft(svc):
+    svc.draft(claim_value("sitepr-0001", "10"))
+    svc.submit("sitepr-0001")
+    svc.draft(claim_value("sitepr-0002", "9"))
+    pr = self_check_claim(svc, "sitepr-0002", ItemRef("ACME-50HP"), FakeSightings(), now=NOW)
+    assert pr.status == SitePRStatus.DRAFT
+    assert "conflicts with sitepr-0001" in pr.self_check_note
+
+
+def test_the_same_field_and_the_same_value_is_still_a_duplicate(svc):
+    svc.draft(claim_value("sitepr-0001", "10"))
+    svc.submit("sitepr-0001")
+    svc.draft(claim_value("sitepr-0002", "10"))
+    assert self_check_claim(svc, "sitepr-0002", ItemRef("ACME-50HP"), FakeSightings(), now=NOW).status == SitePRStatus.WITHDRAWN
+
+
+def test_drafts_are_ordered_by_when_they_were_drafted_not_by_their_id_text(svc):
+    svc.draft(claim("sitepr-9", field="reorder"))
+    svc.draft(claim("sitepr-10", field="reorder"))  # "sitepr-10" sorts before "sitepr-9" as text
+    first = self_check_claim(svc, "sitepr-9", ItemRef("ACME-50HP"), FakeSightings(), now=NOW)
+    second = self_check_claim(svc, "sitepr-10", ItemRef("ACME-50HP"), FakeSightings(), now=NOW)
+    assert first.status == SitePRStatus.DRAFT and second.status == SitePRStatus.WITHDRAWN
+
+
+def test_a_reopened_pr_can_be_self_checked_and_withdrawn_on_a_sighting(svc):
+    svc.draft(claim("sitepr-0001"))
+    svc.submit("sitepr-0001")
+    svc.approve("sitepr-0001", "project manager")
+    svc.write("sitepr-0001")
+    svc.reopen("sitepr-0001", "recurred", recurrence=True)
+    pr = self_check_claim(svc, "sitepr-0001", ItemRef("ACME-50HP"), FakeSightings(seen(1)), now=NOW)
+    assert pr.status == SitePRStatus.WITHDRAWN
+
+
+def test_a_clock_without_a_timezone_is_refused_with_a_clear_message(svc):
+    svc.draft(claim())
+    with pytest.raises(ValueError, match="timezone"):
+        self_check_claim(svc, "sitepr-0001", ItemRef("ACME-50HP"), FakeSightings(), now=NOW.replace(tzinfo=None))

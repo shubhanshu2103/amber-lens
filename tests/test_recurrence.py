@@ -71,11 +71,12 @@ def test_a_different_record_is_a_new_issue_not_a_recurrence(svc):
     assert pr.site_pr_id == "sitepr-0002" and pr.status == SitePRStatus.DRAFT and pr.recurrence_count == 0
 
 
-def test_a_fix_that_is_not_verified_yet_is_not_a_recurrence(svc):
+def test_a_fix_that_is_not_verified_yet_is_not_a_recurrence_but_it_is_not_duplicated_either(svc):
     svc.draft(finding("sitepr-0001"))
     svc.submit("sitepr-0001")
     pr = report_finding(svc, finding("sitepr-0002", obs="obs-2"))
-    assert pr.site_pr_id == "sitepr-0002" and pr.status == SitePRStatus.DRAFT
+    assert pr.site_pr_id == "sitepr-0001" and pr.recurrence_count == 0  # still in flight: nothing new is opened
+    assert [p.site_pr_id for p in svc.list()] == ["sitepr-0001"]
 
 
 def test_a_rejected_or_withdrawn_earlier_pr_is_not_a_recurrence(svc):
@@ -88,3 +89,33 @@ def test_the_reopened_pr_can_go_back_through_review(svc):
     verified(svc)
     report_finding(svc, finding("sitepr-0002", obs="obs-2"))
     assert svc.submit("sitepr-0001").status == SitePRStatus.PENDING_REVIEW
+
+
+def test_a_recurrence_while_another_pr_is_open_on_the_same_field_returns_that_one_and_reopens_nothing(svc):
+    verified(svc)  # sitepr-0001 verified
+    svc.draft(finding("sitepr-0002", new="9"))
+    svc.submit("sitepr-0002")
+    pr = report_finding(svc, finding("sitepr-0003", obs="obs-3"))
+    assert pr.site_pr_id == "sitepr-0002"
+    assert svc.get("sitepr-0001").status == SitePRStatus.VERIFIED and svc.get("sitepr-0001").recurrence_count == 0
+
+
+def test_the_reopened_pr_shows_the_new_verdict_and_drops_the_old_self_check_note(svc):
+    svc.draft(finding("sitepr-0001"))
+    svc.self_check("sitepr-0001", "no sighting")
+    svc.submit("sitepr-0001")
+    svc.approve("sitepr-0001", "project manager")
+    svc.write("sitepr-0001")
+    svc.verify("sitepr-0001")
+    pr = report_finding(svc, finding("sitepr-0002", obs="obs-2"))
+    assert pr.verdict_id == "v-obs-2" and pr.self_check_note is None
+
+
+def test_the_latest_drafted_verified_pr_is_the_one_reopened_even_when_ids_sort_the_other_way(svc):
+    for pid in ("sitepr-9", "sitepr-10"):
+        svc.draft(finding(pid))
+        svc.submit(pid)
+        svc.approve(pid, "project manager")
+        svc.write(pid)
+        svc.verify(pid)
+    assert report_finding(svc, finding("sitepr-11", obs="obs-2")).site_pr_id == "sitepr-10"
